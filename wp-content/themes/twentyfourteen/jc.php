@@ -16,10 +16,7 @@
 		<meta content="Joe" name="author">
 		<title><?php bloginfo( 'name' ); ?></title>
 		<link rel="shortcut icon" href="">
-		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/jquery.vegas.css" />	
-		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/font-awesome.min.css" />
-		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/jc.css" />
-		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/music-player.css" />
+		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/all-min.css" />
 	</head>
 	
 <body class="jc">
@@ -234,17 +231,10 @@
 	</div>
 	<!--播放器结束 } -->
 	
-	
-	<!-- footer -->
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jquery-1.9.1.js"></script>
-    <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jquery-ui.js"></script> 
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/prefixfree.min.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jquery.vegas.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/underscore-min.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jquery.lettering.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jquery.transform-0.9.1.min.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jc.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/musicPlayer.js"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jc.min.js"></script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/musicPlayer.min.js"></script>
 	<script type="text/javascript" src="<?php $_SERVER['HTTP_HOST']; ?>/wp-includes/js/comment-reply.js"></script>
 
 </body>

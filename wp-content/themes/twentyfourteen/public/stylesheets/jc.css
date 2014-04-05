@@ -22,16 +22,14 @@ a:hover{color:#428BCA}
 .f-yahei{font-family:Microsoft Yahei;}
 .btn-jc{background-color: #fff!important;}
 .flash{background-image: none; background-color:rgba(0,0,0,0.5); border: 1px solid #333;}
-p{text-indent:2em}
-blockquote{color: #999;}
-blockquote::before{
-	content:"\f10d";font-size: 4em;color: #EEE;display: inline; padding: 0 10px 10px 0;
-	font-family: FontAwesome;
+blockquote{color: #999; position:relative}
+blockquote::before,blockquote::after{
+	font-size: 2em;color: #EEE;display: inline; padding: 0 10px 10px 0;
+	font-family: FontAwesome; color:#555;
 }
-blockquote::after{
-	content: "\f10e";font-size: 4em;color: #EEE;display: inline; padding: 0 10px 10px 0;
-	font-family: FontAwesome;
-}
+blockquote::before{	content:"\f10d"; position: absolute; left: 0; top: 0;}
+blockquote::after{	content: "\f10e"; position: absolute; right: 0; bottom: -20px;}
+blockquote p{padding: 0 40px; text-indent:0; font-weight:normal; font-style:italic; text-shadow:0 0 0 transparent!important;}
 html,body {
 overflow: hidden;
 scrollbar-face-color:#428BCA; /*滚动条3D表面（ThreedFace）的颜色*/ 
@@ -263,7 +261,6 @@ section.article,
 .about-btn span.share-sns{top:0}
 .about-more {cursor:pointer;}
 .about-more  i{margin-left:4px}
-.about  blockquote::before,.about  blockquote::after{font-size:2em; color:#555}
 .about  p{margin:1em 0}
 .share-sns{display:inline-block; vertical-align: middle;}
 .share-sns a{width:16px; height:16px; display:block; float:left;  margin-right:4px;}
@@ -554,4 +551,3 @@ section.articl p.comment-notes{color:#666}
 .comment-form p label{width:70px;display: block; float: left;}
 .comment-form p{padding:8px 0; margin:0}
 #submit{background-color:#428BCA; width:80px; padding:2px 8px; border:0 none; border-radius:2px; color:#fff; margin-right:8px}
-
