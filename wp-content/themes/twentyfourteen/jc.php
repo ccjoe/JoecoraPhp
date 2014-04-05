@@ -31,16 +31,16 @@
 			<!--<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu','container' => 'nav' ,'container_class' => "nav clearfix") ); ?>-->
 			<span class="postNav" id="postNav"><h3><a href=""><i class="fa fa-pagelines"></i>文字</a></h3></span>
 			<span class="imgNav" id="imgNav"><h3><a href=""><i class="fa fa-github-alt"></i>影像</a></h3></span>
-			<span class="timeNav" id="timeNav"><h3><a href=""><i class="fa fa-clock-o"></i>时间</a></h3></span>
-			<span class="vedNav" id="vedNav"><h3><a href=""><i class="fa fa-info-circle"></i>话语</a></h3></span>
+			<span class="timeNav" id="timeNav"><h3><a><i class="fa fa-clock-o"></i>时间</a></h3></span>
+			<span class="vedNav" id="vedNav"><h3><a><i class="fa fa-info-circle"></i>话语</a></h3></span>
 			<span class="userNav">
 				<div id="user" class="user f-yahei">
 					<h3><i class="fa fa-music"></i></h3>
 					<div class="user-menu">
 						<ul>
-							<li><a href="">修改昵称</a></li>
-							<li><a href="">修改密码</a></li>
-							<li><a href="/logout">退出登录</a></li>
+							<li><a>修改昵称</a></li>
+							<li><a>修改密码</a></li>
+							<li><a>退出登录</a></li>
 						</ul>
 					</div>				
 				</div>
@@ -80,7 +80,7 @@
 							<div class=""  id="imgGlList" style="display:none" >
 								<button type="button" class="btn-lg show-list"  id="returnGL"><i class="fa fa-undo"></i>返回相册列表</button>
 								<div class="btn-group btn-group-sm clearfix" id="showMode" >
-									  <button type="button" class="btn btn-default show-bgs active"><i class="fa fa-caret-square-o-up"></i></span>背景</button>
+									  <button type="button" class="btn btn-default show-bgs active"  title="点击图片将会显示在背景上"><i class="fa fa-caret-square-o-up"></i></span>背景</button>
 									  <button type="button" class="btn btn-default show-grid"><i class="fa fa-th-large"></i>矩阵</button>
 									  <button type="button" class="btn btn-default show-book"><i class="fa fa-book"></i>翻页</button>									  
 							  </div>
@@ -153,7 +153,7 @@
 		</ul>
 		<div class="about-btn">
 			<span><i class="fa fa-share-square-o"></i>分享到： </span>
-			<span class="share-sns clearfix"><a href="" class="qq"><i class="fa fa-pinterest-square"></i></a><a href=""  class="sina"><i class="fa fa-weibo"></i></a><a href=""  class="douban"><i class="fa fa-facebook-square"></i></a><a href=""  class="renren"><i class="fa fa-renren"></i></a></span>
+			<span class="share-sns clearfix"><a  class="qq"><i class="fa fa-pinterest-square"></i></a><a class="sina"><i class="fa fa-weibo"></i></a><a class="douban"><i class="fa fa-facebook-square"></i></a><a class="renren"><i class="fa fa-renren"></i></a></span>
 			<span class="about-more">更多信息<i class="fa fa-arrow-circle-o-up"></i></span><span class="about-music">有关音乐<i class="fa fa-music"></i></span>
 		</div>
 		
