@@ -1,3 +1,4 @@
 wp-config*
 .buildpath
 .project
+wp-content/themes/twentyfourteen/public/node_modules/*
