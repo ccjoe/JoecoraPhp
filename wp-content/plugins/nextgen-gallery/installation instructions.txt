@@ -1,0 +1,17 @@
+To install the NextGEN Gallery language files, please follow these instructions.
+
+
+Either via FTP or through your hosts Admin Area / Control Panel, head to the following directory:
+
+wp-content > plugins > nextgen-gallery > lang 
+
+Rename the existing "lang" folder, to "lang.bak" without quotes.
+
+Upload the "lang" folder from the download.
+
+Language files will automatically load based on the Wordpress language specified in wp-config.php
+
+
+
+
+*Note: The author of this plugin does not take any responsibility for the accuracy of the translations.
