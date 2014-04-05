@@ -126,7 +126,7 @@
             artEvent($("#content"));
 
             //ARTICLE
-            $t.draggable({ handle: "p.ui-widget-header" });
+            //$t.draggable({ handle: "p.ui-widget-header" });
             jc.ajaxComment();                       
             jc.$article.find(".fa-spinner").remove();           
             return false;
@@ -341,7 +341,7 @@
             if(!$("body").find("."+getCurrentGalleryName+"-gridlabel")[0]){
               $("body").append(gridShowData).append($mergejs);
               $.vegas("pause");   //停止背景运作
-              $(".radial-gradient").css("backgroundColor","rgba(0,0,0,0.6)");
+              $(".radial-gradient").css("background-color","rgba(0,0,0,0.6)");
               jc.$leftBg.trigger("click");
             }else{
 
@@ -350,7 +350,7 @@
             $im_close.bind('click',function(){
               $(".image-mergin").remove();
               $.vegas("pause");
-              $(".radial-gradient").css("backgroundColor","rgba(0,0,0,0)");
+              $(".radial-gradient").css("background-color","rgba(0,0,0,0)");
               jc.$leftBg.trigger("click");
             });
           }else if(modeClass.hasClass("show-book")){
@@ -491,7 +491,7 @@
           $el.css("transform",'rotate'+'('+ a + 'deg)');                      
           $el.appendTo(this.$mbPattern);
         }
-        this.$mbPattern.children().draggable(); //just for fun
+        //this.$mbPattern.children().draggable(); //just for fun
       },
 
       disperse:function(){
@@ -512,20 +512,20 @@
         r       = Math.floor(Math.random()*255),
         g       = Math.floor(Math.random()*255),
         b       = Math.floor(Math.random()*255);
-
         a       = Math.floor(Math.random()*101) - 50; // between -50 and 50
         d       = 1.5 + Math.random()*0.5 ; // between 1.5 and 2
         f       = Math.random()* 5 ;        // between 0 and 3
         param = {
-          width           : w,
-          height          : h,
-          opacity         : o,
-          top             : t + 'px',
-          right           : l + 'px',
-          backgroundColor : "rgba("+r+","+g+","+b+")",
-          borderRadius    : d+"em",
-          webkitFilter            : "blur("+f+"px)"
+          "width"           : w,
+          "height"          : h,
+          "opacity"         : o,
+          "top": t + 'px',
+          "right": l + 'px',
+          "background-color" : "rgba("+r+","+g+","+b+")",
+          "border-radius" : d+"em",
+          "webkit-filter" : "blur("+f+"px)"
         };
+        console.log(param['background-color']);
         //if (!$.browser.msie)rotate(19deg)         
       },
 
@@ -533,21 +533,21 @@
         this.$mbPattern.children().each(function(i) {
           var $el         = $(this);
           var param       = {
-            width   : '100px',
-            height  : '100px',
-            top     : 188 + 100 * Math.floor(i/4),
-            right   : 120 + 100 * (i%4),
-            opacity : 0.6,
-            backgroundColor: "#000",
-            borderRadius    : "0",
-            webkitFilter    : "blur(0px)"
+            "width"   : '100px',
+            "height"  : '100px',
+            "top"     : 188 + 100 * Math.floor(i/4),
+            "right"   : 120 + 100 * (i%4),
+            "opacity" : 0.6,
+            "background-color": "#000",
+            "border-radius"    : "0",
+            "webkit-filter"   : "blur(0px)"
           //transform :'rotate(0deg)'
           };
           $el.css("transform",'rotate'+'('+ 0 + 'deg)');      
           //if (!$.browser.msie)$el.css("transform",'rotate'+'('+ a + 'deg)');
           //param.transform   =  'rotate'+'('+ 0 + 'deg)';
 
-          $el.animate(param,1000, "swing");
+          $el.animate(param,1000);  //,"swing"
           }); 
         }
     },

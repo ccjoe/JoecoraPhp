@@ -4,7 +4,7 @@
 .m-player-wrap .m-player{ float:left; padding:10px; width:530px; height:76px; background:#000; box-shadow: 3px 3px 6px RGBA(0,0,0,.42); }
 .m-player-wrap .m-player-switch{ float:left; padding:38px 0 0 5px; width:15px; height:58px; background:#383838; border-radius:0; cursor:pointer; -webkit-transition-duration:300ms; -moz-transition-duration:300ms; box-shadow:3px 3px 6px RGBA(0,0,0,.42); }
 .switch-on,.switch-off,.play-lists,.album-lists,.lyrics,.favorites,.m-play,.m-pause,.m-next,.m-prev,.broadcast-control-l,.broadcast-control-r,.volume,
-.mute,.list-cycle,.single-cycle,.shuffle-play,.order-play,.close-list,.add-favorites,.play-icon,.speaker{ background:url(../images/player_img.png); }
+.mute,.list-cycle,.single-cycle,.shuffle-play,.order-play,.close-list,.add-favorites,.play-icon,.speaker{ background:url(/wp-content/themes/twentyfourteen/public/images/player_img.png); }
 
 /*播放器开关*/
 .m-player-switch:hover{ background:#4b4b4b; }
@@ -15,7 +15,7 @@
 /*播放歌曲信息*/
 .m-info{ float:left; position:relative; width:200px; }
 .m-info .album-front-cover{ float:left; width:75px; height:75px; overflow:hidden; }
-.m-info .front-cover-mask{ position:absolute; left:0; width:75px; height:75px; background:url(../images/album_cover_mask.png) no-repeat; cursor:pointer; -webkit-transition-duration:300ms; -moz-transition-duration:300ms; }
+.m-info .front-cover-mask{ position:absolute; left:0; width:75px; height:75px; background:url(/wp-content/themes/twentyfourteen/public/images/album_cover_mask.png) no-repeat; cursor:pointer; -webkit-transition-duration:300ms; -moz-transition-duration:300ms; }
 .m-info .front-cover-mask:hover{ opacity:0.5; }
 .m-info .info-wrap{ padding:0 5px; width:115px; overflow:hidden; cursor:default; }
 .m-info .info-wrap dt{ color:#fff; }
@@ -41,7 +41,7 @@
 .broadcast-control .broadcast-control-r{ float:left; width:5px; height:75px; }
 .broadcast-control .broadcast-control-l{ background-position:0 0; }
 .broadcast-control .broadcast-control-r{ background-position:-5px 0; }
-.broadcast-control .broadcast-control-m{ float:left; position:relative; width:320px; height:75px; background:url(../images/control_panel_bg.png) repeat-x; }
+.broadcast-control .broadcast-control-m{ float:left; position:relative; width:320px; height:75px; background:url(/wp-content/themes/twentyfourteen/public/images/control_panel_bg.png) repeat-x; }
 .m-next,
 .m-prev{ position:absolute; top:23px; width:21px; height:22px; cursor:pointer; }
 .m-next{ left:197px; background-position:-28px -80px; }

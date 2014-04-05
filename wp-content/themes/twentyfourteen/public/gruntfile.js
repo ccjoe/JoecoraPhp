@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     // Task configuration.
 
     clean: {
-      dist: ['javascripts/min']
+      dist: ['javascripts/min','stylesheets/min']
     },
 
     //必要的语法检查
@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     //js的合并与压缩
     uglify: {
       lib: {
-        src: ['javascripts/jquery-1.9.1.js','javascripts/jquery-ui.js', 'javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
+        src: ['javascripts/jquery-1.9.1.js',/*'javascripts/jquery-ui.js', */'javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
         dest: 'javascripts/min/lib.js'
       },
       buildplugins:{
@@ -66,13 +66,13 @@ module.exports = function(grunt) {
     concat : {
         css : {
             src: ['stylesheets/*.css'],
-            dest:'stylesheets/all.css'
+            dest:'stylesheets/min/all.css'
         }
     },
     cssmin: {
         css: {
-            src:'stylesheets/all.css',
-            dest:'stylesheets/all-min.css'
+            src:'stylesheets/min/all.css',
+            dest:'stylesheets/min/all-min.css'
         }
     }
 
