@@ -30,7 +30,7 @@ module.exports = function(grunt) {
     //js的合并与压缩
     uglify: {
       lib: {
-        src: ['javascripts/jquery-1.9.1.js',/*'javascripts/jquery-ui.js', */'javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
+        src: ['javascripts/jquery-1.9.1.js','javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
         dest: 'javascripts/min/lib.js'
       },
       buildplugins:{

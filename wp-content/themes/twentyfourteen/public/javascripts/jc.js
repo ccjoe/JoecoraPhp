@@ -46,6 +46,10 @@
         //左侧交互      
         var jc = this,  showed,status,  n=0;
 
+        if(screen.width < 600){
+          $("#musicPlayerWrap").remove();
+        }
+
         $("#expando").hover(function(){
           jc.$leftBg.css({
             "opacity": 0.6,
@@ -142,14 +146,14 @@
         jc.PatternSet.disperse();
       }
 
-      jc.$menu.on("click",".nav span",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
+      jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
 
-        if($(this)[0].className === "postNav"){
+        if($(this).hasClass("postNav")){
 
           if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
             jc.$postList.slideDown().siblings().slideUp();
           }
-          }else if($(this)[0].className === "imgNav"){
+          }else if( $(this).hasClass("imgNav") ){
           //点击图象      
           if(jc.$leftCon.is(":visible") && jc.$img.is(":visible") === false){
             jc.$img.slideDown().siblings().slideUp();
@@ -159,16 +163,16 @@
               getAjaxGallery();
             }
           }
-          }else if($(this)[0].className === "vedNav"){
+          }else if( $(this).hasClass("vedNav")){
           //点击视频
           if(leftCon.is(":visible") && vedioList.is(":visible") === false){
             $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();  
           }
-          }else if($(this)[0].className === "timeNav"){
+          }else if( $(this).hasClass("timeNav") ){
           //点击其它
           $.vegas("pause");
           $(".vegas-background").hide();
-          vedioby("http://video-js.zencoder.com/oceans-clip");
+            //vedioby("http://video-js.zencoder.com/oceans-clip");
           }else{
 
           }
@@ -198,8 +202,7 @@
           var url = this.href;
           getLinkArticle(url);
           return false;
-        })
-
+        });
       }
 
       function exlargeArt($t){
@@ -367,7 +370,10 @@
       //ABOUT
       $(".about-more").click(function(){             
         jc.$aboutCon.slideToggle();
-        musicPlayerSwitch("close");
+        if($("#musicPlayerWrap").length){
+            musicPlayerSwitch("close");
+        }
+        
         if( !jc.$article.is(":hidden") ){
           closeArticle();
         }
@@ -378,7 +384,7 @@
           $(this).addClass("active");
           $(this).find("i").removeClass("fa-arrow-circle-o-up").addClass("fa-arrow-circle-o-down");      
         }           
-        jc.$aboutCon.find("li:first-child").addClass("active").find(" .about-item-desc").show().animate({width:"250px",margin:"10px"},200);
+        jc.$aboutCon.find("li:first-child").addClass("active").find(" .about-item-desc").show().animate({width:"200px",margin:"10px"},200);
         jc.$aboutCon.find("li:first-child").siblings().find(" .about-item-desc").removeClass("active").animate({width:"0",margin:"0"},200);
         jc.$aboutCon.off();
         jc.$aboutCon.on("click","li a",function(){
@@ -386,7 +392,7 @@
           if(!$t.parent().hasClass("active")){
             $t.parent().siblings().find(" .about-item-desc").animate({width:"0",margin:"0"},200);
             $t.parent().addClass("active").siblings().removeClass("active");
-            $t.next().show().animate({width:"250px",margin:"10px"},200);
+            $t.next().show().animate({width:"200px",margin:"10px"},200);
           }else{
             return false
           }
@@ -395,7 +401,10 @@
 
       $(".about-music").click(function(){         
         jc.$aboutCon.hide();
-        musicPlayerSwitch();
+        if($("#musicPlayerWrap").length){
+           musicPlayerSwitch();
+        }
+
       }) 
 
       //打开关闭
@@ -411,7 +420,8 @@
 
       $.vegas('slideshow',{
         backgrounds: jc.bgs,
-        delay:8000
+        delay:8000,
+        preload: true
       })('overlay', {
         src: '/wp-content/themes/twentyfourteen/public/images/overlays/mask.png',
         opacity: 0.8
@@ -460,24 +470,26 @@
         }*/
         //如果没有数据了
         if(num * self.index > len){
-        self.$postListCon.find(self.$loading,self.$overing).remove(); //.end().append(self.$overing)
+          self.$postListCon.find(self.$loading,self.$overing).remove(); //.end().append(self.$overing)
         }else{
-        //取第 index+1个num条数据
-        var xmlperdt = (num*(self.index+1)) > len ? _.last(_.first(xmldt,num*(self.index+1)),len-num) : _.last(_.first(xmldt,num*(self.index+1)),num);
+          //alert("test");
+          //取第 index+1个num条数据
+          var xmlperdt = (num*(self.index+1)) > len ? _.last(_.first(xmldt,num*(self.index+1)),len-num) : _.last(_.first(xmldt,num*(self.index+1)),num);
 
-        var $htmlFrag = [];
-        $(xmlperdt).each(function(i){
-          var liitem = $('<li><a href="'+$(this).find("link").text()+'">'+ $(this).find("title").text() +'</a><span class="post-date">'+ $(this).find("description").text() +'</span></li>');
-          //console.log(liitem.html());
-          $htmlFrag.push(liitem);
-        })
-        self.$postListCon.find(self.$loading,self.$overing).remove().end().append($htmlFrag);
+          var $htmlFrag = [];
+          $(xmlperdt).each(function(i){
+            var liitem = $('<li><a href="'+$(this).find("link").text()+'">'+ $(this).find("title").text() +'</a><span class="post-date">'+ $(this).find("description").text() +'</span></li>');
+            //console.log(liitem.html());
+            $htmlFrag.push(liitem);
+          });
+          //console.log($htmlFrag);
+          self.$postListCon.find(self.$loading,self.$overing).remove().end().append($htmlFrag);
         }
 
         self.index++;
 
       }).fail(function(){
-        self.$postListCon.find(loading,overing).remove().end().append(failing);
+        self.$postListCon.find(loading,overing).remove().end().append(self.$failing);
       });
     },
 
@@ -506,50 +518,50 @@
       },
 
       showItem:function(w,h){
-        var o       = 0.2,
-        t       = Math.floor(Math.random()*171) + 30, // between 5 and 200
-        l       = Math.floor(Math.random()*696) + 5, // between 5 and 700
-        r       = Math.floor(Math.random()*255),
-        g       = Math.floor(Math.random()*255),
-        b       = Math.floor(Math.random()*255);
-        a       = Math.floor(Math.random()*101) - 50; // between -50 and 50
-        d       = 1.5 + Math.random()*0.5 ; // between 1.5 and 2
-        f       = Math.random()* 5 ;        // between 0 and 3
-        param = {
-          "width"           : w,
-          "height"          : h,
-          "opacity"         : o,
-          "top": t + 'px',
-          "right": l + 'px',
-          "background-color" : "rgba("+r+","+g+","+b+")",
-          "border-radius" : d+"em",
-          "webkit-filter" : "blur("+f+"px)"
-        };
-        console.log(param['background-color']);
-        //if (!$.browser.msie)rotate(19deg)         
+          var o   = 0.2,
+          t   = Math.floor(Math.random()*171) + 30, // between 5 and 200
+          l   = Math.floor(Math.random()*696) + 5, // between 5 and 700
+          r   = Math.floor(Math.random()*255),
+          g   = Math.floor(Math.random()*255),
+          b   = Math.floor(Math.random()*255);
+          
+          a   = Math.floor(Math.random()*101) - 50; // between -50 and 50
+          d   = 1.5 + Math.random()*0.5 ; // between 1.5 and 2
+          f   = Math.random()* 5 ;    // between 0 and 3
+          param = {
+            width     : w,
+            height      : h,
+            opacity     : o,
+            top       : t + 'px',
+            right     : l + 'px',
+            backgroundColor : "rgb("+r+","+g+","+b+")",
+            borderRadius  : d+"em",
+            webkitFilter      : "blur("+f+"px)"
+          };
+          //if (!$.browser.msie)rotate(19deg)     
       },
-
+      
       openItem: function() {
         this.$mbPattern.children().each(function(i) {
-          var $el         = $(this);
-          var param       = {
-            "width"   : '100px',
-            "height"  : '100px',
-            "top"     : 188 + 100 * Math.floor(i/4),
-            "right"   : 120 + 100 * (i%4),
-            "opacity" : 0.6,
-            "background-color": "#000",
-            "border-radius"    : "0",
-            "webkit-filter"   : "blur(0px)"
-          //transform :'rotate(0deg)'
+          var $el     = $(this);
+          var param   = {
+            width : '100px',
+            height  : '100px',
+            top   : 188 + 100 * Math.floor(i/4),
+            right : 120 + 100 * (i%4),
+            opacity : 0.2,
+            backgroundColor: "rgb(0,0,0)",
+            borderRadius  : "0",
+            webkitFilter  : "blur(0px)"
+            //transform :'rotate(0deg)'
           };
-          $el.css("transform",'rotate'+'('+ 0 + 'deg)');      
+          $el.css("transform",'rotate'+'('+ 0 + 'deg)');    
           //if (!$.browser.msie)$el.css("transform",'rotate'+'('+ a + 'deg)');
-          //param.transform   =  'rotate'+'('+ 0 + 'deg)';
-
-          $el.animate(param,1000);  //,"swing"
-          }); 
-        }
+          //param.transform =  'rotate'+'('+ 0 + 'deg)';
+              
+          $el.animate(param,1000, "swing");
+        }); 
+      }
     },
 
     // @嵌套评论问题待解决

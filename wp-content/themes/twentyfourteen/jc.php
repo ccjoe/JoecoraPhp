@@ -10,7 +10,8 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta content="JOE & CORA's WEBSITE, <?php $description = get_bloginfo( 'description', 'display' );	if ( ! empty ( $description ) ) : ?><?php echo esc_html( $description ); ?><?php endif; ?>" name="description">
 		<meta content="Joe,Cora,website" name="keywords">
 		<meta content="Joe" name="author">
@@ -29,19 +30,20 @@
 	<section class="menu box-opacity" id="menu">
 		<nav class="nav clearfix">
 			<!--<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu','container' => 'nav' ,'container_class' => "nav clearfix") ); ?>-->
-			<span class="postNav" id="postNav"><h3><a href=""><i class="fa fa-pagelines"></i>文字</a></h3></span>
-			<span class="imgNav" id="imgNav"><h3><a href=""><i class="fa fa-github-alt"></i>影像</a></h3></span>
-			<span class="timeNav" id="timeNav"><h3><a><i class="fa fa-clock-o"></i>时间</a></h3></span>
-			<span class="vedNav" id="vedNav"><h3><a><i class="fa fa-info-circle"></i>话语</a></h3></span>
+			<span class="postNav mn" id="postNav"><h3><a href=""><i class="fa fa-pagelines"></i>文字</a></h3></span>
+			<span class="imgNav mn" id="imgNav"><h3><a href=""><i class="fa fa-github-alt"></i>影像</a></h3></span>
+			<span class="timeNav mn" id="timeNav"><h3><a><i class="fa fa-clock-o"></i>时间</a></h3></span>
+			<span class="vedNav mn" id="vedNav"><h3><a><i class="fa fa-info-circle"></i>话语</a></h3></span>
 			<span class="userNav">
 				<div id="user" class="user f-yahei">
-					<h3><i class="fa fa-music"></i></h3>
+					<h3></h3>
 					<div class="user-menu">
-						<ul>
-							<li><a>修改昵称</a></li>
-							<li><a>修改密码</a></li>
-							<li><a>退出登录</a></li>
-						</ul>
+						<?php echo do_shortcode("[theme-my-login instance='1' show_title='show_title' 'user_template']"); ?>
+					<!-- 	<ul>
+						<li><a>修改昵称</a></li>
+						<li><a>修改密码</a></li>
+						<li><a>退出登录</a></li>
+					</ul> -->
 					</div>				
 				</div>
 			</span>
@@ -128,8 +130,7 @@
 	<div class="about">
 		<ul class="about-con clearfix">
 			<li><a><i class="fa fa-pencil"></i>关于JC</a><div class="about-item-desc">
-				<?php
-				$page_id = 227;
+				<?php $page_id = 227;
 				//此处的1就是page页面的ID，ID的数字是多少就填写多少
 				echo get_post($page_id)->post_content;
 				//此段为输出获取的页面内容，无需修改
@@ -137,8 +138,7 @@
 			</div></li>
 			<li><a><i class="fa fa-globe"></i>关于Joe</a><div class="about-item-desc">
 				<div class="liwrap">
-				<?php
-				$page_id = 235;
+				<?php $page_id = 235;
 				//此处的1就是page页面的ID，ID的数字是多少就填写多少
 				echo get_post($page_id)->post_content;
 				//此段为输出获取的页面内容，无需修改
@@ -161,6 +161,7 @@
 	<!-- ABOUT } -->
 	
 	<!--播放器开始 { -->
+	<!--[if !IE]><--> 
 	<div id="musicPlayerWrap" class="m-player-wrap">
 		  <div id="musicPlayerSwitch" class="m-player-switch off" title="隐藏播放器">
 	    <a href="javascript:void(0);" id="playerSwitchBtn" class="switch-on"></a>
@@ -229,14 +230,16 @@
 	    <div id="lrcBox" class="lrc-box"></div>
 	  </div>
 	</div>
+	<!--<![endif]-->
 	<!--播放器结束 } -->
 	
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/jquery-ui.js"></script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jc.min.js"></script>
+	<!--[if !IE]><-->
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/musicPlayer.min.js"></script>
-	<script type="text/javascript" src="<?php $_SERVER['HTTP_HOST']; ?>/wp-includes/js/comment-reply.js"></script>
+	<!-- [endif] -->
 
+	<script type="text/javascript" src="<?php $_SERVER['HTTP_HOST']; ?>/wp-includes/js/comment-reply.js"></script>
 </body>
 </html>

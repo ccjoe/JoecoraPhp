@@ -1,5 +1,9 @@
 ﻿(function(){
-    XMLHttpData();
+    if($("#musicPlayerWrap").length){
+        XMLHttpData();
+    }else{
+        return false;
+    }
 })();
 
 //---------------------------------------------------【AJAX载入歌曲信息】
@@ -60,7 +64,7 @@ function formatPlayer(song){
         setTimeout(function(){
         	mEngine.toPlay("play");  
         	//volFadeIn(mEngine);
-        },10000);
+        },30000);
      
 /*    function volFadeIn(mEngine){
     	setInterval( function(){mEngine.volume = 0.2}, 500 );
@@ -348,30 +352,35 @@ function volumeSize(size){
 
 //---------------------------------------------------【音量控件显示&隐藏，大小调节】
 (function(){
-    var nowVolume = document.getElementById("nowVolume"),
+    if($("#musicPlayerWrap").length){
+        var nowVolume = document.getElementById("nowVolume"),
         nowMute = document.getElementById("nowMute"),
         volumeControl = document.getElementById("volumeControl");
 
-    //音量控件显示&隐藏
-    nowVolume.onmouseover = function(){
-        show(volumeControl);
-    };
-    nowMute.onmouseover = function(){
-        show(volumeControl);
-    };
-    //解决onmouseout事件遇到子元素时，也触发onmouseout的BUG
-    volumeControl.onmouseout = function(event){
-        var Event = event || window.event;
-        if(Event){
-        	if(volumeControl.contains(Event.relatedTarget||Event.toElement)){
-                //如果是子元素，结束函数
-        		return false;
-        	 }else{
-                //触发的事件
-                hide(volumeControl);
+        //音量控件显示&隐藏
+        nowVolume.onmouseover = function(){
+            show(volumeControl);
+        };
+        nowMute.onmouseover = function(){
+            show(volumeControl);
+        };
+        //解决onmouseout事件遇到子元素时，也触发onmouseout的BUG
+        volumeControl.onmouseout = function(event){
+            var Event = event || window.event;
+            if(Event){
+                if(volumeControl.contains(Event.relatedTarget||Event.toElement)){
+                    //如果是子元素，结束函数
+                    return false;
+                 }else{
+                    //触发的事件
+                    hide(volumeControl);
+                }
             }
-        }
-    };
+        };
+    }else{
+        return false;
+    }
+
 })();
 
 /**
@@ -955,37 +964,42 @@ MUSICENGINE.prototype.playIndex = function(albumIndex,songIndex){
 
 //---------------------------------------------------【播放方式控件显示&隐藏，调节】
 (function(){
-    var nowPlayManner = document.getElementById("nowPlayManner"),
+     if($("#musicPlayerWrap").length){
+        var nowPlayManner = document.getElementById("nowPlayManner"),
         playMannerControl = document.getElementById("playMannerControl"),
         orderPlay = document.getElementById("orderPlay"),
         shufflePlay = document.getElementById("shufflePlay"),
         singleCycle = document.getElementById("singleCycle"),
         listCycle = document.getElementById("listCycle");
 
-    //播放方式控件显示&隐藏
-    nowPlayManner.onmouseover = function(){
-        show(playMannerControl);
-    };
-    //解决onmouseout事件遇到子元素时，也触发onmouseout的BUG
-    playMannerControl.onmouseout = function(event){
-        var Event = event || window.event;
-        if(Event){
-        	if(playMannerControl.contains(Event.relatedTarget||Event.toElement)){
-                //如果是子元素，结束函数
-        		return false;
-        	 }else{
-                //触发的事件
-                hide(playMannerControl);
+        //播放方式控件显示&隐藏
+        nowPlayManner.onmouseover = function(){
+            show(playMannerControl);
+        };
+        //解决onmouseout事件遇到子元素时，也触发onmouseout的BUG
+        playMannerControl.onmouseout = function(event){
+            var Event = event || window.event;
+            if(Event){
+                if(playMannerControl.contains(Event.relatedTarget||Event.toElement)){
+                    //如果是子元素，结束函数
+                    return false;
+                 }else{
+                    //触发的事件
+                    hide(playMannerControl);
+                }
             }
-        }
-    };
+        };
 
-    //点击选择相对应的播放方式（利用事件冒泡，事件委托的方式）
-    //给dom的父节点添加事件，然后触发的时候，通过event.target得到子节点对象的id,然后根据id触发相应操作
-    playMannerControl.onclick = function(event){
-        var o = event ? event : window.event;
-        PlayModeIconChange(document.getElementById(o.target.id));
-    };
+        //点击选择相对应的播放方式（利用事件冒泡，事件委托的方式）
+        //给dom的父节点添加事件，然后触发的时候，通过event.target得到子节点对象的id,然后根据id触发相应操作
+        playMannerControl.onclick = function(event){
+            var o = event ? event : window.event;
+            PlayModeIconChange(document.getElementById(o.target.id));
+        };
+    }else{
+        return false;
+    }
+
 })();
 
 //---------------------------------------------------【改变播放方式时图标变化】

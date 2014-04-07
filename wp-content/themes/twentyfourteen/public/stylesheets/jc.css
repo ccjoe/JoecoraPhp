@@ -14,7 +14,7 @@ abbr,acronym { border:0}
 .jc input, .jc textarea{background-color:transparent; color:#428bca; border:1px solid #888; height: 20px; padding: 2px 6px; width: 70%; }
 .jc textarea{height:60px}
 .jc input:focus, .jc textarea:focus{border:1px solid; outline:0 none; }
-a{text-decoration:none; color:#666; transition: all 0.1s linear;}
+a{text-decoration:none; color:#666; transition: all 0.1s linear; outline:0 none;}
 a:hover{color:#428BCA}
 .clearfix:after {content:".";  display:block; height:0; clear:both; visibility:hidden; } 
 .clearfix { display:inline-block; } 
@@ -32,13 +32,13 @@ blockquote::after{	content: "\f10e"; position: absolute; right: 0; bottom: -20px
 blockquote p{padding: 0 40px; text-indent:0; font-weight:normal; font-style:italic; text-shadow:0 0 0 transparent!important;}
 html,body {
 overflow: hidden;
-scrollbar-face-color:#428BCA; /*滚动条3D表面（ThreedFace）的颜色*/ 
-scrollbar-highlight-color:#000; /*滚动条3D界面的亮边（ThreedHighlight）颜色*/ 
-scrollbar-shadow-color:#000; /*滚动条3D界面的暗边（ThreedShadow）颜色*/ 
-scrollbar-3dlight-color:#000; /*滚动条亮边框颜色*/ 
-scrollbar-arrow-color:#000; /*滚动条方向箭头的颜色 */ 
-scrollbar-track-color:#000; /*滚动条的拖动区域(TrackBar)颜色*/
-scrollbar-darkshadow-color:#000; /*滚动条暗边框（ThreedDarkShadow）颜色*/ }
+/* scrollbar-face-color:#428BCA; 滚动条3D表面（ThreedFace）的颜色 
+ scrollbar-highlight-color:#000; 滚动条3D界面的亮边（ThreedHighlight）颜色 
+ scrollbar-shadow-color:#000; 滚动条3D界面的暗边（ThreedShadow）颜色 
+ scrollbar-3dlight-color:#000; 滚动条亮边框颜色 
+ scrollbar-arrow-color:#000; 滚动条方向箭头的颜色 
+ scrollbar-track-color:#000; 滚动条的拖动区域(TrackBar)颜色
+ scrollbar-darkshadow-color:#000; 滚动条暗边框（ThreedDarkShadow）颜色 */ }
 /*---滚动条默认显示样式--*/  
 ::-webkit-scrollbar-thumb{background-color:#222;  height:50px;  border-radius:2px;  opacity:0.3; filter:alpha(opacity=30);  }  
 /*---鼠标点击滚动条显示样式--*/  
@@ -47,6 +47,7 @@ scrollbar-darkshadow-color:#000; /*滚动条暗边框（ThreedDarkShadow）颜�
 ::-webkit-scrollbar{ width:5px; height:5px; }  
 /*---滚动框背景样式--*/  
 ::-webkit-scrollbar-track-piece{ border-radius:0;}
+
 ::selection{background-color:#fff; color: #000; text-shadow:0.2px 0.1px 0px #000!important;}
 input::-webkit-input-placeholder,
 textarea::-webkit-input-placeholder {
@@ -71,7 +72,7 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .vegas-background{image-rendering:optimizeQuality; -ms-interpolation-mode:bicubic; z-index:-2; max-width:none !important;}
 
 /* menu */
-.menu{position: fixed; width:100%; height:6px; left:0; top:0; z-index: 10000;}
+.menu{position: fixed; width:100%; height:6px; left:0; top:0; z-index: 1000000;}
 .menu .nav{float: right; width: 500px;}
 .menu .nav span{width:100px; height:6px; text-align:right; display:block; float:left; cursor:pointer; text-align:center;}
 .menu .nav span h3{font-family:Microsoft Yahei; height:30px; line-height:30px;  height:0}
@@ -103,10 +104,11 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .ltbg{height:100%; width:100%; background-color:#000; opacity: 0.1; filter:alpha(opacity=10); position:absolute; z-index:0; transition:all 0.2s linear; cursor:pointer}
 .ltbg:hover{opacity: 0.6; filter:alpha(opacity=60);}
 .shrink:hover{background-color:#428bca;}
-.lt{max-height: 70%; position:absolute; left:18px}
+.lt{position:absolute;}
 /* header */
 .jc-header hgroup{}
 .jc-header{animation:logo-show 1s ease-out;  margin:2em 0; }
+.jc-header h1 {padding-left: 18px;}
 .jc-header h1 a{font-size:500%; display:block;
 	color: rgba(255,255,255,0.1);
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
@@ -117,8 +119,8 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 	transition: all 0.5s linear;
 	-moz-border-radius: 90px 15px;	-moz-box-shadow: 0px 0px 0px 10px rgba(255,255,255,0.4);}
 .jc-header h1 a:hover{background-position: center right, top right;	color: rgba(39,137,149,0.5); -moz-box-shadow: 0px 0px 0px 10px rgba(39,137,149, 0.9);}
-.jc-header h2{color:#d6cb9a; font:normal 200% Microsoft Yahei;}
-.jc-header h2 a {	display: block;	mask: url(../images/mask.png) repeat;}
+.jc-header h2{color:#d6cb9a; font:normal 200% Microsoft Yahei; padding-left: 18px;}
+.jc-header h2 a {	display: block;	mask: url(/wp-content/themes/twentyfourteen/public/images/mask.png) repeat;}
 .jc-header h2 a span {	color: #428bca; opacity: 1; text-shadow: 0px 0px 2px rgba(27, 52, 95, 0.5), 1px 1px 4px rgba(27, 52, 95, 0.7);	transition: all 0.3s linear;	animation: sharpen 0.9s linear backwards;}
 .jc-header h2 a span:hover{text-shadow: 0px 0px 40px #000;}
 .jc-header h2 a span:nth-child(1) {animation-delay: 0s;}
@@ -158,9 +160,9 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 
 
 /* section */
-.con-list{ margin:60px 0 0 -18px; }
+.con-list{ margin:60px 0 0 0; }
 .post-list  ul li{overflow:hidden;line-height:2em; padding:18px 20px; border-bottom:1px dashed #686868;
-background:url("../images/slidebg.jpg") no-repeat; background-size:0% 100%; transition: all 0.4s; }
+background:url("/wp-content/themes/twentyfourteen/public/images/slidebg.jpg") no-repeat; background-size:0% 100%; transition: all 0.4s; }
 .post-list  ul li:first-child{border-top:1px dashed #686868;}
 .post-list  ul li:hover{background-size:100% 100%;}
 .post-list  ul li a{font-size:24px; color:#fff; display:block;  color:#d6cb9a; text-shadow: 1px 1px 2px rgba(66, 51, 12, 0.38); text-transform: uppercase; height: 28px; overflow: hidden;}
@@ -206,7 +208,7 @@ footer.comment-meta > div{margin-bottom:6px}
 
 /* IMG LIST */				
 .img-list, .vedio-list{display:none; min-height:300px; padding-left:18px;}
-.post-list{ min-height:300px; overflow:auto; height:445px}
+.post-list{overflow:auto; height:445px}
 /*Btn*/
 .show-list{background:transparent none; color:#fff; border:0 none; padding:0;  border-radius:0;  box-shadow:0 0 0 transparent; margin-bottom:0; cursor:pointer}
 .show-list:hover{color:#428BCA;}
@@ -244,9 +246,9 @@ section.article,
 .btn-upload{display: none;}
 .help-block{float: left;}
 /*share-sns .jc .full-screen-comments .note-toolbar{position: absolute; }*/
-.about{position:absolute; bottom:2px; right:5px; width:60%;}
+.about{position:absolute; bottom:2px; right:5px;}
 
-.about-con{display:none; position:absolute; bottom:25px; right:15px; background-color:rgba(0,0,0,.5); overflow:hidden}
+.about-con{display:none; right:15px; border-radius: 4px;  background-color:rgba(0,0,0,.5); overflow:hidden}
 .about-con li{float:left; max-height:200px; height:200px;}
 .about-con li > a{cursor:pointer; display:block; float:right; word-wrap: break-word; width:16px; font-size:14px; line-height:14px; text-align:center; padding:0 6px; display: block; height: 100%; line-height: 1.2em;  border-right: 1px solid #3C3C3C;}
 .about-con li > a i{margin:6px 0; display: block;}
@@ -261,7 +263,7 @@ section.article,
 .about-btn span.share-sns{top:0}
 .about-more {cursor:pointer;}
 .about-more  i{margin-left:4px}
-.about  p{margin:1em 0}
+.about  p{margin:1em 0; font-style:italic;}
 .share-sns{display:inline-block; vertical-align: middle;}
 .share-sns a{width:16px; height:16px; display:block; float:left;  margin-right:4px;}
 
@@ -491,9 +493,7 @@ a.cn-nav-next{    right: 20px;	bottom:40%;}
 .about-music{
 	margin-left:4px; cursor:pointer
 }
- @media only screen and (max-width : 1024px){ }
- @media only screen and (max-width : 768px){ }
- @media only screen and (max-width :480px){ } 
+
 /* = 动画 Animations
 ----------------------------------------------- */
 @keyframes logo-show{0% {transform: translate(0, -110px); opacity: 0.30;} 100% {transform: translate(0, 0); opacity: 1;} }
@@ -551,3 +551,25 @@ section.articl p.comment-notes{color:#666}
 .comment-form p label{width:70px;display: block; float: left;}
 .comment-form p{padding:8px 0; margin:0}
 #submit{background-color:#428BCA; width:80px; padding:2px 8px; border:0 none; border-radius:2px; color:#fff; margin-right:8px}
+
+ @media only screen and (max-width : 1024px){ }
+ @media only screen and (max-width : 768px){ }
+ @media only screen and (max-width :480px){
+    .lt{left:10px; }
+    .con-list{margin:10px 0 0 -18px;}
+    .jc-header{margin-bottom:1em;}
+    .jc-header h1 a{font-size: 300%}
+    .jc-header h2{font-size: 120%}
+    #expando{width:100%;}
+    .menu .nav{width:100%;}
+    .menu .nav span{width: 20%;}
+    .menu .nav h3 a:hover{font-size: 14px;}
+    .article{right: 0; width: 100%!important}
+    .post-list{ height: 150px;}
+    .post-list ul li {padding: 6px 20px}
+    .post-list ul li a{font-size: 14px;}
+    .post-list ul li .post-date { line-height: 14px;    display: block;    margin-top: 6px;    font-size: 12px;    }
+    a.cn-nav-prev{right:10px; top: 30%;}
+    a.cn-nav-next {right:10px; bottom: 30%; }
+
+  } 
