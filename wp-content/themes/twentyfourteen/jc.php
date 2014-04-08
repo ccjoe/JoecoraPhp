@@ -38,7 +38,7 @@
 				<div id="user" class="user f-yahei">
 					<h3></h3>
 					<div class="user-menu">
-						<?php echo do_shortcode("[theme-my-login instance='1' show_title='show_title' 'user_template']"); ?>
+						<?php echo do_shortcode("[lwa]"); ?>
 					<!-- 	<ul>
 						<li><a>修改昵称</a></li>
 						<li><a>修改密码</a></li>
