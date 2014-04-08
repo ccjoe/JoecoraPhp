@@ -89,7 +89,7 @@
           jc.$aboutCon.hide();
           return false;
         });
-s
+
       function getLinkArticle(href){
         $.ajax({
           url: href,
