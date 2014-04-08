@@ -76,7 +76,8 @@
         //滚动条滚动拉取文章
         jc.$postList.scroll(function(){
           if($(this).find("ul.post-wrapper").height() - $(this).scrollTop() < 450){
-            jc.getAjaxPostData(5);  
+            //触发多次则必须200ms或以上才执行一次.
+            _.throttle(function(){ jc.getAjaxPostData(5);  }, 200);  
           }
         });
 
@@ -88,7 +89,7 @@
           jc.$aboutCon.hide();
           return false;
         });
-
+s
       function getLinkArticle(href){
         $.ajax({
           url: href,
