@@ -44,23 +44,23 @@
 		</div><!-- .entry-meta -->
 	</header><!-- .entry-header -->
 
-	<?php if ( is_search() ) : ?>
-	<div class="entry-summary">
-		<?php the_excerpt(); ?>
-	</div><!-- .entry-summary -->
-	<?php else : ?>
-	<div class="entry-content">
-		<?php
-			the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'twentyfourteen' ) );
-			wp_link_pages( array(
-				'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfourteen' ) . '</span>',
-				'after'       => '</div>',
-				'link_before' => '<span>',
-				'link_after'  => '</span>',
-			) );
-		?>
-	</div><!-- .entry-content -->
-	<?php endif; ?>
+	<?php if ( is_single() ) : // Only display full content for Single page ?>  
+	    <div class="entry-content">  
+	        <?php  
+	            the_content( __( 'Continue reading <span class="meta-nav">→</span>', 'twentyfourteen' ) );  
+	            wp_link_pages( array(  
+	                'before'      => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentyfourteen' ) . '</span>',  
+	                'after'       => '</div>',  
+	                'link_before' => '<span>',  
+	                'link_after'  => '</span>',  
+	            ) );  
+	        ?>  
+	    </div><!-- .entry-content -->  
+	    <?php else : ?>  
+	    <div class="entry-summary">  
+	        <?php the_excerpt(); ?>  
+	    </div><!-- .entry-summary -->  
+	<?php endif; ?> 
 
 	<?php the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 </article><!-- #post-## -->
