@@ -302,8 +302,9 @@ a.post-thumbnail:hover { background-color: #999; }
 .entry-title { font-size: 33px; font-weight: 300; line-height: 1.0909090909; margin-bottom: 12px; margin: 0 0 12px 0; text-transform: uppercase; }
 .entry-title a { color: #2b2b2b; }
 .entry-title a:hover { color: #41a62a; }
-.site-content .entry-header { background-color: #fff; padding: 12px 10px; }
+.site-content .entry-header { background-color: #fff; padding: 12px 10px; padding-top:0;}
 .site-content .has-post-thumbnail .entry-header { padding-top: 24px; }
+article.post .entry-header div.entry-meta {display: none;}
 /**
  * 6.3 Entry Meta
  * -----------------------------------------------------------------------------
