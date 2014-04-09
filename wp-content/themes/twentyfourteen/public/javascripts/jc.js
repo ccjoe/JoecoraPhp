@@ -47,19 +47,19 @@
         var jc = this,  showed,status,  n=0;
 
         $(document).ajaxSend(function(){
-          pcsBar(0);
+          pcsBar(0,0);
         }).ajaxStart(function(){
-          pcsBar(30);
+          pcsBar(0,30);
         }).ajaxSuccess(function(){
-          pcsBar(90);
+          pcsBar(30,90);
         }).ajaxComplete(function(){
-          pcsBar(100);
+          pcsBar(90,100);
         }).ajaxStop(function(){
-          pcsBar(100);
+          
         }).ajaxError(function(){
-          pcsBar(100);
+          pcsBar(0,0);
         });
-
+        
         if(screen.width < 600){
           $("#musicPlayerWrap").remove();
         }
