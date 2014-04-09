@@ -41,10 +41,24 @@
       JCApp.VegasSet();                                        //背景交互
       JCApp.PageUISet();                                   //页面交互
     },  
-
+    
     PageUISet:function(){     //页面上UI 
         //左侧交互      
         var jc = this,  showed,status,  n=0;
+
+        $(document).ajaxSend(function(){
+          pcsBar(0);
+        }).ajaxStart(function(){
+          pcsBar(30);
+        }).ajaxSuccess(function(){
+          pcsBar(90);
+        }).ajaxComplete(function(){
+          pcsBar(100);
+        }).ajaxStop(function(){
+          pcsBar(100);
+        }).ajaxError(function(){
+          pcsBar(100);
+        });
 
         if(screen.width < 600){
           $("#musicPlayerWrap").remove();
