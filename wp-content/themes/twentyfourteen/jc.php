@@ -18,6 +18,23 @@
 		<title><?php bloginfo( 'name' ); ?></title>
 		<link rel="shortcut icon" href="">
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
+		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
+		<script>
+		function pcsBar(b,o){
+	          $({property: b})
+	          .animate({property: o}, {
+	    		    duration: (3000/100)*(o-b),  //每阶段时间
+	    		    step: function() {
+	    		        var percentage = Math.round(this.property);
+	    		        $('#progress').css('width',  percentage+"%");
+	    		         if(percentage == 100) {
+	       				 $("#progress").addClass("done");//完成，隐藏进度条
+	   			 }
+	    		    }
+	    		});
+	        }
+	        pcsBar(0,20);
+		</script>
 	</head>
 	
 <body class="jc">
@@ -100,7 +117,7 @@
 		</div>	
 	</div>
 	<!-- 左侧｝ -->
-	
+	<script>pcsBar(20,40)</script>
 	<!-- 	弹出的文章面板{ -->
 	<section class="article ui-widget-content" id="article" style="display:none">
 		<div class="article-bg"></div>
@@ -160,7 +177,7 @@
 		
 	</div>
 	<!-- ABOUT } -->
-	
+	<script>pcsBar(40,50)</script>
 	<!--播放器开始 { -->
 	<!--[if !IE]><--> 
 	<div id="musicPlayerWrap" class="m-player-wrap">
@@ -233,14 +250,15 @@
 	</div>
 	<!--<![endif]-->
 	<!--播放器结束 } -->
-	
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
+
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
+	<script>pcsBar(50,60)</script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jc.min.js"></script>
 	<!--[if !IE]><-->
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/musicPlayer.min.js"></script>
 	<!-- [endif] -->
-
+	<script>pcsBar(60,80)</script>
 	<script type="text/javascript" src="<?php $_SERVER['HTTP_HOST']; ?>/wp-includes/js/comment-reply.js"></script>
+	<script>pcsBar(80,100)</script>
 </body>
 </html>
