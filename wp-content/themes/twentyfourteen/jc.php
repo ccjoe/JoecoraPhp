@@ -21,6 +21,7 @@
 	</head>
 	
 <body class="jc">
+	<div id="progress"><span></span></div>
 	<!-- 覆盖层 BEGIN{ -->
 	<div id="mb_pattern" class="mb_pattern"></div>
 	<div class="radial-gradient"></div>
