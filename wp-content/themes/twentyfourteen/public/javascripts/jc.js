@@ -54,8 +54,7 @@
           pcsBar(30,90);
         }).ajaxComplete(function(){
           pcsBar(90,100);
-        }).ajaxStop(function(){
-          
+        }).ajaxStop(function(){      
         }).ajaxError(function(){
           pcsBar(0,0);
         });
@@ -160,6 +159,10 @@
         jc.PatternSet.$mbPattern.show();
         jc.PatternSet.disperse();
       }
+      
+      $("#user").on("click","h3",function(){  
+          $(".lwa-default").toggle();
+      })
 
       jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
 
@@ -168,7 +171,8 @@
           if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
             jc.$postList.slideDown().siblings().slideUp();
           }
-          }else if( $(this).hasClass("imgNav") ){
+          
+        }else if( $(this).hasClass("imgNav") ){
           //点击图象      
           if(jc.$leftCon.is(":visible") && jc.$img.is(":visible") === false){
             jc.$img.slideDown().siblings().slideUp();
@@ -178,21 +182,25 @@
               getAjaxGallery();
             }
           }
-          }else if( $(this).hasClass("vedNav")){
+          
+        }else if( $(this).hasClass("vedNav")){
           //点击视频
           if(leftCon.is(":visible") && vedioList.is(":visible") === false){
             $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();  
           }
-          }else if( $(this).hasClass("timeNav") ){
+          
+        }else if( $(this).hasClass("timeNav")){
           //点击其它
           $.vegas("pause");
           $(".vegas-background").hide();
-            //vedioby("http://video-js.zencoder.com/oceans-clip");
-          }else{
+          //vedioby("http://video-js.zencoder.com/oceans-clip");
+          
+        }
+        return false;
+      });  
+        
 
-          }
-          return false;
-      });
+
 
       function artEvent(content){
         content.find(".comments-link a").attr({"href":"#comments"});

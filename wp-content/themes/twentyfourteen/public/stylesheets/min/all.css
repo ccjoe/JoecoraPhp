@@ -76,7 +76,7 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .vegas-background{image-rendering:optimizeQuality; -ms-interpolation-mode:bicubic; z-index:-2; max-width:none !important;}
 
 /* menu */
-.menu{position: fixed; width:100%; height:6px; left:0; top:0; z-index: 1000000;}
+.menu{position: fixed; width:100%; height:6px; left:0; top:0; z-index:999999;}
 .menu .nav{float: right; width: 500px;}
 .menu .nav span{width:100px; height:6px; text-align:right; display:block; float:left; cursor:pointer; text-align:center;}
 .menu .nav span h3{font-family:Microsoft Yahei; height:30px; line-height:30px;  height:0}
@@ -89,21 +89,30 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu .nav .timeNav,
 .menu .nav .timeNav:hover h3{background-color:#a6b818;}
 .menu .nav .userNav,
-.menu .nav .userNav:hover h3{background-color:#c584bf; }
+.menu .nav .userNav:hover h3{background-color:#8b8b8b; }
 .menu .nav .userNav:hover .user,
-.menu .nav .userNav:hover .user-menu{display:block; background-color:#c584bf;}
+.menu .nav .userNav:hover .user-menu{display:block; background-color:#aaa;}
 .menu .user,
 .menu .nav span h3{color:#fff; margin-top:6px; opacity: 0.9; filter:alpha(opacity=90); transition: height 0.1s linear;}
 .menu .nav span:hover h3{height:30px}
-.menu .user{padding-bottom:4px; margin-top:6px}
+
+.menu .user{padding-bottom:4px; margin-top:6px;}
 .menu .user .user-menu{display:none;}
 .menu .user .user-menu li{padding:4px 10px}
 .menu .user a,
 .menu .nav h3 a{color:#fff; font-size:12px;}
+
+.menu .lwa-form{ position: absolute; width: 210px; padding: 20px; right: 0; top: 0; font-size: 12px; z-index: -1; }
+.menu .lwa-form input{width:auto; padding: 0; float:left;}
+#lwa_wp-submit{background-color:#428BCA; color: #fff; padding: 2px 8px; border:0 none}
+.menu .nav span.lwa-status{width:auto; height:auto; cursor: pointer;}
 .menu .nav h3 a i{margin-right:4px}
 .menu .nav h3 a.abg:hover{background-color:#FFF; color:#000;}
 .menu .nav h3 a:hover {font-size:20px;}
-.menu .user .user-name{}
+.menu .userNav .lwa-default{display: none}
+
+.lwa-modal{background-color: #333!important;}
+
 #expando{height:100%; width:360px; position:absolute; top:0}
 .ltbg{height:100%; width:100%; background-color:#000; opacity: 0.1; filter:alpha(opacity=10); position:absolute; z-index:0; transition:all 0.2s linear; cursor:pointer}
 .ltbg:hover{opacity: 0.6; filter:alpha(opacity=60);}
@@ -113,7 +122,7 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .jc-header hgroup{}
 .jc-header{animation:logo-show 1s ease-out;  margin:2em 0; }
 .jc-header h1 {padding-left: 18px;}
-.jc-header h1 a{font-size:500%; display:block;
+.jc-header h1 a{font-size:400%; display:block;
 	color: rgba(255,255,255,0.1);
 	text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
 	background: -webkit-linear-gradient(left, rgba(105,94,127,0.54) 0%,rgba(255,92,92,0.57) 15%,rgba(255,160,17,0.59) 27%,rgba(252,236,93,0.61) 37%,rgba(255,229,145,0.63) 46%,rgba(111,196,173,0.65) 58%,rgba(106,132,186,0.67) 69%,rgba(209,119,195,0.69) 79%,rgba(216,213,125,0.7) 89%,rgba(216,213,125,0.72) 100%), -webkit-repeating-linear-gradient(-45deg, rgba(255,255,255,0.5), transparent 20px, rgba(255,255,255,0.3) 40px);
@@ -555,6 +564,12 @@ section.articl p.comment-notes{color:#666}
 .comment-form p label{width:70px;display: block; float: left;}
 .comment-form p{padding:8px 0; margin:0}
 #submit{background-color:#428BCA; width:80px; padding:2px 8px; border:0 none; border-radius:2px; color:#fff; margin-right:8px}
+#progress {position:fixed;height: 2px;background:#b91f1f;transition:opacity 500ms linear; z-index:1000000}
+#progress.done {opacity:0}
+#progress span {position:absolute;height:2px;-webkit-box-shadow:#b91f1f 1px 0 6px 1px;-webkit-border-radius:100%;opacity:1;
+width:150px;right:-10px;-webkit-animation:pulse 2s ease-out 0s infinite;}
+
+@-webkit-keyframes pulse {30% {opacity:.6}60% {opacity:0;}100% {opacity:.6}}
 
  @media only screen and (max-width : 1024px){ }
  @media only screen and (max-width : 768px){ }
@@ -577,7 +592,6 @@ section.articl p.comment-notes{color:#666}
     a.cn-nav-next {right:10px; bottom: 30%; }
 
   } 
-
 /*播放器框架*/
 .hidden{ display:none; }
 .m-player-wrap{ position:fixed; right:0; bottom:28px; z-index:1; width:570px; height:96px; color:#828282; font:normal 12px/1.5 Arial,Helvetica,Tahoma,"宋体",sans-serif; }

@@ -2,27 +2,32 @@
 # This file is distributed under the same license as the Login With Ajax package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2014-04-08 08:38:39+0000\n"
+"PO-Revision-Date: 2014-04-13 19:50+0800\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/0.1\n"
 "Project-Id-Version: Login With Ajax\n"
+"POT-Creation-Date: \n"
+"Last-Translator: ihateyou711 <ihateyou711@163.com>\n"
+"Language-Team: \n"
 
-#: login-with-ajax-widget.php:55 login-with-ajax-widget.php:59
+#: login-with-ajax-widget.php:55
+#: login-with-ajax-widget.php:59
 msgid "Title (%s)"
-msgstr ""
+msgstr "Title (%s)"
 
 #: login-with-ajax-widget.php:55
 msgid "Logged In"
-msgstr ""
+msgstr "已登录"
 
 #: login-with-ajax-widget.php:59
 msgid "Logged Out"
-msgstr ""
+msgstr "已登出"
 
-#: login-with-ajax-admin.php:197 login-with-ajax-admin.php:249
+#: login-with-ajax-admin.php:197
+#: login-with-ajax-admin.php:249
 msgid "With WPML enabled you can provide different redirection destinations based on language too."
 msgstr ""
 
@@ -46,11 +51,11 @@ msgstr ""
 
 #: login-with-ajax-widget.php:67
 msgid "Recover Password?"
-msgstr ""
+msgstr "找回密码"
 
 #: registration.php:18
 msgid "<strong>ERROR</strong>: Please enter a username."
-msgstr ""
+msgstr "<strong>ERROR</strong>: 请输入用户名"
 
 #: registration.php:20
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
@@ -86,11 +91,11 @@ msgstr "显示资料链接？"
 
 #: login-with-ajax-widget.php:71
 msgid "AJAX Registration?"
-msgstr ""
+msgstr "AJAX 注册"
 
 #: login-with-ajax-widget.php:76
 msgid "Template"
-msgstr ""
+msgstr "模板"
 
 #: login-with-ajax.php:157
 msgid "Login Successful, redirecting..."
@@ -100,17 +105,18 @@ msgstr "登陆成功，正在转向中..."
 msgid "Login successful, updating..."
 msgstr ""
 
-#: login-with-ajax.php:179 login-with-ajax.php:233
+#: login-with-ajax.php:179
+#: login-with-ajax.php:233
 msgid "An undefined error has ocurred"
 msgstr "未知错误！"
 
 #: login-with-ajax.php:183
 msgid "Please supply your username and password."
-msgstr ""
+msgstr "请输入用户名及密码"
 
 #: login-with-ajax.php:203
 msgid "Registration complete. Please check your e-mail."
-msgstr ""
+msgstr "注册完成，请检查您的E-mail"
 
 #: login-with-ajax.php:224
 msgid "We have sent you an email"
@@ -120,31 +126,34 @@ msgstr "我们已发给您一封Email"
 msgid "New user registration on your blog %s:"
 msgstr ""
 
-#: pluggable.php:25 pluggable.php:39
+#: pluggable.php:25
+#: pluggable.php:39
 msgid "Username: %s"
-msgstr ""
+msgstr "用户名：%s"
 
 #: pluggable.php:26
 msgid "E-mail: %s"
-msgstr ""
+msgstr "E-mail: %s"
 
 #: pluggable.php:28
 msgid "[%s] New User Registration"
-msgstr ""
+msgstr "[%s] 新用户注册"
 
 #: pluggable.php:40
 msgid "Password: %s"
-msgstr ""
+msgstr "密码： %s"
 
 #: pluggable.php:43
 msgid "[%s] Your username and password"
 msgstr ""
 
-#: login-with-ajax-widget.php:9 widget/default/widget_in.php:13
+#: login-with-ajax-widget.php:9
+#: widget/default/widget_in.php:13
 msgid "Hi"
 msgstr "您好"
 
-#: widget/default/widget_in.php:25 widget/default/widget_in.php:29
+#: widget/default/widget_in.php:25
+#: widget/default/widget_in.php:29
 msgid "Profile"
 msgstr "个人资料"
 
@@ -156,83 +165,103 @@ msgstr "注销"
 msgid "blog admin"
 msgstr "博客后台"
 
-#: login-with-ajax-widget.php:8 widget/default/widget_out.php:31
-#: widget/divs-only/widget_out.php:26 widget/modal/widget_out.php:9
+#: login-with-ajax-widget.php:8
+#: widget/default/widget_out.php:31
+#: widget/divs-only/widget_out.php:26
+#: widget/modal/widget_out.php:9
 #: widget/modal/widget_out.php:36
 msgid "Log In"
 msgstr "登陆"
 
-#: widget/default/widget_out.php:14 widget/default/widget_out.php:82
-#: widget/divs-only/widget_out.php:12 widget/divs-only/widget_out.php:63
-#: widget/modal/widget_out.php:19 widget/modal/widget_out.php:92
+#: widget/default/widget_out.php:14
+#: widget/default/widget_out.php:82
+#: widget/divs-only/widget_out.php:12
+#: widget/divs-only/widget_out.php:63
+#: widget/modal/widget_out.php:19
+#: widget/modal/widget_out.php:92
 msgid "Username"
 msgstr "用户名"
 
-#: widget/default/widget_out.php:22 widget/divs-only/widget_out.php:17
+#: widget/default/widget_out.php:22
+#: widget/divs-only/widget_out.php:17
 #: widget/modal/widget_out.php:27
 msgid "Password"
 msgstr "密  码"
 
-#: widget/default/widget_out.php:36 widget/divs-only/widget_out.php:32
+#: widget/default/widget_out.php:36
+#: widget/divs-only/widget_out.php:32
 #: widget/modal/widget_out.php:41
 msgid "Remember Me"
-msgstr "记住密码"
+msgstr "记住我"
 
-#: widget/default/widget_out.php:39 widget/divs-only/widget_out.php:35
+#: widget/default/widget_out.php:39
+#: widget/divs-only/widget_out.php:35
 #: widget/modal/widget_out.php:44
 msgid "Password Lost and Found"
-msgstr "密码恢复"
+msgstr "找回密码"
 
-#: widget/default/widget_out.php:39 widget/divs-only/widget_out.php:35
+#: widget/default/widget_out.php:39
+#: widget/divs-only/widget_out.php:35
 #: widget/modal/widget_out.php:44
 msgid "Lost your password?"
-msgstr "丢失您的密码了？"
+msgstr "忘记密码？"
 
-#: widget/default/widget_out.php:43 widget/default/widget_out.php:92
-#: widget/divs-only/widget_out.php:39 widget/divs-only/widget_out.php:76
-#: widget/modal/widget_out.php:48 widget/modal/widget_out.php:113
+#: widget/default/widget_out.php:43
+#: widget/default/widget_out.php:92
+#: widget/divs-only/widget_out.php:39
+#: widget/divs-only/widget_out.php:76
+#: widget/modal/widget_out.php:48
+#: widget/modal/widget_out.php:113
 msgid "Register"
 msgstr "注册"
 
-#: widget/default/widget_out.php:55 widget/divs-only/widget_out.php:45
+#: widget/default/widget_out.php:55
+#: widget/divs-only/widget_out.php:45
 #: widget/modal/widget_out.php:60
 msgid "Forgotten Password"
 msgstr "忘记密码"
 
-#: widget/default/widget_out.php:60 widget/divs-only/widget_out.php:47
+#: widget/default/widget_out.php:60
+#: widget/divs-only/widget_out.php:47
 #: widget/modal/widget_out.php:65
 msgid "Enter username or email"
 msgstr "请输入用户名或者Email"
 
-#: widget/default/widget_out.php:67 widget/divs-only/widget_out.php:52
+#: widget/default/widget_out.php:67
+#: widget/divs-only/widget_out.php:52
 #: widget/modal/widget_out.php:72
 msgid "Get New Password"
 msgstr "更新密码"
 
-#: widget/default/widget_out.php:68 widget/divs-only/widget_out.php:53
-#: widget/divs-only/widget_out.php:77 widget/modal/widget_out.php:73
+#: widget/default/widget_out.php:68
+#: widget/divs-only/widget_out.php:53
+#: widget/divs-only/widget_out.php:77
+#: widget/modal/widget_out.php:73
 #: widget/modal/widget_out.php:114
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
-#: widget/default/widget_out.php:77 widget/divs-only/widget_out.php:61
+#: widget/default/widget_out.php:77
+#: widget/divs-only/widget_out.php:61
 #: widget/modal/widget_out.php:87
 msgid "Register For This Site"
 msgstr ""
 
-#: widget/default/widget_out.php:86 widget/divs-only/widget_out.php:67
+#: widget/default/widget_out.php:86
+#: widget/divs-only/widget_out.php:67
 #: widget/modal/widget_out.php:98
 msgid "E-mail"
-msgstr ""
+msgstr "E-mail"
 
-#: widget/default/widget_out.php:78 widget/divs-only/widget_out.php:75
+#: widget/default/widget_out.php:78
+#: widget/divs-only/widget_out.php:75
 #: widget/modal/widget_out.php:112
 msgid "A password will be e-mailed to you."
 msgstr ""
 
 #: login-with-ajax-admin.php:166
 msgid "Redirection Settings"
-msgstr ""
+msgstr "重定向设置"
 
 #: login-with-ajax-admin.php:170
 msgid "Global Login Redirect"
@@ -276,7 +305,7 @@ msgstr "如果您想自定义特定用户的登陆注销，请在此填写好(�
 
 #: login-with-ajax-admin.php:300
 msgid "Notification Settings"
-msgstr ""
+msgstr "通知设置"
 
 #: login-with-ajax-admin.php:303
 msgid "If this feature doesn't work, please make sure that you don't have another plugin installed which also manages user registrations (e.g. BuddyPress and MU)."
@@ -288,7 +317,7 @@ msgstr ""
 
 #: login-with-ajax-admin.php:316
 msgid "Subject"
-msgstr ""
+msgstr "主题"
 
 #: login-with-ajax-admin.php:321
 msgid "Your registration at %BLOGNAME%"
@@ -302,17 +331,19 @@ msgstr ""
 msgid "<code>%PASSWORD%</code> will be replaced with the user's password."
 msgstr ""
 
-#: login-with-ajax-admin.php:327 login-with-ajax-admin.php:351
+#: login-with-ajax-admin.php:327
+#: login-with-ajax-admin.php:351
 msgid "<code>%BLOGNAME%</code> will be replaced with the name of your blog."
 msgstr ""
 
-#: login-with-ajax-admin.php:328 login-with-ajax-admin.php:352
+#: login-with-ajax-admin.php:328
+#: login-with-ajax-admin.php:352
 msgid "<code>%BLOGURL%</code> will be replaced with the url of your blog."
 msgstr ""
 
 #: login-with-ajax-admin.php:333
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 #: login-with-ajax-admin.php:360
 msgid "Save Changes"
@@ -332,11 +363,11 @@ msgstr "修改已保存。"
 
 #: login-with-ajax-admin.php:134
 msgid "General Settings"
-msgstr ""
+msgstr "概况设置"
 
 #: login-with-ajax-admin.php:139
 msgid "Default Template"
-msgstr ""
+msgstr "默认模板"
 
 #: login-with-ajax-admin.php:148
 msgid "Choose the default theme you'd like to use. This can be overriden in the widget, shortcode and template tags."
@@ -348,8 +379,9 @@ msgstr ""
 
 #: login-with-ajax-admin.php:155
 msgid "Disable refresh upon login?"
-msgstr ""
+msgstr "禁止刷新登录"
 
 #: login-with-ajax-admin.php:160
 msgid "If the user logs in and you check the button above, only the login widget will update itself without refreshing the page. Not a good idea if your site shows different content to users once logged in, as a refresh would be needed."
 msgstr ""
+

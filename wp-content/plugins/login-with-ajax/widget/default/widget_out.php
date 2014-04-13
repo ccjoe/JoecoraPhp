@@ -4,7 +4,8 @@
  * You can edit this, but for upgrade safety you should copy and modify this file into your template folder.
  * The location from within your template folder is plugins/login-with-ajax/ (create these directories if they don't exist)
 */
-?>
+?>  
+    <h3>请登录</h3>
 	<div class="lwa lwa-default"><?php //class must be here, and if this is a template, class name should be that of template directory ?>
         <form class="lwa-form" action="<?php echo esc_attr(LoginWithAjax::$url_login); ?>" method="post">
         	<span class="lwa-status"></span>

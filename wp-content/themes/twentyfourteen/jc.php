@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="utf-8">
+		<meta charset="utf-8" lang="zh">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta content="JOE & CORA's WEBSITE, <?php $description = get_bloginfo( 'description', 'display' );	if ( ! empty ( $description ) ) : ?><?php echo esc_html( $description ); ?><?php endif; ?>" name="description">
 		<meta content="Joe,Cora,website" name="keywords">
@@ -54,19 +54,7 @@
 			<span class="imgNav mn" id="imgNav"><h3><a href=""><i class="fa fa-github-alt"></i>影像</a></h3></span>
 			<span class="timeNav mn" id="timeNav"><h3><a><i class="fa fa-clock-o"></i>时间</a></h3></span>
 			<span class="vedNav mn" id="vedNav"><h3><a><i class="fa fa-info-circle"></i>话语</a></h3></span>
-			<span class="userNav">
-				<div id="user" class="user f-yahei">
-					<h3></h3>
-					<div class="user-menu">
-						<?php echo do_shortcode("[lwa]"); ?>
-					<!-- 	<ul>
-						<li><a>修改昵称</a></li>
-						<li><a>修改密码</a></li>
-						<li><a>退出登录</a></li>
-					</ul> -->
-					</div>				
-				</div>
-			</span>
+			<span class="userNav"  id="user"><?php echo do_shortcode("[lwa]"); ?></span>
 		</nav>
 	</section>		
 	<!-- MENU OVER｝ -->

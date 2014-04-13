@@ -6,41 +6,51 @@
 */
 ?>
 <div class="lwa">
-	<?php 
+	<h3><?php 
 		global $current_user;
 		get_currentuserinfo();
-	?>
+	?></h3>
 	<span class="lwa-title-sub" style="display:none"><?php echo __( 'Hi', 'login-with-ajax' ) . " " . $current_user->display_name  ?></span>
+
+	
+	<div class="user-menu">
+ 		<span class="avatar" class="lwa-avatar">
+			<?php echo get_avatar( $current_user->ID, $size = '50' );  ?>
+		</span>
+	 	<ul class="lwa-info">
+ 			<li><?php
+				//Admin URL
+				if ( $lwa_data['profile_link'] == '1' ) {
+					if( function_exists('bp_loggedin_user_link') ){
+						?>
+						<a href="<?php bp_loggedin_user_link(); ?>"><?php esc_html_e('Profile','login-with-ajax') ?></a><br/>
+						<?php	
+					}else{
+						?>
+						<a href="<?php echo trailingslashit(get_admin_url()); ?>profile.php"><?php esc_html_e('Profile','login-with-ajax') ?></a><br/>
+						<?php	
+					}
+				}
+				//Logout URL
+				?>				
+				<a id="wp-logout" href="<?php echo wp_logout_url() ?>"><?php esc_html_e( 'Log Out' ,'login-with-ajax') ?></a></li>
+				<li><?php
+				//Blog Admin
+				if( current_user_can('list_users') ) {
+					?>
+					<a href="<?php echo get_admin_url(); ?>"><?php esc_html_e("blog admin", 'login-with-ajax'); ?></a>
+					<?php
+				}
+			?></li>
+		</ul> 
+	</div>		
+
+
 	<table>
 		<tr>
-			<td class="avatar" class="lwa-avatar">
-				<?php echo get_avatar( $current_user->ID, $size = '50' );  ?>
-			</td>
+
 			<td class="lwa-info">
-				<?php
-					//Admin URL
-					if ( $lwa_data['profile_link'] == '1' ) {
-						if( function_exists('bp_loggedin_user_link') ){
-							?>
-							<a href="<?php bp_loggedin_user_link(); ?>"><?php esc_html_e('Profile','login-with-ajax') ?></a><br/>
-							<?php	
-						}else{
-							?>
-							<a href="<?php echo trailingslashit(get_admin_url()); ?>profile.php"><?php esc_html_e('Profile','login-with-ajax') ?></a><br/>
-							<?php	
-						}
-					}
-					//Logout URL
-					?>
-					<a id="wp-logout" href="<?php echo wp_logout_url() ?>"><?php esc_html_e( 'Log Out' ,'login-with-ajax') ?></a><br />
-					<?php
-					//Blog Admin
-					if( current_user_can('list_users') ) {
-						?>
-						<a href="<?php echo get_admin_url(); ?>"><?php esc_html_e("blog admin", 'login-with-ajax'); ?></a>
-						<?php
-					}
-				?>
+
 			</td>
 		</tr>
 	</table>
