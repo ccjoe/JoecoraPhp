@@ -2588,7 +2588,7 @@ msgstr "近期评论"
 #: wp-includes/default-widgets.php:700
 msgctxt "widgets"
 msgid "%1$s on %2$s"
-msgstr "%1$s发表在《%2$s》"
+msgstr "%1$s 说道：%2$s"
 
 #: wp-includes/default-widgets.php:731
 msgid "Number of comments to show:"

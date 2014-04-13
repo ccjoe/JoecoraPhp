@@ -41,11 +41,25 @@
       JCApp.VegasSet();                                        //背景交互
       JCApp.PageUISet();                                   //页面交互
     },  
-
+    
     PageUISet:function(){     //页面上UI 
         //左侧交互      
         var jc = this,  showed,status,  n=0;
 
+        $(document).ajaxSend(function(){
+          pcsBar(0,0);
+        }).ajaxStart(function(){
+          pcsBar(0,30);
+        }).ajaxSuccess(function(){
+          pcsBar(30,90);
+        }).ajaxComplete(function(){
+          pcsBar(90,100);
+        }).ajaxStop(function(){
+          
+        }).ajaxError(function(){
+          pcsBar(0,0);
+        });
+        
         if(screen.width < 600){
           $("#musicPlayerWrap").remove();
         }
@@ -76,7 +90,8 @@
         //滚动条滚动拉取文章
         jc.$postList.scroll(function(){
           if($(this).find("ul.post-wrapper").height() - $(this).scrollTop() < 450){
-            jc.getAjaxPostData(5);  
+            //触发多次则必须200ms或以上才执行一次.
+            _.throttle(function(){ jc.getAjaxPostData(5);  }, 200);  
           }
         });
 
