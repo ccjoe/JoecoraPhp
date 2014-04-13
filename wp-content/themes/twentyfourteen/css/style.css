@@ -1,0 +1,85 @@
+/*
+Theme Name:     Developer 2014
+Theme URI:      http://www.designpromote.co.uk/wp2012/blogs/
+Description:    2014 Child Theme with central layout for developers
+Author:         Nan Zhang
+Author URI:     http://www.designpromote.co.uk/
+Template:       twentyfourteen
+Version:				1.01
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Tags: black, green, one-column, two-columns, responsive-layout, seasonal
+
+Twenty Fourteen WordPress Theme, Copyright 2014 WordPress.org
+Twenty Fourteen is distributed under the terms of the GNU GPL
+*/
+
+@import url("../twentyfourteen/style.css");
+/**
+ * navigation menu in full screen
+ **/
+.site {
+	max-width: 100%;
+}
+/**
+ * center all other areas (header, content, footer)
+ **/
+.header-main,
+#site-header,
+.site-main,
+.site-info {
+	max-width: 980px;
+	margin: 0 auto;
+}
+.header-main {
+	padding: 0;
+}
+.site-header {
+	width: 100%;
+	max-width: 100%;
+}
+
+/** 
+ *Disable .site:before in parent 
+ **/
+.site:before{
+	content: none; 
+}
+
+/**
+ *#primary
+ **/
+.site-content,
+.site-main .widecolumn {
+	margin-left: 0;
+}
+/**
+ * Hide primary sidebar
+ **/ 
+#secondary{
+	display: none;
+}
+/**
+ * 6.0 Content
+ * -----------------------------------------------------------------------------
+ * use max-width to override the parent settings
+ */
+.hentry {
+	margin: 0 0 48px;
+	max-width: 100%;
+}
+
+.site-content .entry-header,
+.site-content .entry-content,
+.site-content .entry-summary,
+.site-content .entry-meta,
+.page-content {
+	margin: 0;
+	max-width: 100%;
+}
+.comments-area {
+	margin: 48px 0;
+	max-width: 100%;
+	padding: 0 30px;
+}
