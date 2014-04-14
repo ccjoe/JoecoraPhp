@@ -18,7 +18,7 @@ abbr,acronym { border:0}
 .jc input, .jc textarea{background-color:transparent; color:#428bca; border:1px solid #888; height: 20px; padding: 2px 6px; width: 70%; }
 .jc textarea{height:60px}
 .jc input:focus, .jc textarea:focus{border:1px solid; outline:0 none; }
-a{text-decoration:none; color:#666; transition: all 0.1s linear; outline:0 none;}
+a{text-decoration:none; color:#aaa; transition: all 0.1s linear; outline:0 none;}
 a:hover{color:#428BCA}
 .clearfix:after {content:".";  display:block; height:0; clear:both; visibility:hidden; } 
 .clearfix { display:inline-block; } 
@@ -102,16 +102,21 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu .user a,
 .menu .nav h3 a{color:#fff; font-size:12px;}
 
-.menu .lwa-form{ position: absolute; width: 210px; padding: 20px; right: 0; top: 0; font-size: 12px; z-index: -1; }
+.menu .userNav .lwa-default{display: none; font-size: 12px; position: absolute; width: 225px; padding: 20px; right: 0; top: 0;font-size: 12px; z-index: -1;}
 .menu .lwa-form input{width:auto; padding: 0; float:left;}
-#lwa_wp-submit{background-color:#428BCA; color: #fff; padding: 2px 8px; border:0 none}
+.menu .lwa-form td{font-size: 12px}
+.menu .lwa-form .lwa-submit-links{vertical-align: middle;}
+.menu .lwa-form .lwa-submit-links a,.menu .lwa-form .lwa-submit-links label{margin-right: 4px}
+.menu .lwa-form .lwa-rememberme{height: 12px; margin-right: 4px}
+.lwa-register-tip{font-size: 13px; color: #999; float: right;}
+.lwa-register-form p {font-size: 13px; color: #999;}
+.lwa-register-form p label{width: 80px;display: block;margin-bottom: 10px;}
+
+input[type="submit"]{background-color:#428BCA; color: #fff; padding: 2px 8px!important; border:0 none; width:auto!important;}
 .menu .nav span.lwa-status{width:auto; height:auto; cursor: pointer;}
 .menu .nav h3 a i{margin-right:4px}
 .menu .nav h3 a.abg:hover{background-color:#FFF; color:#000;}
 .menu .nav h3 a:hover {font-size:20px;}
-.menu .userNav .lwa-default{display: none; font-size: 12px}
-
-.lwa-modal{background-color: #333!important;}
 
 #expando{height:100%; width:360px; position:absolute; top:0}
 .ltbg{height:100%; width:100%; background-color:#000; opacity: 0.1; filter:alpha(opacity=10); position:absolute; z-index:0; transition:all 0.2s linear; cursor:pointer}

@@ -187,7 +187,7 @@
           
         }else if( $(this).hasClass("vedNav")){
           //点击视频
-          if(leftCon.is(":visible") && vedioList.is(":visible") === false){
+          if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
             $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();  
           }
           

@@ -18,6 +18,7 @@
 		<title><?php bloginfo( 'name' ); ?></title>
 		<link rel="shortcut icon" href="">
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
+		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/jc.css" />
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
 		<script>
 		function pcsBar(b,o){
@@ -90,17 +91,18 @@
 							<div class=""  id="imgGlList" style="display:none" >
 								<button type="button" class="btn-lg show-list"  id="returnGL"><i class="fa fa-undo"></i>返回相册列表</button>
 								<div class="btn-group btn-group-sm clearfix" id="showMode" >
-									  <button type="button" class="btn btn-default show-bgs active"  title="点击图片将会显示在背景上"><i class="fa fa-caret-square-o-up"></i></span>背景</button>
-									  <button type="button" class="btn btn-default show-grid"><i class="fa fa-th-large"></i>矩阵</button>
-									  <button type="button" class="btn btn-default show-book"><i class="fa fa-book"></i>翻页</button>									  
-							  </div>
+								  <button type="button" class="btn btn-default show-bgs active"  title="点击图片将会显示在背景上"><i class="fa fa-caret-square-o-up"></i>背景</button>
+								  <button type="button" class="btn btn-default show-grid"><i class="fa fa-th-large"></i>矩阵</button>
+								  <button type="button" class="btn btn-default show-book"><i class="fa fa-book"></i>翻页</button>									  
+							    </div>
 						 </div>
 					</div>
 				</section>
 				<!-- IMG OVER} -->
 				
 				<!-- vedio BEGIN{ -->
-				<section class="vedio-list" id="vedio"></section>
+				
+				<section class="vedio-list" id="vedio"><?php echo do_shortcode("[widget widget_name='WP_Widget_Recent_Comments']"); ?></section>
 				<!-- vedio OVER} -->	
 				
 			</div>			

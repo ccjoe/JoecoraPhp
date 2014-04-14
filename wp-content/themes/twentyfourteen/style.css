@@ -713,7 +713,6 @@ article.post .entry-header div.entry-meta {display: none;}
 .slider-direction-nav .slider-disabled { display: none; }
 
 /*----add-----*/
-body { background: url(images/bg.png) repeat 0 0;}
 .site-title { margin-left:10px; }
 .entry-title { padding: 5px; background-color:#328732; color:#fff; font-family: "Microsoft Yahei",Verdana,Simsun,"Helvetica Neue",Arial,sans-serif; }
 .entry-title a, .entry-title a:hover { color:#fff; }
@@ -733,8 +732,12 @@ code, kbd, tt, var, samp, pre{ line-height:inherit; font-size:inherit; }
 .codecolorer-container table{margin-bottom:0}
 .codecolorer-container table td.line-numbers{width:23px}
 .widget .lwa-default table,.widget .lwa-default th,.widget .lwa-default td{border:0 none}
-
-
+.widget_loginwithajaxwidget h3{display:none}
+.primary-navigation a{padding-left:10px}
+.lwa{margin-bottom:0}
+.content-area,  .content-sidebar { background: #fff; }
+article.post .entry-summary img{max-width: 200px;float: left;padding: 20px;padding-left: 0;}
+.widget .user-menu span{float:left; margin-right:16px;}
 /**
  * 10.0 Multisite
  * -----------------------------------------------------------------------------
@@ -808,7 +811,6 @@ a.post-thumbnail:hover img { opacity: 0.85; }
 .site-content .has-post-thumbnail .entry-header { margin-top: -48px; }
 }
  @media screen and (min-width: 673px) {
-.header-main { padding: 0 30px; }
 .search-box .search-field { width: 50%; }
 .content-area { float: left; width: 100%; }
 .site-content { margin-right: 33.33333333%; }
@@ -876,7 +878,6 @@ a.post-thumbnail:hover img { opacity: 0.85; }
 .full-width .site-content .alignright { clear: right; }
 }
  @media screen and (min-width: 846px) {
-.content-area,  .content-sidebar { padding-top: 72px; }
 .site-content .has-post-thumbnail .entry-header { margin-top: -48px; }
 .comment-list .trackback,  .comment-list .pingback,  .comment-list article { margin-bottom: 36px; padding-top: 36px; }
 .comment-author .avatar { height: 34px; top: 2px; width: 34px; }
