@@ -109,7 +109,7 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu .nav h3 a i{margin-right:4px}
 .menu .nav h3 a.abg:hover{background-color:#FFF; color:#000;}
 .menu .nav h3 a:hover {font-size:20px;}
-.menu .userNav .lwa-default{display: none}
+.menu .userNav .lwa-default{display: none; font-size: 12px}
 
 .lwa-modal{background-color: #333!important;}
 
@@ -564,7 +564,7 @@ section.articl p.comment-notes{color:#666}
 .comment-form p label{width:70px;display: block; float: left;}
 .comment-form p{padding:8px 0; margin:0}
 #submit{background-color:#428BCA; width:80px; padding:2px 8px; border:0 none; border-radius:2px; color:#fff; margin-right:8px}
-#progress {position:fixed;height: 2px;background:#b91f1f;transition:opacity 500ms linear; z-index:1000000}
+#progress {position:fixed;height: 2px;background:#b91f1f;transition:opacity 500ms linear; z-index:1000000; top:0;}
 #progress.done {opacity:0}
 #progress span {position:absolute;height:2px;-webkit-box-shadow:#b91f1f 1px 0 6px 1px;-webkit-border-radius:100%;opacity:1;
 width:150px;right:-10px;-webkit-animation:pulse 2s ease-out 0s infinite;}

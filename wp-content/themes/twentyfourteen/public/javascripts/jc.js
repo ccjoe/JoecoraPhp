@@ -90,9 +90,11 @@
         jc.$postList.scroll(function(){
           if($(this).find("ul.post-wrapper").height() - $(this).scrollTop() < 450){
             //触发多次则必须200ms或以上才执行一次.
-            _.throttle(function(){ jc.getAjaxPostData(5);  }, 200);  
+             jc.getAjaxPostData(5);
+             //_.debounce(function(){  console.log("debounce") }, 200); 
           }
         });
+
 
         //Ajax Article
         this.$postList.on('click',"ul li a",function(e){
@@ -159,7 +161,7 @@
         jc.PatternSet.$mbPattern.show();
         jc.PatternSet.disperse();
       }
-      
+
       $("#user").on("click","h3",function(){  
           $(".lwa-default").toggle();
       })
