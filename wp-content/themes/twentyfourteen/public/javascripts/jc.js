@@ -128,7 +128,7 @@
             var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
             //文章容器
-            $t.find(".article-con").append(needdata);
+            $t.find(".article-con .jc-art").append(needdata);
 
             $t.find('.close').click( closeArticle );
 
