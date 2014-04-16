@@ -125,7 +125,7 @@
           //return false;
           }
           }).done(function ( data ) { 
-            var needdata = $($.parseHTML(data)).find("#content");
+            var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
             //文章容器
             $t.find(".article-con").append(needdata);
