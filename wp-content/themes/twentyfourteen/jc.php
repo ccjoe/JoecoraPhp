@@ -18,9 +18,22 @@
 		<title><?php bloginfo( 'name' ); ?></title>
 		<link rel="shortcut icon" href="">
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
-		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/jc.css" />
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
+		<!--
+		<script>var duoshuoQuery = {short_name:"joecora.dushuo.com"};</script>
+		<script src="http://static.duoshuo.com/embed.js"></script>
+		function showDsComments(){
+			var $el = $('<div />');//该div不需要设置class="ds-thread"
+			$el.attr({
+				'data-thread-key': '文章的本地ID',    //必选参数
+				'data-url', 'http://www.joecora.com', //必选参数
+				'data-author-key', '作者的本地用户ID' //可选参数
+			});
+			DUOSHUO.EmbedThread($el[0]);
+			return $el
+		}-->
 		<script>
+		
 		function pcsBar(b,o){
 	          $({property: b})
 	          .animate({property: o}, {
@@ -50,7 +63,6 @@
 	<!-- MENU BEGIN｛ -->
 	<section class="menu box-opacity" id="menu">
 		<nav class="nav clearfix">
-			<!--<?php wp_nav_menu( array( 'theme_location' => 'primary', 'menu_class' => 'nav-menu','container' => 'nav' ,'container_class' => "nav clearfix") ); ?>-->
 			<span class="postNav mn" id="postNav"><h3><a href=""><i class="fa fa-pagelines"></i>文字</a></h3></span>
 			<span class="imgNav mn" id="imgNav"><h3><a href=""><i class="fa fa-github-alt"></i>影像</a></h3></span>
 			<span class="timeNav mn" id="timeNav"><h3><a><i class="fa fa-clock-o"></i>时间</a></h3></span>
@@ -120,7 +132,6 @@
 		</div>
 		<div class="article-con">
 		     <div class='jc-art'></div>
-		     <div class='jc-ds'><?php comments_template('', true); ?></div>
 		</div>
 	</section>
 	<!-- 	弹出的文章面板} -->

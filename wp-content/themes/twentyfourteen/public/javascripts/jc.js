@@ -110,12 +110,13 @@
           url: href,
           context:jc.$article,  //上下文，整个弹出面板
           beforeSend:function(){
-
-            $(this).find(".article-con").append(jc.$loading);
+			var $goalElem = $(this).find(".article-con");
+			$goalElem.find(".jc-art").empty();
+            $goalElem.find(".jc-art").append(jc.$loading);
             $(this).find('.close').off();
             $(this).find('.size').off();
             var $t = $(this);
-            if($("#content")){ $("#content").remove();}
+            
             jc.PatternSet.openItem();
             jc.PatternSet.$mbPattern.children().promise().done(function() {
               $t.show();
@@ -125,10 +126,10 @@
           //return false;
           }
           }).done(function ( data ) { 
-            var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
+            var needdata = $($.parseHTML(data)).find("#content"); //.find("article.post, nav.post-navigation")
             var $t = $(this);
             //文章容器
-            $t.find(".article-con .jc-art").append(needdata);
+            $t.find(".article-con .jc-art").prepend(needdata);
 
             $t.find('.close').click( closeArticle );
 
@@ -163,7 +164,7 @@
       }
 
       $("#user").on("click","h3",function(){  
-          $(".lwa-default").toggle();
+          $(".lwa").toggle();
       })
 
       jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   

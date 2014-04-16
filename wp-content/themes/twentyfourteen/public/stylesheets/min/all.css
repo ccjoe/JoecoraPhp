@@ -79,6 +79,9 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu{position: fixed; width:100%; height:6px; left:0; top:0; z-index:999999;}
 .menu .nav{float: right; width: 500px;}
 .menu .nav span{width:100px; height:6px; text-align:right; display:block; float:left; cursor:pointer; text-align:center;}
+.menu .nav span.avatar{height: auto; width: auto;float: right; margin-left: 10px;}
+.menu .nav span.avatar img{width: 30px; height: 30px;}
+.menu .nav .user-menu .lwa-info{float: left; text-align: right;}
 .menu .nav span h3{font-family:Microsoft Yahei; height:30px; line-height:30px;  height:0}
 .menu .nav .postNav, 	
 .menu .nav .postNav:hover h3{background-color:#88bdff;}
@@ -90,8 +93,7 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu .nav .timeNav:hover h3{background-color:#a6b818;}
 .menu .nav .userNav,
 .menu .nav .userNav:hover h3{background-color:#8b8b8b; }
-.menu .nav .userNav:hover .user,
-.menu .nav .userNav:hover .user-menu{display:block; background-color:#aaa;}
+.menu .nav .userNav:hover .user{display:block; background-color:#aaa;}
 .menu .user,
 .menu .nav span h3{color:#fff; margin-top:6px; opacity: 0.9; filter:alpha(opacity=90); transition: height 0.1s linear;}
 .menu .nav span:hover h3{height:30px}
@@ -102,7 +104,7 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu .user a,
 .menu .nav h3 a{color:#fff; font-size:12px;}
 
-.menu .userNav .lwa-default{display: none; font-size: 12px; position: absolute; width: 225px; padding: 20px; right: 0; top: 0;font-size: 12px; z-index: -1;}
+.menu .userNav .lwa{display: none; font-size: 12px; position: absolute; max-width: 225px; padding: 10px; right: 0; top: 0;font-size: 12px; z-index: -1;}
 .menu .lwa-form input{width:auto; padding: 0; float:left;}
 .menu .lwa-form td{font-size: 12px}
 .menu .lwa-form .lwa-submit-links{vertical-align: middle;}
