@@ -1,0 +1,1540 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="ie6 oldie"> <![endif]-->
+<!--[if IE 7]>    <html class="ie7 oldie"> <![endif]-->
+<!--[if IE 8]>    <html class="ie8 oldie"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Joe有关流媒体HTML5及CSS3，JQuery的Module,可复用代码段</title>
+	<link href="css/boilerplate.css" rel="stylesheet" type="text/css">
+	<link href="css/custom.css" rel="stylesheet" type="text/css">
+	<link href="css/css3.css" rel="stylesheet" type="text/css">
+<!-- 
+要详细了解文件顶部 html 标签周围的条件注释:
+paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/
+
+如果您使用的是 modernizr (http://www.modernizr.com/) 的自定义内部版本，请执行以下操作:
+* 在此处将链接插入 js 
+* 将下方链接移至 html5shiv
+* 将“no-js”类添加到顶部的 html 标签
+* 如果 modernizr 内部版本中包含 MQ Polyfill，您也可以将链接移至 respond.min.js 
+-->
+<!--[if lt IE 9]>
+<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<!-- 
+* @added by Joe 如果是IE，需要用excanvas.js来支持canvas 
+* Joe Email:icareu.joe@gmai.com
+*      Site:http://www.mei027.com
+-->
+
+<!--[if IE]><script src="excanvas.js"></script><![endif]-->
+
+<script src="js/respond.min.js"></script>
+</head>
+<body class="bg">
+	<div class="gridContainer clearfix">
+		<style>
+		/*
+		================================================================================
+		Hearer style
+		================================================================================
+		*/
+		
+		a{text-decoration:none;}
+		header hgroup{ float:left; padding-right:1em; border-right:3px solid #eee}
+		h1{padding:0; margin:0; font-size:3.6em;
+			text-shadow: 0 1px 0 #ccc,
+			0 2px 0 #c9c9c9,
+			0 3px 0 #bbb,
+			0 4px 0 #b9b9b9,
+			0 5px 0 #aaa,
+			0 6px 1px rgba(0,0,0,.1),
+			0 0 5px rgba(0,0,0,.1),
+			0 1px 3px rgba(0,0,0,.3),
+			0 3px 5px rgba(0,0,0,.2),
+			0 5px 10px rgba(0,0,0,.25),
+			0 10px 10px rgba(0,0,0,.2),
+			0 20px 20px rgba(0,0,0,.15);
+			
+		}
+		h1 a,h1 a:visited{color:#666;}
+		h2{font-size:3em; font-weight:bold; color:#FFF; background-color:#000; padding:0.3em}
+		h3{font-size:2.4em; font-weight:bold; color:#066;  border:1px solid #D1D1D1; padding:0.2em; background-color:#eee}
+		h4{border-bottom:1px solid #9CF; padding-bottom:0.3em; font-size:1.6em; color:#603}
+		h6{margin:0.5em 0; width:14em; font-size:1.4em;}
+		header{margin:1em 0; padding:1em;}
+		header nav{float:left; padding:3em}
+		nav ul li{float:left; margin:2em 1em}
+		nav ul li a{text-decoration:none; font-size:2em;}
+		.bg{
+			background-image:-webkit-gradient(linear,0% 0%, 0% 100%, from(#CCCCCC), to(#333333)); /*@支持Safari 4+, Chrome */		/*参数分别是：渐变样式（linear，radial） 水平位移(x1)垂直位移(y1)：水平位移(x2)：垂直位移(y2)：开始颜色 结束颜色 偏移量 停靠色 */
+			background-image:-moz-linear-gradient(0% 0% 36deg, #CCCCCC,#333333);/*@支持 firefox*/
+			/*参数分别是：渐变样式（linear，radial） 直位移：开始颜色 结束颜色  停靠色 偏移量 */
+			background-image: -webkit-linear-gradient(top, #CCCCCC, #333333); /* Chrome 10+, Safari 5.1+, iOS 5+ */
+			background-image:      -o-linear-gradient(top, #CCCCCC, #333333); /* Opera 11.10-12.00 */
+			background-image:         linear-gradient(to bottom, #CCCCCC, #333333); /* Firefox 16+, IE10, Opera 12.50+ */
+			
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#AACCCCCC',endColorstr='#AA333333',GradientType=0 );/*@支持IE10及以下*/}
+	</style>
+	<div id="LayoutDiv1">
+		<header class="clearfix bg">
+			<hgroup>
+				<h1 ><a href="#">Home and LOGO </a></h1>
+				<h6>HTML5响应式模板，HTML5教程及示例，代码结构及代码习惯示例，详见代码参考</h6>
+			</hgroup>
+			<nav>	
+				 	<!--
+					**** @UL LI A样本
+				-->
+				<ul>
+					<li><a href="#" title="HTML5 Canvas">HTML5 Canvas</a></li>
+					<li><a href="#" title="HTML5 表格详解">HTML5 表格详解</a></li>
+					<li><a href="#" title="HTML 标签">HTML5</a></li>
+					<li><a href="#" title="CSS3 样式格式">CSS3 样式参考</a></li>
+				</ul>
+			</nav>
+		</header>
+	</div>
+	
+	<div class="content clearfix">
+		<style>
+		/*
+		================================================================================
+		流体左右布局样式75%;23%;2%是较好的比例
+		解决100%与border:1px之间用margin负值
+		================================================================================
+		*/
+		.contentLeft{
+			width:75%;
+			margin-right:2%;
+			float:left;
+			
+		}
+		.contentLeft article{border:0.33em solid #eee; padding:1em; margin:0 1em 1em 0; background-color:#ccc}
+		.contentRight{
+			width:23%;
+			float:left;
+		}
+		.last{padding-bottom:0}
+		footer{color:#C33}
+		article header{color:#069}
+		/*
+		=====================================================================
+		@blockquote,pre,code
+		=====================================================================
+		*/
+		blockquote,pre,code{background-color:#fAFAFA;  margin:1em; border-left:3px solid #06F; padding:0.4em 1em; display:inline-block;
+			line-height:1.4em; overflow:auto; width:80%}
+			p{line-height:1.6em}
+		</style>
+		
+		
+		<div class="contentLeft">
+			<article  class="page-curl">
+				<header>
+					<h2 class="box_opacity gradient radius box_animation">Canvas基本详解</h2>
+					<div class="article_description">
+						使用canvas编程，首先要获取其上下文（context）。接着在上下文中执行动作，最后将这些动作应用到上下文中。可以将canvas的这种编辑方式想象成为数据库事务：开发人员先发起一个事务，然后执行某些操作，最后提交事务。	
+					</div>
+				</header>
+				
+				<div class="article_context">
+					<p>访问页面的时候，如果浏览器不支持canvas元素，或者不支持HTML5 Canvas API中的某些特性，那么开发人员最好提供一份替代代。例如，开发人员可以通过一张替代图片或者一些说明性的文字告诉访问者，使用最新的浏览器可以获得更佳的浏览效果。代码清单2-2展示了如何在canvas中指定替代文本，当浏览器不支持canvas的时候会显示这些替代内容。<b>除了上面代码中的文本外，同样还可以使用图片，不论是文本还是图片都会在浏览器不支持canvas元素的情况下显示出来。</b></p>
+					<p>开发者迫切希望Canvas可以受到广泛支持，因此不断有项目启动来尝试解决老浏览器或者非标准浏览器不支持Canvas的问题。微软已经宣布Internet Explorer 9将支持canvas，因此，所有主流浏览器都支持canvas已经指日可待了。由于各家浏览器对canvas的支持程度有差异，所以最好在使用API之前，先测试一下HTML5 Canvas是否被支持。2.2.1节会讲解怎样通过代码来检测浏览器支持Canvas的情况。</p>
+					<p>检测浏览器支持情况:
+						<pre>
+							try {
+							document.createElement("canvas").getContext("2d");
+							document.getElementById("support").innerHTML =
+							"HTML5 Canvas is supported in your browser.";
+						} catch (e) {
+						document.getElementById("support").innerHTML = "HTML5 Canvas is not supportedin your browser.";
+					}
+				</pre>
+			</div>
+			<footer>canvas powered by <a href="www.mei027.com" title="LSF-前端-实录">Joe</a> Part1</footer>
+			
+		</article>
+		
+		<article>
+			<header><h3 class="box_animation">先讲网格：</h3></header>
+			<p><strong>网格:</strong>我们在开始绘图之前，我们还需谈谈关于canvas网格或坐标空间（coordinate space）。前面的HTML模板有一个150像素宽和150像素高的canvas元素。现在我在画面上加上格线（见右图）。通常1个单位的格线对应于canvas的1个像素。网格的原点位于左上角（坐标(0,0)）。所有元素都相对于原点放置。所以蓝色方块的左上角的位置就会是离左边x个像素且离顶边y个像素（坐标(x,y)）。后面的教学我们将会看到我们如何把原点移到其他位置，还有旋转、缩放格线。  
+				<img src="https://developer.mozilla.org/@api/deki/files/78/=Canvas_default_grid.png" alt="网格" style="float:left"/></p>
+				<p>与SVG不同，canvas只支援一个基本图形-矩形。其他的图形必须以路径组合出来。还好，我们有一系列的路径绘图函数，可以帮我们组合非常复杂的图形。矩形  首先看看矩形。canvas 有三个可以绘出矩形的函数︰
+					<blockquote>
+						<ol>
+							<li>fillRect (x,y,width,height)  :绘制填满的矩形</li>
+							<li>strokeRect (x,y,width,height)  :绘制矩形的边框</li>
+							<li>clearRect (x,y,width,height)  :清除指定的区块，使该区块完全透明</li>
+						</ol>
+					</blockquote><br>
+					这三个函数使用同样的参数。x和y指明矩形的左上角位于canvas（相对于原点）的位置。width和height是矩形的宽与高。现在就来使用看看。以下是之前的draw()函数，不过我多加了上面的三个函数。
+					<p><b>方法moveTo和lineTo实际上并不画线，而是在结束canvas操作的时候，通过调用context.stroke()方法完成线条的绘制。</b>
+						关于可重用代码有一条重要的建议：一般绘制都应从原点（坐标系中的0,0点）开始，应用变换（缩放、平移、旋转），然后不断修改代码直至达到希望的效果。如图所示。</p>
+					</article>
+					
+					<article>
+						<header>
+							<h3 class="box_animation">绘制图形</h3>
+							<div class="article_description">与SVG不同，canvas只支援一个基本图形-矩形。其他的图形必须以路径组合出来。还好，我们有一系列的路径绘图函数，可以帮我们组合非常复杂的图形。</div>
+						</header>
+						<div class="article_context">
+							<h4>矩形</h4>首先看看矩形。canvas 有三个可以绘出矩形的函数︰
+							<p>下面看canvas示例及代码：</p>
+							<canvas id="rectTutorial"></canvas>
+							<script>
+								function  drawShape(){
+									var canvas = document.getElementById("rectTutorial")
+									if(canvas.getContext){
+										var ctx = canvas.getContext('2d');
+										ctx.fillRect(25,25,100,100);
+										ctx.clearRect(45,45,60,60);
+										ctx.strokeRect(50,50,50,50);
+									}
+									else{
+										alert("您需要更高版本游览器，谢谢");
+									}
+								}
+								window.addEventListener("load",drawShape,true);
+							</script>
+
+							<pre>
+								function drawShape(){
+								// get the canvas element using the DOM
+								var canvas = document.getElementById('tutorial');
+								// Make sure we don't execute when canvas isn't supported
+								if (canvas.getContext){
+								// use getContext to use the canvas for drawing
+								var ctx = canvas.getContext('2d');
+								// Draw shapes
+								ctx.fillRect(25,25,100,100);
+								ctx.clearRect(45,45,60,60);
+								ctx.strokeRect(50,50,50,50);
+							}
+						}
+					</pre>
+					<h4>繪製路徑</h4>要使用路徑繪製圖形，我們還需要一些步驟。
+					<blockquote>
+						beginPath()     closePath()     stroke()    fill()
+						
+					</blockquote>
+					<p>繪製路徑的第一個步驟是呼叫 beginPath 方法。就本質而言，路徑是以列表形式儲存的一系列子路徑（直線、弧線等），並以此構成一個圖形。每回呼叫 beginPath 方法時，列表便會被清除，我們就可以開始畫新圖形。</p>
+					<p>第二個步驟是呼叫一個方法，實際繪製路徑。我們很快就會看到。</p>
+					<p>第三個步驟是呼叫 closePath 方法（這個步驟不是必要的）。這個方法會嘗試以直線連接起點和終點以閉合路徑。如果圖形已閉合或只有一個點，這個函數就什麼也不做。</p>
+					<p>最後一個步驟是呼叫 stroke 或 fill 方法。呼叫其中一個便會在 canvas 上真正繪出圖形。stroke 用於繪製圖形的框線，fill 則用於繪製填滿的圖形。</p><b>附註︰呼叫 fill 方法時，任何未閉合的圖形都將會自動的閉合，也就不需要使用 closePath 方法。</b>
+					
+					<h4>直线：lineTo</h4>
+					<code>lineTo(x, y)</code>
+					<p>下面的範例繪出兩個三角形，一個實心一個空心（見右圖）。首先呼叫 beginPath 方法開始繪製新的圖形路徑。然後使用 moveTo 方法將起點移到想要的位置。再畫出三角形的兩條邊。你將注意到填滿和只畫邊線這兩個三角形的不同。如前所述，由於將路徑填滿時路徑會自動閉合，而只畫邊線的不會。我們如果去掉空心三角形的 closePath()，就只會畫出兩條直線，而非完整的三角形。</p>
+					
+					<pre>			
+						// 實心三角形
+						ctx.beginPath();
+						ctx.moveTo(25,25);
+						ctx.lineTo(105,25);
+						ctx.lineTo(25,105);
+						ctx.fill();
+						
+						// 空心三角形
+						ctx.beginPath();
+						ctx.moveTo(125,125);
+						ctx.lineTo(125,45);
+						ctx.lineTo(45,125);
+						ctx.closePath();
+						ctx.stroke();
+					</pre>					
+					<h4>弧线</h4>
+					<code>arc(x, y, radius, startAngle, endAngle, anticlockwise)</code>
+					這個方法使用五個參數︰x 和 y 是圓中的坐標。radius 為半徑。startAngle 和 endAngle 參數以弧度定義弧線的起角和終角。起角和終角以 x 軸為準。anticlockwise 參數是一個布林值，若為 true 就反時針畫弧，反之則為順時針。<br>
+					附註︰arc 函數中是以弧度來度量角度，而非角度。將角度轉換為弧度，可以使用這個 JavaScript 表達式︰var radians = (Math.PI/180)*degrees。
+					<h4>貝茲與二次方曲線</h4>
+					<code>quadraticCurveTo(cp1x, cp1y, x, y) // 在 Firefox 1.5 中是有問題的（下面可以看到應對方案）<br>
+						bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)</code>
+						
+						<pre>	 绘制对话泡
+							// 二次方曲線的範例
+							ctx.beginPath();
+							ctx.moveTo(75,25);
+							ctx.quadraticCurveTo(25,25,25,62.5);
+							ctx.quadraticCurveTo(25,100,50,100);
+							ctx.quadraticCurveTo(50,120,30,125);
+							ctx.quadraticCurveTo(60,120,65,100);
+							ctx.quadraticCurveTo(125,100,125,62.5);
+							ctx.quadraticCurveTo(125,25,75,25);
+							ctx.stroke();
+						</pre>					
+						<pre>
+							//绘制心图形
+							// 貝茲曲線的範例
+							ctx.beginPath();
+							ctx.moveTo(75,40);
+							ctx.bezierCurveTo(75,37,70,25,50,25);
+							ctx.bezierCurveTo(20,25,20,62.5,20,62.5);
+							ctx.bezierCurveTo(20,80,40,102,75,120);
+							ctx.bezierCurveTo(110,102,130,80,130,62.5);
+							ctx.bezierCurveTo(130,62.5,130,25,100,25);
+							ctx.bezierCurveTo(85,25,75,37,75,40);
+							ctx.fill();
+						</pre>
+						<h4>矩形</h4>
+						<code>rect(x, y, width, height)</code>
+					</div>				
+				</article>
+				
+				<article>
+					<header>
+						<h2>使用图片</h2>
+						<div class="article_description">Canvas 其中一項有趣的功能就是能夠使用图片。可用於動態的組合相片，或用作為圖形的背景等等。這也是目前唯一的新增文字的途徑（規格書裡並沒有任何繪製文字的函數）。只要是 Gecko 支援的影像格式（如 PNG、GIF 或 JPEG 格式）就都能使用。也能把同一頁面上的 canvas 元素作為图片來源</div>
+					</header>
+					<div class="article_context">
+						<h3 class="box_animation">载入图片</h3>
+						<h4>從頭建立图片</h4>
+						<p>另一個選擇是在我們的 script 裡建立新的 Image 物件。這個方法主要的缺點是，如果我們不希望我們的 script 停在載入影像途中，便需要預先載入影像。
+							
+							建立新的 image 物件如下︰</p>
+							<code>
+								var img = new Image();   // 建立新的 image 物件<br>
+								img.src = 'myImage.png'; // 設定來源路徑
+							</code>
+							<p>當 script 執行時，開始載入影像。如果未能在執行 drawImage 之前載入完成，script 會停住，直到影像載入完成。如果你不希望這樣的話，使用 onload 事件處理器︰</p>
+							<code>
+								var img = new Image();   // 建立新的 image 物件<br>
+								img.onload = function(){<br>
+								// 執行 drawImage 的語句<br>
+							}<br>
+							img.src = 'myImage.png'; // 設定來源路徑
+						</code>
+						如果你只使用一個外部的影像，這就是個不錯的解決方法。但如果一次不只一個的話，便需要使用一些技巧。影像預讀策略已超出了本教學的範圍，不過你可以參考 JavaScript Image Preloader 以取得完整的解決方法。
+						<h4>使用 data: url 嵌入影像</h4>
+						<code>var img_src = 'data:image/gif;base64,R0lGODlhCwALAIAAAAAA3pn/ZiH5BAEAAAEALAAAAAALAAsAAAIUhA+hkcuO4lmNVindo7qyrIXiGBYAOw==';</code>
+						<h3 class="box_animation">drawImage图片</h3>
+						<p>一旦取得作為來源的影像物件，我們就可以使用 drawImage 方法畫到 canvas 上。稍後我們將會看到經過重載（Overload）的 drawImage 方法的三個變體。它的最簡形式如下。</p>
+						<code>drawImage(image, x, y)</code>此處 image 即影像或 canvas 物件的參考。x 和 y 坐標即影像的擺放位置。
+						<h4>縮放</h4>
+						<code>drawImage(image, x, y, width, height)</code>drawImage 方法的第二個變體多了兩個用於縮放影像的參數。此處的 width 和 height 是影像在 canvas 上的大小。  <h4>切片</h4>
+						<code>drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)</code>drawImage 方法的最後一個變體有八個新的參數。我們可以使用這個方法把來源影像切一塊下來，並繪製在 canvas 上,第一個參數 image 和其他變體一樣，只是 Image 物件的參考，或是其他的 canvas 元素。至於剩下的八個參數，最好看看右邊的圖例。前四個參數定義了來源影像的切片位置和大小。後四個參數定義了要畫在 canvas 的位置和大小。  <img src="https://developer.mozilla.org/@api/deki/files/79/=Canvas_drawimage.jpg" alt="" /> 					
+						
+					</div>
+					
+				</article>
+				
+				
+				<article>
+					<header>
+						<h2>套用樣式和色彩</h2>
+						<div class="article_description">在繪製圖形的章節中，我只使用過直線和填充的預設樣式。在本章中，我們將會探討 canvas 的全部選項，使我們能夠繪製更加吸引人的內容。</div>
+					</header>
+					<div class="article_context">
+						<h3 class="box_animation">色彩</h3><p>到目前為止，我們只看過繪製內容的方法。如果我們想要給圖形套用色彩，這裡有兩個相當重要的屬性可以使用︰fillStyle 和 strokeStyle。</p><p>strokeStyle 是用來設定圖形輪廓的色彩，fillStyle 則是用於填充顏色。color 可以是 CSS 色彩值的字串、漸層物件，或者是圖樣物件。稍後我們會看到漸層和圖樣物件。預設情況下，輪廓線和填充色彩都是設成黑色（CSS 色彩值 #000000）。</p>
+						<code>
+							fillStyle = color<br>
+							strokeStyle = color
+						</code>
+						<h3 class="box_animation">透明度</h3>
+						<p>除了繪製不透明圖形以外，我們也可以繪製半透明的圖形。只需要設定 globalAlpha 屬性，或是給邊緣線或填充類型指定一個半透明彩色。
+							<code>globalAlpha = transparency value</code>
+
+							這個屬性會給所有繪製在 canvas 上的圖形套用透明值。數值的範圍是從 0.0（完全透明）到 1.0（完全不透明）。這個屬性的預設值是 1.0（完全不透明）。
+							當我們想要在畫布上繪製許多帶有相同透明度的圖形時，globalAlpha 屬性會很有用。不過我想下面這個選擇會更實用。
+							strokeStyle 和 fillStyle 屬性接受 CSS 3 色彩值，我們可以使用下面的記法設定帶有透明度的色彩。</p>
+							<code>
+								// 給輪廓線和填充類型指定帶有透明度的色彩<br>
+								ctx.strokeStyle = "rgba(255,0,0,0.5)";<br>
+								ctx.fillStyle = "rgba(255,0,0,0.5)";
+							</code>
+							<h3 class="box_animation"> class="box_animation">線條樣式</h3>
+							<code>  lineWidth = value<br>
+
+								lineCap = type
+								<br>
+								lineJoin = type
+								<br>
+								miterLimit = value</code>
+								<h3 class="box_animation">class="box_animation">漸变</h3>
+								<h3 class="box_animation">陰影</h3>
+								
+							</div>
+						</article>
+						
+						
+						
+						<article>	
+							<div class="article_context">	
+								<p>接下来，基于这个上下文执行画线的操作。在代码清单中，调用了三个方法——beginPath、moveTo和lineTo，传入了这条线的起点和终点的坐标。 </p>
+								<p>变换方法——translate函数</p>
+								<p>路径:	到目前为止，我们已经用到了几个简单的context路径函数。
+								</p>
+								<ol>
+									<li>moveTo(x, y)：不绘制，只是将当前位置移动到新的目标坐标(x,y)。</li>
+									<li>lineTo(x, y)：不仅将当前位置移动到新的目标坐标(x,y)，而且在两个坐标之间画一条直线。</li>
+									<li>stroke(): 填充路径。</li>
+									<li>strokeStyle（通过strokeStyle属性改变了线条的颜色。在这个例子中，我们使用了CSS值来设置颜色）</li>
+									<li>fill(): 填充区域。</li>
+									<li>fillStyle: 填充区域。</li>
+									<li>closePath:。这个函数的行为同lineTo很像，唯一的差别在于closePath会将路径的起始坐标自动作为目标坐标。closePath还会通知canvas当前绘制的图形已经闭合或者形成了完全封闭的区域，这对将来的填充和描边都非常有用。</li>
+									<li>lineWidth（将线条宽度加粗到4像素。）</li>
+									<li>lineJoin（lineJoin属性设置为round，这是修改当前形状中线段的连接方式，让拐角变得更圆滑；也可以把lineJoin属性设置成bevel或者miter（相应的context.miterLimit值也需要调整）来变换拐角样式。）</li>	
+									<li>还有一个没有用到的属性——lineCap，可以把它的值设置为butt、square或者round，以此来指定线条末端的样式。哦，示例中的线是闭合的，没有端点。图2-7就是我们加工过的树冠，与之前扁平的黑线相比，现在是一条更粗、更平滑的棕色线条。</li>
+									<li>context.fillRect(-5, -50, 10, 50);画矩形<br>
+										strokeRect和clearRect。strokeRect的作用是基于给出的位置和坐标画出矩形的轮廓<br>
+										clearRect的作用是清除矩形区域内的所有内容并将它恢复到初始状态，即透明色。</li>
+										<li>quadraticCurveTo(170, -50, 260, -190);用最简单的曲线函数——二次曲线，用来绘制曲线(HTML5 Canvas API的其他曲线功能还涉及bezierCurveTo、arcTo和arc函数。这些函数通过多种控制点（如半径、角度等）让曲线更具可塑性)</li>
+										<li>drawImage(bark, -5, -50, 10, 50); bark是图片变量，在canvas中插入图片:图片增加了canvas操作的复杂度：必须等到图片完全加载后才能对其进行操作。浏览器通常会在页面脚本执行的同时异步加载图片。如果试图在图片未完全加载之前就将其呈现到canvas上，那么canvas将不会显示任何图片。因此，开发人员要特别注意，在呈现之前，应确保图片已经加载完毕。</li>
+										<li>context . restore() //弹出堆最上面保存的绘图状态</li>
+										<li>context . save() //在绘图状态堆上保存当前绘图状态</li>
+										<li>context . rotate(angle) //按给定的弧度旋转,按顺时针旋转</li>
+										<li>context . scale(x, y) //按给定的缩放倍率缩放，1.0,为不变</li>
+										<li>context . fillStyle [ = value ] //返回填充形状的当前风格，能被设置以用来改变当前的填充风格，其值可以是CSS颜色字串，也可以是CanvasGradient或者CanvasPattern对象，非法的值将被忽略。</li>
+										<li>context . strokeStyle [ = value ] //返回当前描绘形状的风格，能被设置，其值同上。</li>
+										
+									</ol>
+									<p>简而言之，上面两个函数的区别在于：moveTo就像是提起画笔，移动到新位置，而lineTo告诉canvas用画笔从纸上的旧坐标画条直线到新坐标。不过，再次提醒一下，不管调用它们哪一个，都不会真正画出图形，因为我们还没有调用stroke或者fill函数。目前，我们只是在定义路径的位置，以便后面绘制时使用。</p>
+									<img src="images/translate.jpg" alt="有关变换" />
+									<p>这里将会有一个canvas编程实例:</p>
+									<style>
+										canvas{
+											border:1px solid #ccc; 
+											margin:1em 0;
+											width:30em;
+											max-width:100%								
+										}
+										p ~ img{
+											width:30em;
+											
+										}
+									</style>
+
+									<canvas id="canvasExp">您的浏览器不支持CANVAS标签<img src="#" alt="您的浏览器不支持CANVAS标签时会显示这张图片"/>
+									</canvas>
+						<!--
+						<script>
+							function drawLine(){
+								//取得canvas元素及其绘图上下文
+								var canvas = document.getElementById("canvasExp");
+								var context = canvas.getContext('2d');
+								///用绝对坐标来创建一条路径
+								context.beginPath();
+								context.moveTo(70, 140);
+								context.lineTo(140, 70);
+								//将这条线绘制到canvas上
+								context.stroke();
+								// 取得canvas元素及其绘图上下文
+								}
+							window.addEventListener("load", drawLine , true);
+							
+						</script>
+					-->						
+					<script>
+						function drawTranslate(){
+							var canvas = document.getElementById("canvasExp");
+							var context = canvas.getContext('2d');
+								// 保存当前绘图状态
+								context.save();
+								// 向右下方移动绘图上下文
+								context.translate(70, 140);
+								// 以原点为起点，绘制与前面相同的线段
+								context.beginPath();
+								context.moveTo(0,0);
+								context.lineTo(70,-70);
+								context.stroke();
+								// 恢复原有的绘图状态
+								context.restore();
+
+							}
+							window.addEventListener("load",drawTranslate,true);
+						</script>
+						
+					</div>
+					<footer>canvas powered by <a href="www.mei027.com" title="LSF-前端-实录">Joe</a></footer>
+					
+				</article>
+				
+				<article>
+					<h2>Canvas画一棵树</h2>
+					<div class="article_description">
+						使用HTML5 Canvas API开始创建一个新场景——带有长跑跑道的树林。权且把这个图案当成是我们长跑比赛的标志吧。同其他的画图方式一样，我们将从基本元素开始。在这幅图中松树的树冠最简单。代码清单2-8演示了如何在canvas上绘制一颗松树的树冠。
+					</div>
+					<canvas id="canvasTree">
+					</canvas>
+					<script>
+						function createTreePath(context){
+								// 绘制树冠
+								context.beginPath();
+								context.moveTo(-25,-50);
+								context.lineTo(-10, -80);
+								context.lineTo(-20, -80);
+								context.lineTo(-5, -110);
+								context.lineTo(-15, -110);
+								// 树的顶点
+								context.lineTo(0, -140);
+								context.lineTo(15, -110);
+								context.lineTo(5, -110);
+								context.lineTo(20, -80);
+								context.lineTo(10, -80);
+								context.lineTo(25, -50);
+								// 连接起点，闭合路径
+								context.closePath();
+
+							}
+							
+
+							function drawCanvasTree(){
+								var canvas = document.getElementById("canvasTree");
+								var context = canvas.getContext('2d');
+								context.save();
+								context.translate(130, 150);
+								// 创建表现树冠的路径
+								createTreePath(context);
+								
+								/**
+								=========@workaround图片没有被加载至矩形树干，需要完善
+								*/
+								
+								/**	var imageObj = new Image();
+									imageObj.src = "bark.JPG";	
+									imageObj.onload = function(){
+									 // 用背景图案填充作为树干的矩形 
+										context.drawImage(imageObj, -5, -50, 10, 50);
+									};
+	
+								context.fillStyle = imageObj;
+								context.fillRect(-5, -50, 10, 50);
+								**/
+								
+								// 绘制当前路径
+								
+								
+								context.stroke();
+								context.restore();
+								
+								
+								// 加宽线条
+								context.lineWidth=4;								
+								// 平滑路径的接合点
+								context.lineJoin='round';
+								// 将颜色改成棕色
+								context.strokeStyle='#663300';
+								// 最后，绘制树冠
+								context.stroke();
+								context.fillStyle="#390"
+								context.fill();
+								
+
+								
+								// 保存canvas的状态并绘制路径
+								context.save();
+								context.translate(-50, 290);
+								context.beginPath();
+								// 第一条曲线向右上方弯曲
+								context.moveTo(0, 0);
+								context.quadraticCurveTo(170, -50, 260, -190);
+								// 第二条曲线向右下方弯曲
+								context.quadraticCurveTo(310, -250, 410,-250);
+								// 使用棕色的粗线条来绘制路径
+								context.strokeStyle = '#663300';
+								context.lineWidth = 20;
+								context.stroke();
+								// 恢复之前的canvas状态
+								context.restore();
+								
+								
+								
+								// 创建用作树干纹理的三阶水平渐变
+								context.save();
+								context.translate(130, 150);
+								var trunkGradient = context.createLinearGradient(-5,-50,5,-50);
+								trunkGradient.addColorStop(0,"#663300");
+								trunkGradient.addColorStop(0.4,"#996600");
+								trunkGradient.addColorStop(1,"#552200");
+								context.fillStyle = trunkGradient;
+								context.fillRect(-5,-50,10,50);
+								// 使用渐变色填充树干
+								context.fillStyle = trunkGradient;
+								context.fillRect(-5, -50, 10, 50);
+								// 接下来，创建垂直渐变，以用作树冠在树干上投影
+								var canopyShadow = context.createLinearGradient(0, -50, 0, 0);
+								// 投影渐变的起点是透明度设为50%的黑色
+								canopyShadow.addColorStop(0, 'rgba(0, 0, 0, 0.5)');
+								// 方向垂直向下，渐变色在很短的距离内迅速渐变至完全透明，这段长度之外的树干上没有投影
+								canopyShadow.addColorStop(0.2, 'rgba(0, 0, 0, 0.0)');
+								// 在树干上填充投影渐变
+								context.fillStyle = canopyShadow;
+								context.fillRect(-5, -50, 10, 50);
+								context.stroke();
+								
+								context.save();
+								
+								//加载砾石背景图
+								/**
+								var gravel = new Image();
+								gravel.src= "bark.JPG";
+								gravel.onload = function() {
+									drawCanvasTree();
+									}
+								context.strokeStyle = context.createPattern(gravel,'repeat');
+								context.lineWidth = 20;
+								context.stroke();
+								**/
+							}
+							window.addEventListener("load", drawCanvasTree,true)
+						</script>
+						
+						<div class="article_context">
+						</div>
+						<footer class="last">
+							TREE_canvas powered by Joe
+						</footer>
+						
+					</article>
+					<article>
+						<h2>HTML5速查表</h2>				
+						
+						<table class="wikitable">
+							<tbody>
+								<tr class="_th">
+									<th>标签</th>
+									<th>描述</th>
+									<th>版本</th>
+									<th>属性</th>
+								</tr>
+								<tr>
+									<th>&lt;!--...--&gt;</th>
+									<td>定义注释</td>
+									<td>4 / 5</td>
+									<td>none</td>
+								</tr>
+								<tr>
+									<th>&lt;!DOCTYPE&gt;</th>
+									<td> 定义文档类型 </td>
+									<td>4 / 5</td>
+									<td>none</td>
+								</tr>
+								<tr>
+									<th>&lt;a&gt;</th>
+									<td> 定义超链接，用于从一个页面链接到另一个页面。 </td>
+									<td>4 / 5</td>
+									<td>href | hreflang | media | ping | rel | target | type</td>
+								</tr>
+								<tr>
+									<th>&lt;abbr&gt;</th>
+									<td> 定义缩写 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;acronym&gt;</th>
+									<td>定义首字母缩写</td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;address&gt;</th>
+									<td> 定义文档作者或拥有者的联系信息 .</td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;applet&gt;</th>
+									<td>&nbsp;定义嵌入的 applet </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;area&gt;</th>
+									<td> 定义图像映射内部的区域（图像映射指的是带有可点击区域的图像）。 </td>
+									<td>4 / 5</td>
+									<td>alt | coords | href | hreflang | media | ping | rel | shape | target | type</td>
+								</tr>
+								<tr>
+									<th>&lt;article&gt;</th>
+									<td> 定义独立的内容 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;aside&gt;</th>
+									<td> 定义页面内容之外的内容 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;audio&gt;</th>
+									<td> 定义声音，比如音乐或其他音频流。 </td>
+									<td>5</td>
+									<td>autobuffer | autoplay | controls | loop | src</td>
+								</tr>
+								<tr>
+									<th>&lt;b&gt;</th>
+									<td> 定义粗体文本 ,  用于强调某些文本  </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;base&gt;</th>
+									<td> 定义页面上的所有链接规定默认地址或默认目标   </td>
+									<td>4 / 5</td>
+									<td>href  | target</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;basefont&gt;</th>
+									<td> 定义文档中所有文本的默认颜色、大小和字体 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;bb&gt;</th>
+									<td> 定义文本的文本方向，使其脱离其周围文本的方向设置。 </td>
+									<td>5</td>
+									<td>type</td>
+								</tr>
+								<tr>
+									<th>&lt;bdi&gt;</th>
+									<td> 指的是 bidi 隔离,  允许您设置一段文本，使其脱离其父元素的文本方向设置  .</td>
+									<td>5</td>
+									<td>dir</td>
+								</tr>
+								<tr>
+									<th>&lt;bdo&gt;</th>
+									<td> 定义文本显示的方向。 </td>
+									<td>4 / 5</td>
+									<td>dir</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;big&gt;</th>
+									<td> 定义大号文本。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;blockquote&gt;</th>
+									<td> 定义摘自另一个源的块引用 。 </td>
+									<td>4 / 5</td>
+									<td>cite</td>
+								</tr>
+								<tr>
+									<th>&lt;body&gt;</th>
+									<td> 定义文档的主体 。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;br&gt;</th>
+									<td> 插入换行符。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;button&gt;</th>
+									<td> 定义按钮。 </td>
+									<td>4 / 5</td>
+									<td>autofocus | disabled | form | formaction | formenctype | formme-thod | formnovalidate | formtarget | name | type | value</td>
+								</tr>
+								<tr>
+									<th>&lt;canvas&gt;</th>
+									<td>    定义图形，比如图表和其他图像  </td>
+									<td>5</td>
+									<td>height | width<br /></td>
+								</tr>
+								<tr>
+									<th>&lt;caption&gt;</th>
+									<td> 定义表格标题。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;center&gt;</th>
+									<td> 定义居中的文本。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;cite&gt;</th>
+									<td> 定义作品（比如书籍、歌曲、电影、电视节目、绘画、雕塑等等）的标题。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;code&gt;</th>
+									<td> 定义计算机代码文本。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;col&gt;</th>
+									<td>   定义为表格中的一个或多个列定义属性值。  。 </td>
+									<td>4 / 5</td>
+									<td>span</td>
+								</tr>
+								<tr>
+									<th>&lt;colgroup&gt;</th>
+									<td> 定义对表格中的列进行组合，以便对其进行格式化。 </td>
+									<td>4 / 5</td>
+									<td>span<br /></td>
+								</tr>
+								<tr>
+									<th>&lt;command&gt;</th>
+									<td> 定义命令按钮。 </td>
+									<td>5</td>
+									<td>checked | default | disabled | hidden | icon | label | radiogroup | type</td>
+								</tr>
+								<tr>
+									<th>&lt;datagrid&gt;</th>
+									<td> 定义可选数据的列表。   datagrid 作为树列表来显示。  </td>
+									<td>5</td>
+									<td>disabled | multipe</td>
+								</tr>
+								<tr>
+									<th>&lt;datalist&gt;</th>
+									<td>定义下拉列表。  请与 input 元素配合使用该元素，来定义 input 可能的值。   </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;dd&gt;</th>
+									<td> 定义一个定义列表中对项目的描述 。</td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;del&gt;</th>
+									<td>定义删除文本。</td>
+									<td>4 / 5</td>
+									<td>cite | datetime</td>
+								</tr>
+								<tr>
+									<th>&lt;details&gt;</th>
+									<td> 定义描述文档或文档某个部分的细节。 </td>
+									<td> 5</td>
+									<td>open</td>
+								</tr>
+								<tr>
+									<th>&lt;dialog&gt;</th>
+									<td> 定义对话，比如交谈 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;dir&gt;</th>
+									<td> 定义目录列表。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;div&gt;</th>
+									<td> 定义文档中的一个部分。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;dfn&gt;</th>
+									<td> 定义一个定义项目。 </td>
+									<td>4 / 5</td>
+									<td>title</td>
+								</tr>
+								<tr>
+									<th>&lt;dl&gt;</th>
+									<td> 定义一个定义列表 .</td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;dt&gt;</th>
+									<td> 定义一个定义列表中的一个项目。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;em&gt;</th>
+									<td> 呈现为被强调的文本。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;embed&gt;</th>
+									<td> 定义嵌入的内容，比如插件 </td>
+									<td>5</td>
+									<td>height | src | type | width</td>
+								</tr>
+								<tr>
+									<th>&lt;fieldset&gt;</th>
+									<td>定义用于从逻辑上将表单中的元素组合起来。  </td>
+									<td>4 / 5</td>
+									<td>disabled | form | name</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<table class="wikitable">
+							
+							<tbody>
+								<tr class="_th">
+									<th>标签</th>
+									<th>描述</th>
+									<th>版本</th>
+									<th>属性</th>
+								</tr>
+								<tr>
+									<th>&lt;figcaption&gt;</th>
+									<td> 定义 fiqure 元素的标题（caption）。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;figure&gt;</th>
+									<td> 规定独立的流内容（图像、图表、照片、代码等等）。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;font&gt;</th>
+									<td> 规定文本的字体、大小和颜色。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;footer&gt;</th>
+									<td> 定义 section 或 document 的页脚。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;form&gt;</th>
+									<td> 用于创建供用户输入的 HTML 表单 </td>
+									<td>4 / 5</td>
+									<td>action | date | replace | accept | accept-charset | enctype | method | target</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;frame&gt;</th>
+									<td>定义子窗口（框架）</td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;frameset&gt;</th>
+									<td> 定义框架集。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;h1&gt; to &lt;h6&gt;</th>
+									<td> 定义标题。&lt;h1&gt; 定义最大的标题。&lt;h6&gt; 定义最小的标题 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;heda&gt;</th>
+									<td> 所有头部元素的容器。位于 &lt;head&gt; 内部的元素可以包含脚本、指引浏览器找到样式表、提供元信息，等等。 </td>
+									<td>4 / 5</td>
+									<td>无</td>
+								</tr>
+								<tr>
+									<th>&lt;header&gt;</th>
+									<td> 定义文档的页眉（介绍信息）。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;hgroup&gt;</th>
+									<td> 用于对网页或区段（section）的标题进行组合。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;hr&gt;</th>
+									<td> 水平线，它应该定义内容中的主题变化 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;html&gt;</th>
+									<td> 告知浏览器这是一个 HTML 文档。 </td>
+									<td>4 / 5</td>
+									<td>manifest</td>
+								</tr>
+								<tr>
+									<th>&lt;i&gt;</th>
+									<td> 呈现斜体的文本。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;iframe&gt;</th>
+									<td> 创建包含另一个文档的行内框架。 </td>
+									<td>4 / 5</td>
+									<td>src | name | sandbox | seamless | width | height</td>
+								</tr>
+								<tr>
+									<th>&lt;img&gt;</th>
+									<td> 定义 HTML 页面中的图像。 </td>
+									<td>4 / 5</td>
+									<td>alt | src | height | ismap | usemap | width</td>
+								</tr>
+								<tr>
+									<th>&lt;input&gt;</th>
+									<td> 规定用户可输入数据的输入字段。 </td>
+									<td>4 / 5</td>
+									<td>accept | alt | auto-complete | autofocus | checked | disabled | from | formaction | formenctype | formme-thod | formnovalidate | formtarget | height | list | max | maxiength | min | multipe | name | pattern | placeholder | readonly | required | size | src | step | type | value | width</td>
+								</tr>
+								<tr>
+									<th>&lt;ins&gt;</th>
+									<td> 定义文档的其余部分之外的插入文本。 </td>
+									<td>4 / 5</td>
+									<td>cite | datetime</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;isindex&gt;</th>
+									<td> 定义单行的输入域。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;keygen&gt;</th>
+									<td> 规定用于表单的密钥对生成器字段。 </td>
+									<td>5</td>
+									<td>autofocus | challenge | disabled | form | keytype | name</td>
+								</tr>
+								<tr>
+									<th>&lt;kbd&gt;</th>
+									<td> 定义键盘文本。它表示文本是从键盘上键入的。它经常用在与计算机相关的文档或手册中。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;label&gt;</th>
+									<td> 为 input 元素定义标签（label） </td>
+									<td>4 / 5</td>
+									<td>for | form</td>
+								</tr>
+								<tr>
+									<th>&lt;legend&gt;</th>
+									<td>为以下元素定义标题（caption）：&lt;fieldset&gt;、&lt;figure&gt;、&lt;details&gt;。</td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;li&gt;</th>
+									<td> 定义列表项，有序列表和无序列表中都使用 &lt;li&gt; 标签。 </td>
+									<td>4 / 5</td>
+									<td>value</td>
+								</tr>
+								<tr>
+									<th>&lt;link&gt;</th>
+									<td> 定义文档与外部资源之间的关系。   大多数时候都用来连接样式表。  </td>
+									<td>4 / 6</td>
+									<td>href | rel | media | hreflang | type | sizes</td>
+								</tr>
+								<tr>
+									<th>&lt;mark&gt;</th>
+									<td> 定义带有记号的文本。请在需要突出显示文本时使用 &lt;m&gt; 标签 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;map&gt;</th>
+									<td> 定义客户端图像映射。图像映射指的是带有可点击区域的图像。 </td>
+									<td>4 / 5</td>
+									<td>label | type</td>
+								</tr>
+								<tr>
+									<th>&lt;menu&gt;</th>
+									<td>定义菜单列表。当希望列出表单控件时使用该标签。</td>
+									<td>5</td>
+									<td>autosubmit | compact | label | type</td>
+								</tr>
+								<tr>
+									<th>&lt;meta&gt;</th>
+									<td> 可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。 </td>
+									<td>5</td>
+									<td> charset  |   content   |   http-equiv   |   name   | scheme</td>
+								</tr>
+								<tr>
+									<th>&lt;meter&gt;</th>
+									<td> 定义度量衡。仅用于已知最大和最小值的度量。 </td>
+									<td>5</td>
+									<td>high | low | max | min | optimum | value</td>
+								</tr>
+								<tr>
+									<th>&lt;nav&gt;</th>
+									<td> 定义导航链接的部分。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;noframes&gt;</th>
+									<td> 向浏览器显示无法处理框架的提示文本。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;noscript&gt;</th>
+									<td> 定义在脚本未被执行时的替代内容（文本）。 </td>
+									<td>4 / 5</td>
+									<td>无</td>
+								</tr>
+							</tbody>
+						</table>
+						
+						<table class="wikitable">
+							<tbody>
+								<tr class="_th">
+									<th>标签</th>
+									<th>描述</th>
+									<th>版本</th>
+									<th>属性</th>
+								</tr>
+								<tr>
+									<th>&lt;object&gt;</th>
+									<td> 定义一个嵌入的对象。 </td>
+									<td>4 / 5</td>
+									<td>data | height | type | usemap | width | object</td>
+								</tr>
+								<tr>
+									<th>&lt;ol&gt;</th>
+									<td> 定义有序列表。 </td>
+									<td>4 / 5</td>
+									<td> compact | start | reversed</td>
+								</tr>
+								<tr>
+									<th>&lt;optgroup&gt;</th>
+									<td> 定义选项组。此元素允许您组合选项。当您使用一个长的选项列表时，对相关的选项进行组合会使处理更加容易。 </td>
+									<td>4 / 5</td>
+									<td>disabled | label</td>
+								</tr>
+								<tr>
+									<th>&lt;option&gt;</th>
+									<td> 定义下拉列表中的一个选项。 </td>
+									<td>4 / 5</td>
+									<td>disabled | label | selected | value</td>
+								</tr>
+								<tr>
+									<th>&lt;output&gt;</th>
+									<td> 定义不同类型的输出，比如脚本的输出。 </td>
+									<td>5</td>
+									<td>form | for | name</td>
+								</tr>
+								<tr>
+									<th>&lt;p&gt;</th>
+									<td> 定义段落 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;param&gt;</th>
+									<td> 允许您为插入 XHTML 文档的对象规定 run-time 设置，也就是说，此标签可为包含它的 &lt;object&gt; 标签提供参数。 </td>
+									<td>4 / 5</td>
+									<td>name | value | type | valuetype</td>
+								</tr>
+								<tr>
+									<th>&lt;pre&gt;</th>
+									<td> 定义预格式化文本。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;progress&gt;</th>
+									<td> 定义运行中的进度（进程）。 </td>
+									<td>5</td>
+									<td>max | value</td>
+								</tr>
+								<tr>
+									<th>&lt;q&gt;</th>
+									<td> 定义一个短的引用。 </td>
+									<td>4 / 5</td>
+									<td>cite</td>
+								</tr>
+								<tr>
+									<th>&lt;ruby&gt;</th>
+									<td> 定义 ruby 注释。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;rp&gt;</th>
+									<td> 定义若浏览器不支持 ruby 元素显示的内容。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;rt&gt;</th>
+									<td>义 ruby 注释的解释。 </td>
+									<td>5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;s&gt;</th>
+									<td> 定义加删除线的文本 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;samp&gt;</th>
+									<td> 定义样本计算机代码。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;script&gt;</th>
+									<td> 定义脚本。 </td>
+									<td>4 / 5</td>
+									<td>async | type | defer | src | charset</td>
+								</tr>
+								<tr>
+									<th>&lt;section&gt;</th>
+									<td> 定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分 </td>
+									<td>5</td>
+									<td>cite</td>
+								</tr>
+								<tr>
+									<th>&lt;select&gt;</th>
+									<td> 创建下拉列表 </td>
+									<td>4 / 5</td>
+									<td>autofocus | data | disabled | form | multiple | name</td>
+								</tr>
+								<tr>
+									<th>&lt;small&gt;</th>
+									<td> 将旁注 (side comments) 呈现为小型文本。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;source&gt;</th>
+									<td> 为媒介元素（比如 &lt;video&gt; 和 &lt;audio&gt;）定义媒介资源。 </td>
+									<td>5</td>
+									<td>media | src | type</td>
+								</tr>
+								<tr>
+									<th>&lt;span&gt;</th>
+									<td> 用于对文档中的行内元素进行组合 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;strike&gt;</th>
+									<td>定义加删除线的文本。</td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;strong&gt;</th>
+									<td> 定义重要的文本 .</td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;style&gt;</th>
+									<td> 定义 HTML 文档的样式信息。 </td>
+									<td>4 / 5</td>
+									<td>media | type | scoped</td>
+								</tr>
+								<tr>
+									<th>&lt;sub&gt;</th>
+									<td> 定义下标文本 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;sup&gt;</th>
+									<td> 定义上标文本。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;summary&gt;</th>
+									<td> 包含 details 元素的标题，&quot;details&quot; 元素用于描述有关文档或文档片段的详细信息。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;table&gt;</th>
+									<td> 定义 HTML 表格 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;tbody&gt;</th>
+									<td> 定义表格的主体。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;td&gt;</th>
+									<td> 定义表格单元 </td>
+									<td>4 / 5</td>
+									<td>colspan | rowspan | headers</td>
+								</tr>
+								<tr>
+									<th>&lt;textarea&gt;</th>
+									<td> 定义一个文本区域 (text-area) （一个多行的文本输入区域）。 </td>
+									<td>4 / 5</td>
+									<td>autofocus | cols | disabled | form | name | feadonly | required | required | rows | maxlength | placeholder | wrap</td>
+								</tr>
+								<tr>
+									<th>&lt;tfoot&gt;</th>
+									<td> 定义表格的页脚（脚注） </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;th&gt;</th>
+									<td> 定义 HTML 表格中的表头单元格。 </td>
+									<td>4 / 5</td>
+									<td>colspan | rowspan | scope</td>
+								</tr>
+								<tr>
+									<th>&lt;thead&gt;</th>
+									<td> 定义表格的表头。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;time&gt;</th>
+									<td> 定义公历的时间（24 小时制）或日期，时间和时区偏移是可选的。 </td>
+									<td>5</td>
+									<td>datetime</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;title&gt;</th>
+									<td> 定义文档的标题 </td>
+									<td>4</td>
+									<td>无</td>
+								</tr>
+								<tr>
+									<th>&lt;tr&gt;</th>
+									<td> 定义表格中的行。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;track&gt;</th>
+									<td> 为诸如 video 元素之类的媒介规定外部文本轨道。 </td>
+									<td>5</td>
+									<td>default | kind | label | src | srclang</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;tt&gt;</th>
+									<td> 定义打字机文本。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;u&gt;</th>
+									<td> 定义下划线文本 。 </td>
+									<td>4</td>
+									<td>-</td>
+								</tr>
+								<tr>
+									<th>&lt;ul&gt;</th>
+									<td> 定义无序列表。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;var&gt;</th>
+									<td> 定义变量。 </td>
+									<td>4 / 5</td>
+									<td>全局属性</td>
+								</tr>
+								<tr>
+									<th>&lt;video&gt;</th>
+									<td> 定义视频，比如电影片段或其他视频流。 </td>
+									<td>5</td>
+									<td>src | poster | autobuffer | autoplay | loop | controls | width | height</td>
+								</tr>
+								<tr class="gray">
+									<th>&lt;xmp&gt;</th>
+									<td> 定义预格式文本。 </td>
+									<td>4 </td>
+									<td>-</td>
+								</tr>
+							</tbody>
+						</table>
+					</article>
+					
+					
+				</div>
+				
+				
+				<div class="contentRight">
+					<aside>
+						<table>
+							
+							<style type="text/css" >
+								
+							/*
+							================================================================================
+								*特性全面的表格示例
+								*包含一般表格的结构及CSS应用
+								*COL 是列属性，方便统一对列应用样式
+							================================================================================
+							*/
+							table{
+								border-collapse:collapse;
+								width:100%;
+								border:1px solid #FA0}
+								th, td, caption{
+									padding:0.5em 1em
+								}
+								col{
+									border-right:1px solid #ccc
+								}
+								col.colClass3{
+									border-right:none
+								}
+								thead{
+									background-color:#9C6;
+									border-top:1px solid #969;
+									border-bottom:1px solid #969
+								}
+								thead tr{background-color:transparent!important;}
+								th{
+									font-weight:normal;
+									text-align:left
+								}
+								tr:nth-child(odd){
+									background-color:#eee
+								}
+							/*
+							================================================================================
+							IE@todo 选择tr偶数行应用    	   //IE@todo来表示某些东西需要在以后进行修改、修复或复查，  
+							@bugfix表示代码或特定浏览器遇到的问题，
+							@workaround表示并不完善的权宜之计：		
+							================================================================================
+							*/
+							tr:hover{background-color:#9CF
+							}
+							.colClass1{
+								border:1px solid #666}
+								{}
+							</style>
+							<caption class="aside-title">表格的标题用CAPTION,特性全面的表格示例</caption>
+							<colgroup>
+								<col class="colClass1" />
+								<col class="colClass2" />
+								<col class="colClass3" />
+							</colgroup>
+							
+							<thead> <tr><th>表格行或列标题</th><th>表格行或列标题</th><th>表格行或列标题</th></tr>
+							</thead>
+							<tfoot> <tr><td>Sum</td><td>$180</td><td>$180</td></tr>
+							</tfoot>
+							<tbody> <tr><td>行1列1</td><td>行1列2</td><td>行1列3</td></tr>
+								<tr><td>行2列1</td><td>行2列2</td><td>行2列3</td></tr>
+								<tr><td>行3列1</td><td>行3列2</td><td>行3列3</td></tr>
+							</tbody>
+							
+						</table>
+					</aside>
+		
+					<aside>
+						<style>	
+						aside{ background-color:#EEE; padding:0.2em; margin:0 0 1em 0}
+						aside section{
+							padding:0.6em
+						}
+						summary{margin:0.6em 0}
+						.aside-title{ background:#999; padding:.2em; font-size:1.6em; font-weight:bold; margin:0 0 0.6em 0;
+							border-left:2px solid #03C}
+						</style>
+						<section>
+							<!-- =====================================================================
+							**** @DL DT DD A样本
+							===================================================================== -->  
+							<dl>  <!--定义列表-->
+								<dt  class="aside-title">DL DT DD标签说明</dt>
+								<dd>dt是标题，dd是对dt的描述,而dl包含dt,dd</dd>
+								<dd>此外，dd可以有多个，补充加以描述</dd>
+							</dl>
+							<code>
+								<DIV class=dp-highlighter><DIV class=bar></DIV>
+								<OL class=dp-xml>
+									<LI class=alt><SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>dl</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN><SPAN class=comments>&lt;!--定义列表--&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>dt</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>DL&nbsp;DT&nbsp;DD标签</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>dt</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI class=alt><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>dd</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>DD标题说明</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>dd</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>dd</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>DD标题说明</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>dd</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI class=alt><SPAN></SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>dl</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI></OL></DIV>
+							</code>
+						</section>
+								
+						<section>
+							<hgroup>
+								<h1  class="aside-title">hgroup对标题整合</h1>
+								<h6>包含H1，h2...h6等整合标题 </h6>
+							</hgroup>
+							<code>
+								<DIV class=dp-highlighter><DIV class=bar></DIV>
+								<OL class=dp-xml>
+									<LI class=alt><SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>hgroup</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>h1</SPAN><SPAN>&nbsp;</SPAN><SPAN class=tag>&gt;</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>a</SPAN><SPAN>&nbsp;</SPAN><SPAN class=attribute>href</SPAN><SPAN>=</SPAN><SPAN class=attribute-value>"#"</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>hgroup对标题整合</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>a</SPAN><SPAN class=tag>&gt;</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>h1</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI class=alt><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>h6</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>包含H1，h2...h6等整合标题&nbsp;</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>h6</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI><SPAN></SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>hgroup</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI></OL></DIV>
+								</code>
+						</section>
+						<section>
+							<blockquote class="aside-title">blockquote,code,pre标签</blockquote>
+							<code>
+								<DIV class=dp-highlighter><DIV class=bar></DIV>
+								<OL class=dp-xml>
+									<LI class=alt><SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>blockquote</SPAN><SPAN class=tag>&gt;</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>blockquote</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>code</SPAN><SPAN class=tag>&gt;</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>code</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+									<LI class=alt><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>pre</SPAN><SPAN class=tag>&gt;</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>pre</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI></OL></DIV>
+								</code>
+						</section>
+						<section>
+								<div class="aside-title">cite del ins details summary datetime描述文档用标签</div>
+								<cite>《描述文档用标签》</cite>包含cite del ins details summary...
+								<del cite="url">2005</del>2008经由JOE修缮<ins>Joe first name is Liu</ins>
+								<datetime>2012.11.28</datetime>	
+								
+								<details>
+									<summary>《描述文档用标签》简介</summary>
+									<p>
+										cite是文档标签，值为链接;指向另一个文档的 URL，该文档解释文本插入的原因。<br>
+										del是文档删除，值为链接<br>
+										datetime 定义文本插入的日期和时间。<br>
+										ins  标签定义文档的其余部分之外的插入文本。<br>
+										details 标签用于描述文档或文档某个部分的细节。details内容点击summary内容展开<br>
+										summary 标签包含 details 元素的标题，"details" 元素用于描述有关文档或文档片段的详细信息。
+									</p>
+								</details>
+								<p>本段标签代码见下</p>
+								<code>			
+									<DIV class=dp-highlighter><DIV class=bar></DIV>
+									<OL class=dp-xml>
+										<LI class=alt><SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=attribute>cite</SPAN><SPAN class=tag-name>cite</SPAN><SPAN>&nbsp;=</SPAN><SPAN class=attribute-value>"document's&nbsp;url"</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>《描述文档用标签》</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>cite</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>包含cite&nbsp;del&nbsp;ins&nbsp;details&nbsp;summary... &nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>del</SPAN><SPAN>&nbsp;</SPAN><SPAN class=attribute>cite</SPAN><SPAN>=</SPAN><SPAN class=attribute-value>"url"</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>2005</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>del</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>2008经由JOE修缮</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>ins</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>Joe&nbsp;first&nbsp;name&nbsp;is&nbsp;Liu</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>ins</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI class=alt><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>datetime</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>2012.11.28</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>datetime</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp; &nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI><SPAN>&nbsp;&nbsp;</SPAN></LI>
+										<LI class=alt><SPAN></SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>details</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>summary</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>《描述文档用标签》简介</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>summary</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI class=alt><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>p</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cite是文档标签，值为链接;指向另一个文档的&nbsp;URL，该文档解释文本插入的原因。</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>br</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI class=alt><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;del是文档删除，值为链接</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>br</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;datetime&nbsp;定义文本插入的日期和时间。</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>br</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI class=alt><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ins&nbsp;&nbsp;标签定义文档的其余部分之外的插入文本。</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>br</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;details&nbsp;标签用于描述文档或文档某个部分的细节。details内容点击summary内容展开</SPAN><SPAN class=tag>&lt;</SPAN><SPAN class=tag-name>br</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI class=alt><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;summary&nbsp;标签包含&nbsp;details&nbsp;元素的标题，"details"&nbsp;元素用于描述有关文档或文档片段的详细信息。 &nbsp;&nbsp;</SPAN></LI>
+										<LI><SPAN>&nbsp;&nbsp;&nbsp;&nbsp;</SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>p</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI>
+										<LI class=alt><SPAN></SPAN><SPAN class=tag>&lt;/</SPAN><SPAN class=tag-name>details</SPAN><SPAN class=tag>&gt;</SPAN><SPAN>&nbsp;&nbsp;</SPAN></SPAN></LI></OL></DIV>						
+								</code>
+						</section>
+					</aside>
+					<aside>aside3</aside>
+				</div>
+		</div>
+		<footer>
+			<style>
+				footer{
+					padding:10px 0;
+				}
+			</style>
+			page is powered by Joe, copayright @ Joe & mei027.com
+		</footer>
+	</div>
+
+</body>
+</html>

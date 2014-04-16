@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>flame/fire effect using particles</title>
+<style>	*{padding:0; margin:0}
+	canvas{ border:1px solid #ccc;}
+</style>
+<script>
+window.onload = function(){
+  var canvas = document.getElementById("joecanvas");
+  var ctx = canvas.getContext("2d");
+  var W = window.innerWidth, H= window.innerHeight;
+  canvas.width = W;
+  canvas.height= H;
+  var particles = [];
+  var mouse ={};
+
+  var particle_count = 100;
+  for(var i = 0; i<particle_count; i++){
+	particles.push(new particle());  //push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+	  }
+	  
+  canvas.addEventListener('mousemove',track_mouse,false);
+  function track_mouse(e){
+		mouse.x = e.pageX;
+		mouse.y = e.pageY;
+	  }
+	 
+ function particle(){
+	this.speed= {x:-2.5 + Math.random()*5,y:-2.5+Math.random()*-12};
+	
+	if(mouse.x && mouse.y){  this.location={x:mouse.x,y:mouse.y};  }
+	else{this.location = {x:W/2,y:H/2};}
+	
+	this.radius = 10 + Math.random()*20;
+	
+	//life在20-30间
+	this.life = 20 + Math.random()*10;
+	this.remaining_life = this.life;
+	
+	//colors
+	this.r = Math.round( Math.random()*255 );
+	this.g = Math.round( Math.random()*255 );
+	this.b = Math.round( Math.random()*255 );
+		}
+	
+ function draw(){
+  	  ctx.globalCompositeOperation="source-over";
+	  ctx.fillStyle = "black";
+	  ctx.fillRect(0,0,W,H);
+	  ctx.globalCompositeOperation="lighter";					  /*source-over (default)这是默认设置，新图形会覆盖在原有内容之上。
+							destination-over会在原有内容之下绘制新图形。
+							source-in新图形会仅仅出现与原有内容重叠的部分。其它区域都变成透明的。
+							destination-in原有内容中与新图形重叠的部分会被保留，其它区域都变成透明的。
+							source-out结果是只有新图形中与原有内容不重叠的部分会被绘制出来。
+							destination-out原有内容中与新图形不重叠的部分会被保留。
+							source-atop新图形中与原有内容重叠的部分会被绘制，并覆盖于原有内容之上。
+							destination-atop原有内容中与新内容重叠的部分会被保留，并会在原有内容之下绘制新图形
+							lighter两图形中重叠部分作加色处理。	
+							darker两图形中重叠的部分作减色处理。
+							xor重叠的部分会变成透明。
+							copy只有新图形会被保留，其它都被清除掉。
+							注意：copy 和 darker 属性值在 Gecko 1.8 型的浏览器（Firefox 1.5 betas，等等）上暂时还无效。昔有Jack赌桌上赢泰坦尼克号船票，今看Joe是否有双色球赢诺亚方舟末日船票*/
+	
+	
+	 for(var i=0;i<particles.length;i++){
+		 var p = particles[i];
+		 p.opacity = Math.round(p.remaining_life/p.life*100)/100;
+		 ctx.beginPath();
+		 ctx.fillStyle="rgba(255,255,255,"+p.opacity+")";
+		 
+		 var gradient = ctx.createRadialGradient(p.location.x,p.location.y,0,p.location.x, p.location.y, p.radius)
+		 gradient.addColorStop(0,"rgba("+p.r+","+p.g+","+p.b+","+p.opacity+")");
+		 gradient.addColorStop(0.5,"rgba("+p.r+","+p.g+","+p.b+","+p.opacity+")");
+		 gradient.addColorStop(1,"rgba("+p.r+","+p.g+","+p.b+","+"0)");
+		 
+		 ctx.fillStyle=gradient;
+		 ctx.arc(p.location.x,p.location.y,p.radius,Math.PI*2,false);
+		 ctx.fill(); 
+		 
+		 //lets move the particles
+		 p.remaining_life--;
+		 p.radius--;
+		 p.location.x += p.speed.x;
+		 p.location.y += p.speed.y;
+		 
+		 if(p.remaining_life<0 || p.radius<0)
+		 {particles[i] = new particle();
+			 }
+	    }
+	}
+		 
+	setInterval(draw,33);
+}
+</script>
+</head>
+
+<body>
+<canvas id="joecanvas"></canvas>
+</body>
+</html>

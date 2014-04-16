@@ -3,8 +3,6 @@
  * Template Name: Joecora 
  * Made by Joe
  * Email: ihateyou711@163.com
- * <link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/summernote.css" />
- * <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/summernote.min.js"></script>
  */  
 ?> 
 <!DOCTYPE html>
@@ -19,6 +17,7 @@
 		<link rel="shortcut icon" href="">
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/jc.css" />
+		<link type="text/css" rel="stylesheet" href="http://static.duoshuo.com/styles/embed.default.css?d6149e1c.css">
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
 		<script>
 		function pcsBar(b,o){
@@ -119,7 +118,9 @@
 			<button class="size enlarge"><i class="fa fa-search"></i></button>	
 		</div>
 		<div class="article-con">
+			
 		</div>
+		<?php comments_template('', true); ?>
 	</section>
 	<!-- 	弹出的文章面板} -->
 	
@@ -249,8 +250,10 @@
 	<!--[if !IE]><-->
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/musicPlayer.min.js"></script>
 	<!-- [endif] -->
+	<script type="text/javascript" src="http://www.joecora.com/wp-content/plugins/login-with-ajax/widget/login-with-ajax.js?ver=3.8.3"></script>
 	<script>pcsBar(60,80)</script>
 	<script type="text/javascript" src="<?php $_SERVER['HTTP_HOST']; ?>/wp-includes/js/comment-reply.js"></script>
 	<script>pcsBar(80,100)</script>
+	<script type="text/javascript" async="" charset="UTF-8" src="http://static.duoshuo.com/embed.js"></script>
 </body>
 </html>
