@@ -119,6 +119,8 @@
 			<button class="size enlarge"><i class="fa fa-search"></i></button>	
 		</div>
 		<div class="article-con">
+		     <div class='jc-art'></div>
+		     <div class='jc-ds'><?php comments_template('', true); ?></div>
 		</div>
 	</section>
 	<!-- 	弹出的文章面板} -->
