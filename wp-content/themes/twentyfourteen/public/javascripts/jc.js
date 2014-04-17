@@ -126,11 +126,12 @@
           //return false;
           }
           }).done(function ( data ) { 
-            var needdata = $($.parseHTML(data)).find("#content"); //.find("article.post, nav.post-navigation")
+            var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
+            var thisComments = showDsComments( $("#content").find(".comments-link .ds-thread-count").data("thread-key") );
             //文章容器
-            $t.find(".article-con .jc-art").prepend(needdata);
-
+            $t.find(".article-con .jc-art").append(needdata, thisComments );
+	    
             $t.find('.close').click( closeArticle );
 
             $t.find('.size').click(function(){
@@ -148,7 +149,9 @@
 
             //ARTICLE
             //$t.draggable({ handle: "p.ui-widget-header" });
-            jc.ajaxComment();                       
+            //自定义ajax原生评论
+            //jc.ajaxComment();     
+            
             jc.$article.find(".fa-spinner").remove();           
             return false;
 
@@ -156,6 +159,18 @@
               alert("调用发生错误！"); 
             });       
       }
+
+
+	function showDsComments(artid){
+		var $el = $('<div />');//该div不需要设置class="ds-thread"
+		$el.attr({
+			'data-thread-key': artid,//'文章的本地ID',    //必选参数
+			'data-url': 'http://www.joecora.com' 	//必选参数
+			//'data-author-key': '作者的本地用户ID' //可选参数
+		});
+		DUOSHUO.EmbedThread($el[0]);
+		return $el
+	}
 
       function closeArticle(){
         jc.$article.hide();
