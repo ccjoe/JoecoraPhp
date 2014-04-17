@@ -1300,7 +1300,7 @@ function musicPlayerSwitch(OOC){
             if(musicList){
                 musicList.style.right = "-" + m + "px";
             }
-            if(m >= 550){
+            if(m >= 570){
                 clearInterval(timer);
                 replaceClass(document.getElementById("playerSwitchBtn"),"switch-off","switch-on");
                 playerSwitch.title = "打开播放器";

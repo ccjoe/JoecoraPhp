@@ -304,7 +304,8 @@ a.post-thumbnail:hover { background-color: #999; }
 .entry-title a:hover { color: #41a62a; }
 .site-content .entry-header { background-color: #fff;}
 .site-content .has-post-thumbnail .entry-header { padding-top: 24px; }
-article.post .entry-header div.entry-meta {display: none;}
+article.post header.entry-header{margin-bottom:16px;}
+article.post .entry-header div.entry-meta .cat-links {display: none;}
 /**
  * 6.3 Entry Meta
  * -----------------------------------------------------------------------------

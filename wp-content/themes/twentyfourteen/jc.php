@@ -3,8 +3,6 @@
  * Template Name: Joecora 
  * Made by Joe
  * Email: ihateyou711@163.com
- * <link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/summernote.css" />
- * <script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/summernote.min.js"></script>
  */  
 ?> 
 <!DOCTYPE html>
@@ -19,60 +17,63 @@
 		<link rel="shortcut icon" href="">
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
-		<!--
-		<script>var duoshuoQuery = {short_name:"joecora.dushuo.com"};</script>
+		<script>var duoshuoQuery = {short_name:"joecora"}</script>
 		<script src="http://static.duoshuo.com/embed.js"></script>
-		function showDsComments(){
-			var $el = $('<div />');//该div不需要设置class="ds-thread"
-			$el.attr({
-				'data-thread-key': '文章的本地ID',    //必选参数
-				'data-url', 'http://www.joecora.com', //必选参数
-				'data-author-key', '作者的本地用户ID' //可选参数
-			});
-			DUOSHUO.EmbedThread($el[0]);
-			return $el
-		}-->
-		<script>
-		
+		<script>	
 		function pcsBar(b,o){
-	          $({property: b})
-	          .animate({property: o}, {
-	    		    duration: (3000/100)*(o-b),  //每阶段时间
-	    		    step: function() {
-	    		        var percentage = Math.round(this.property);
-	
-	    		        $('#progress').css('width',  percentage+"%");
-	
-	    		         if(percentage == 100) {
-	       				 $("#progress").addClass("done");//完成，隐藏进度条
-	   				 }
-	    		    }
-	    		});
-	        }
-	        pcsBar(0,20);
+        $({property: b})
+        .animate({property: o}, {
+  		    duration: (3000/100)*(o-b),  //每阶段时间
+  		    step: function() {
+  		        var percentage = Math.round(this.property);
+
+  		        $('#progress').css('width',  percentage+"%");
+
+  		         if(percentage == 100) {
+     				 $("#progress").addClass("done");//完成，隐藏进度条
+   				 }
+    		    }
+    		});
+	  }
+	  pcsBar(0,20);
 		</script>
 	</head>
 	
 <body class="jc">
+  <!-- 进度层 BEGIN{ -->
 	<div id="progress"><span></span></div>
+	<!-- 进度层 OVER} -->
+
 	<!-- 覆盖层 BEGIN{ -->
 	<div id="mb_pattern" class="mb_pattern"></div>
 	<div class="radial-gradient"></div>
 	<!-- 覆盖层 OVER} -->
 	
-	<!-- MENU BEGIN｛ -->
+	<!-- MENU层 BEGIN｛ -->
 	<section class="menu box-opacity" id="menu">
 		<nav class="nav clearfix">
 			<span class="postNav mn" id="postNav"><h3><a href=""><i class="fa fa-pagelines"></i>文字</a></h3></span>
 			<span class="imgNav mn" id="imgNav"><h3><a href=""><i class="fa fa-github-alt"></i>影像</a></h3></span>
 			<span class="timeNav mn" id="timeNav"><h3><a><i class="fa fa-clock-o"></i>时间</a></h3></span>
 			<span class="vedNav mn" id="vedNav"><h3><a><i class="fa fa-info-circle"></i>话语</a></h3></span>
-			<span class="userNav"  id="user"><?php echo do_shortcode("[lwa]"); ?></span>
+			<span class="userNav"  id="user">
+				<h3><a><i class="fa fa-user"></i>			
+				<?php global $current_user;
+					if( isset( $current_user ) ){			
+						get_currentuserinfo(); 
+						echo __( 'Hi', 'login-with-ajax' ) . " " . $current_user->display_name;	
+					}else{
+						echo '请登录';
+					}
+				?></a>
+				</h3>
+			<?php echo do_shortcode("[lwa]"); ?>
+			</span>
 		</nav>
 	</section>		
-	<!-- MENU OVER｝ -->
+	<!-- MENU层 OVER｝ -->
 	
-	<!-- 左侧{ -->	
+	<!-- 左侧层{ -->	
 	<div id="expando">
 		<div class="ltbg" id="ltbg" data-toggle="tooltip" data-placement="right" title="" data-original-title="请点击空白区域收缩面板"></div>
 		<div class="lt">
@@ -120,9 +121,11 @@
 			</div>			
 		</div>	
 	</div>
-	<!-- 左侧｝ -->
+	<!-- 左侧层｝ -->
+
 	<script>pcsBar(20,40)</script>
-	<!-- 	弹出的文章面板{ -->
+
+	<!-- 	文章面板层{ -->
 	<section class="article ui-widget-content" id="article" style="display:none">
 		<div class="article-bg"></div>
 		<div class="btnset">
@@ -134,7 +137,7 @@
 		     <div class='jc-art'></div>
 		</div>
 	</section>
-	<!-- 	弹出的文章面板} -->
+	<!-- 	文章面板层} -->
 	
 	<!-- BG左右翻{ -->
 	<div class="cn-nav" id="cnNav">
@@ -149,7 +152,7 @@
 	</div>
 	<!-- BG左右翻}-->
 	
-	<!-- ABOUT { -->
+	<!-- ABOUT层 { -->
 	<div class="about">
 		<ul class="about-con clearfix">
 			<li><a><i class="fa fa-pencil"></i>关于JC</a><div class="about-item-desc">
@@ -177,13 +180,14 @@
 		<div class="about-btn">
 			<span><i class="fa fa-share-square-o"></i>分享到： </span>
 			<span class="share-sns clearfix"><a  class="qq"><i class="fa fa-pinterest-square"></i></a><a class="sina"><i class="fa fa-weibo"></i></a><a class="douban"><i class="fa fa-facebook-square"></i></a><a class="renren"><i class="fa fa-renren"></i></a></span>
-			<span class="about-more">更多信息<i class="fa fa-arrow-circle-o-up"></i></span><span class="about-music">有关音乐<i class="fa fa-music"></i></span>
+			<span class="about-more">更多信息<i class="fa fa-arrow-circle-o-up"></i></span><span class="about-music">有关音乐<i class="fa fa-music"></i> <i class="fa fa-cog fa-spin"></i></span>
 		</div>
 		
 	</div>
-	<!-- ABOUT } -->
+	<!-- ABOUT层 } -->
 	<script>pcsBar(40,50)</script>
-	<!--播放器开始 { -->
+
+	<!--播放器层 { -->
 	<!--[if !IE]><--> 
 	<div id="musicPlayerWrap" class="m-player-wrap">
 		  <div id="musicPlayerSwitch" class="m-player-switch off" title="隐藏播放器">
@@ -254,16 +258,19 @@
 	  </div>
 	</div>
 	<!--<![endif]-->
-	<!--播放器结束 } -->
+	<!--播放器层 } -->
 
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
 	<script>pcsBar(50,60)</script>
+	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
+  <script>pcsBar(60,80)</script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jc.min.js"></script>
+
 	<!--[if !IE]><-->
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/musicPlayer.min.js"></script>
 	<!-- [endif] -->
-	<script>pcsBar(60,80)</script>
-	<script type="text/javascript" src="<?php $_SERVER['HTTP_HOST']; ?>/wp-includes/js/comment-reply.js"></script>
+
+	<script type="text/javascript" src="/wp-content/plugins/login-with-ajax/widget/login-with-ajax.js?ver=3.8.3"></script>
+
 	<script>pcsBar(80,100)</script>
 </body>
 </html>

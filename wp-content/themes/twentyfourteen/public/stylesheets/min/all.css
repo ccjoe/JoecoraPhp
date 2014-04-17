@@ -84,25 +84,30 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .menu .nav .user-menu .lwa-info{float: left; text-align: right;}
 .menu .nav span h3{font-family:Microsoft Yahei; height:30px; line-height:30px;  height:0}
 .menu .nav .postNav, 	
-.menu .nav .postNav:hover h3{background-color:#88bdff;}
+.menu .nav .postNav h3:hover{background-color:#88bdff;}
 .menu .nav .imgNav,
-.menu .nav .imgNav:hover h3{background-color:#56818a;}
+.menu .nav .imgNav h3:hover{background-color:#56818a;}
 .menu .nav .vedNav,
-.menu .nav .vedNav:hover h3{background-color:#d6cb9a;}
+.menu .nav .vedNav h3:hover{background-color:#d6cb9a;}
 .menu .nav .timeNav,
-.menu .nav .timeNav:hover h3{background-color:#a6b818;}
+.menu .nav .timeNav h3:hover{background-color:#a6b818;}
 .menu .nav .userNav,
-.menu .nav .userNav:hover h3{background-color:#8b8b8b; }
-.menu .nav .userNav:hover .user{display:block; background-color:#aaa;}
+.menu .nav .userNav h3:hover {background-color:#8b8b8b; }
+.menu .nav .userNav h3:hover .user{display:block; background-color:#aaa;}
+.menu .nav .userNav h3 a{ width:80px; text-overflow:ellipsis; overflow:hidden; white-space:nowrap;}
 .menu .user,
-.menu .nav span h3{color:#fff; margin-top:6px; opacity: 0.9; filter:alpha(opacity=90); transition: height 0.1s linear;}
-.menu .nav span:hover h3{height:30px}
+.menu .nav span h3{height:30px; color:#fff; margin-top:6px; opacity: 0.9; filter:alpha(opacity=90); transition: height 0.1s linear;}
+.menu .nav span h3:hover, .menu .nav span h3:hover a{overflow:hidden; font-size:18px;}
 
 .menu .user{padding-bottom:4px; margin-top:6px;}
 .menu .user .user-menu{display:none;}
 .menu .user .user-menu li{padding:4px 10px}
 .menu .user a,
 .menu .nav h3 a{color:#fff; font-size:12px;}
+.menu .nav span.lwa-status{width:auto; height:auto; cursor: pointer;}
+.menu .nav h3 a i{margin-right:4px}
+.menu .nav h3 a.abg:hover{background-color:#FFF; color:#000;}
+
 
 .menu .userNav .lwa{display: none; font-size: 12px; position: absolute; max-width: 225px; padding: 10px; right: 0; top: 0;font-size: 12px; z-index: -1;}
 .menu .lwa-form input{width:auto; padding: 0; float:left;}
@@ -113,12 +118,8 @@ margin: 0; padding: 0; position: fixed; left: 0; top: 0; width: 100%; height: 10
 .lwa-register-tip{font-size: 13px; color: #999; float: right;}
 .lwa-register-form p {font-size: 13px; color: #999;}
 .lwa-register-form p label{width: 80px;display: block;margin-bottom: 10px;}
-
 input[type="submit"]{background-color:#428BCA; color: #fff; padding: 2px 8px!important; border:0 none; width:auto!important;}
-.menu .nav span.lwa-status{width:auto; height:auto; cursor: pointer;}
-.menu .nav h3 a i{margin-right:4px}
-.menu .nav h3 a.abg:hover{background-color:#FFF; color:#000;}
-.menu .nav h3 a:hover {font-size:20px;}
+
 
 #expando{height:100%; width:360px; position:absolute; top:0}
 .ltbg{height:100%; width:100%; background-color:#000; opacity: 0.1; filter:alpha(opacity=10); position:absolute; z-index:0; transition:all 0.2s linear; cursor:pointer}
@@ -247,7 +248,7 @@ footer.comment-meta > div{margin-bottom:6px}
 
 
 .dir-title-link{width:150px; height:150px; border:3px solid #000; display:block;}
-.vedio-list{}
+.vedio-list{font-size:12px}
 
 /* content */
 section.article p{font-size:12px; line-height:1.5em; letter-spacing: 1px; color: #798181; text-shadow:0.2px 0.1px 0px #FFF;}
@@ -266,9 +267,8 @@ section.article,
 .btn-upload{display: none;}
 .help-block{float: left;}
 /*share-sns .jc .full-screen-comments .note-toolbar{position: absolute; }*/
-.about{position:absolute; bottom:2px; right:5px;}
-
-.about-con{display:none; right:15px; border-radius: 4px;  background-color:rgba(0,0,0,.5); overflow:hidden}
+.about{position:absolute; bottom:6px; right:0;}
+.about-con{display:none; right:15px; border-radius: 4px; margin-bottom:10px;  background-color:rgba(0,0,0,.5); overflow:hidden}
 .about-con li{float:left; max-height:200px; height:200px;}
 .about-con li > a{cursor:pointer; display:block; float:right; word-wrap: break-word; width:16px; font-size:14px; line-height:14px; text-align:center; padding:0 6px; display: block; height: 100%; line-height: 1.2em;  border-right: 1px solid #3C3C3C;}
 .about-con li > a i{margin:6px 0; display: block;}
@@ -276,17 +276,18 @@ section.article,
 .about-con li .about-item-desc{float:left; height:180px; overflow:hidden; width:0; display:none; margin:10px; color: #999; overflow:auto;}
 .about-con li .about-item-desc .liwrap{overflow: auto;height: 180px;}
 .about-con li .about-item-desc, .about-con li .about-item-desc *{font-size:12px; line-height:1.5em}
-.about-con li .about-item-desc a{ color: #999;}
-.about-btn {font-size:12px; text-align:right; overflow: hidden;}
-.about-btn span{position: relative; top: 2px; color:#888}
+.about-con li .about-item-desc a{ color: #999; margin-right:6px}
+.about-btn {font-size:12px; text-align:right; overflow: hidden; margin-right:6px;}
+.about-btn span{position: relative; color:#888}
+.about-btn span  i{margin-left:4px}
 .about-btn span:hover{color:#fff}
-.about-btn span.share-sns{top:0}
+
 .about-more {cursor:pointer;}
-.about-more  i{margin-left:4px}
+
 .about  p{margin:1em 0; font-style:italic;}
 .share-sns{display:inline-block; vertical-align: middle;}
-.share-sns a{width:16px; height:16px; display:block; float:left;  margin-right:4px;}
-
+.share-sns a{display:block; float:left;  margin-right:4px; width:16px; height:16px;}
+.share-sns a:hover{font-size: 14px}
 .cn-nav > a{    position: absolute;    height: 70px;    width: 70px; z-index:30;}
 a.cn-nav-prev{    right: 20px;	 top:40%;}
 a.cn-nav-next{    right: 20px;	bottom:40%;}
@@ -554,6 +555,7 @@ span + .edit-link:before,
 .widget_twentyfourteen_ephemera .entry-title:after {
 	content: "\0020\007c\0020";
 }
+.jc-art .entry-meta .cat-links{display:none;}
 .entry-meta >   span,.bypostauthor > article .fn:before, .reply a{margin-right: 8px;position: relative;top: 1px;	font-size: 12px;font-family: FontAwesome;font-weight: normal;font-style: normal;line-height: normal;vertical-align: baseline;
 		color: #999; }
 .entry-meta >   span:hover{color:#428BCA}

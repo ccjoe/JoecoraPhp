@@ -5,11 +5,6 @@
  * The location from within your template folder is plugins/login-with-ajax/ (create these directories if they don't exist)
 */
 ?>
-<h3><?php 
-	global $current_user;
-	get_currentuserinfo(); 
-	echo __( 'Hi', 'login-with-ajax' ) . " " . $current_user->display_name;
-?></h3>
 <div class="lwa">
 	<span class="lwa-title-sub" style="display:none"><?php echo __( 'Hi', 'login-with-ajax' ) . " " . $current_user->display_name  ?></span>
 	<div class="user-menu">
