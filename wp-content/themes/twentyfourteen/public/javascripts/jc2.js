@@ -47,12 +47,16 @@
         var jc = this,  showed,status,  n=0;
 
         $(document).ajaxSend(function(){
-          $("#progress").removeClass("done");
           pcsBar(0,0);
         }).ajaxStart(function(){
-          pcsBar(0,70);
+          pcsBar(0,30);
         }).ajaxSuccess(function(){
-          pcsBar(70,100);
+          pcsBar(30,90);
+        }).ajaxComplete(function(){
+          pcsBar(90,100);
+        }).ajaxStop(function(){      
+        }).ajaxError(function(){
+          pcsBar(0,0);
         });
         
         if(screen.width < 600){
@@ -61,13 +65,13 @@
 
         $("#expando").hover(function(){
           jc.$leftBg.css({
-            "opacity": 0.8,
+            "opacity": 0.6,
             "filter": "alpha(opacity=60)"
           });
         },function(){
           jc.$leftBg.css({
-            "opacity": 0.5,
-            "filter": "alpha(opacity=50)"
+            "opacity": 0.1,
+            "filter": "alpha(opacity=10)"
           });
         });
 
@@ -93,17 +97,13 @@
 
 
         //Ajax Article
-        this.$postList.on('click',"ul li a", getAart);
-
-        $("#ds-recent-comments").on("click",".ds-thread-title a",getAart)
-
-        function getAart(){
+        this.$postList.on('click',"ul li a",function(e){
           var href = $(this)[0].href;
           //console.log(href);
           getLinkArticle(href);
           jc.$aboutCon.hide();
           return false;
-        }
+        });
 
       function getLinkArticle(href){
         $.ajax({
@@ -111,7 +111,7 @@
           context:jc.$article,  //上下文，整个弹出面板
           beforeSend:function(){
       var $goalElem = $(this).find(".article-con");
-          $goalElem.find(".jc-art").empty();
+      $goalElem.find(".jc-art").empty();
             $goalElem.find(".jc-art").append(jc.$loading);
             $(this).find('.close').off();
             $(this).find('.size').off();
@@ -128,12 +128,7 @@
           }).done(function ( data ) { 
             var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
-            var artid =  href.match(/\d*$/) ;
-            
-            console.log(artid);
-
-            var thisComments = showDsComments(artid);
-            
+            var thisComments = showDsComments( $("#content").find(".comments-link .ds-thread-count").data("thread-key") );
             //文章容器
             $t.find(".article-con .jc-art").append(needdata, thisComments );
       
@@ -150,7 +145,7 @@
             });
 
             //文章内所有事件
-            artEvent($("#article").find(".jc-art"));
+            artEvent($("#content"));
 
             //ARTICLE
             //$t.draggable({ handle: "p.ui-widget-header" });
@@ -174,7 +169,6 @@
       //'data-author-key': '作者的本地用户ID' //可选参数
     });
     DUOSHUO.EmbedThread($el[0]);
-    //console.log(artid);
     return $el
   }
 
@@ -185,7 +179,7 @@
       }
 
       $("#user").on("click","h3",function(){  
-          $("#user").find(".lwa").toggle();
+          $(".lwa").toggle();
       })
 
       jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
@@ -194,7 +188,7 @@
 
           if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
             jc.$postList.slideDown().siblings().slideUp();
-          }else { return false; }
+          }
           
         }else if( $(this).hasClass("imgNav") ){
           //点击图象      
@@ -205,22 +199,21 @@
             if(!jc.$imgGL.find(".view").length){
               getAjaxGallery();
             }
-          }else { return false; }
+          }
           
         }else if( $(this).hasClass("vedNav")){
           //点击视频
           if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
             $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();  
-          }else { return false; }
+          }
           
         }else if( $(this).hasClass("timeNav")){
           //点击其它
           $.vegas("pause");
-          //$(".vegas-background").hide();
+          $(".vegas-background").hide();
           //vedioby("http://video-js.zencoder.com/oceans-clip");
           
         }
-        closeArticle();
         return false;
       });  
         
@@ -228,12 +221,11 @@
 
 
       function artEvent(content){
-        content.find(".comments-link a").attr({"href":function(){ return "#"+$(this).attr("href").match(/[a-z]*$/) }});
+        content.find(".comments-link a").attr({"href":"#comments"});
         content.find("a.comment-reply-link").each(function(i){
           $(this).attr("href",$(this).attr("href").substring(1));
         });
-        content.find("#ds-thread").prepend("<a name='comments' />");  //加上锚点
-        content.off();
+
         content.on("click",".entry-meta a",function(){    //文章
           var $t = $(this);
           if($t.parent().hasClass("entry-date")){
@@ -547,7 +539,7 @@
       initPattern:function () {
         //console.log("init");
         for(var i = 0; i < 16 ; ++i) {
-          this.showItem("50px","50px");
+          this.showItem("initial","initial");
           $el     = $('<div>').css(param);
           $el.css("transform",'rotate'+'('+ a + 'deg)');                      
           $el.appendTo(this.$mbPattern);
@@ -569,7 +561,7 @@
       showItem:function(w,h){
           var o   = 0.2,
           t   = Math.floor(Math.random()*171) + 30, // between 5 and 200
-          l   = Math.floor(Math.random()*496) + 5, // between 5 and 700
+          l   = Math.floor(Math.random()*696) + 5, // between 5 and 700
           r   = Math.floor(Math.random()*255),
           g   = Math.floor(Math.random()*255),
           b   = Math.floor(Math.random()*255);
@@ -597,7 +589,7 @@
             width : '100px',
             height  : '100px',
             top   : 188 + 100 * Math.floor(i/4),
-            right : 100 * (i%4),
+            right : 120 + 100 * (i%4),
             opacity : 0.2,
             backgroundColor: "rgb(0,0,0)",
             borderRadius  : "0",
@@ -613,7 +605,7 @@
       }
     },
 
-/*    // @嵌套评论问题待解决
+    // @嵌套评论问题待解决
     ajaxComment: function (){
       //Ajax comments
       $("#submit").click(function(event){
@@ -667,7 +659,7 @@
         });
         return false;
       });
-    },*/
+    },
 
 
     //将某张图片作为背景触发
