@@ -1,5 +1,20 @@
 //background
+var _IE = (function(){
+  var v = 3, div = document.createElement('div'), all = div.getElementsByTagName('i');
+  while (
+    div.innerHTML = '<!--[if gt IE ' + (++v) + ']><i></i><![endif]-->',
+    all[0]
+  );
+  return v > 4 ? v : false ;
+}());
+
+if(_IE && _IE < 9){
+  $("div,section,nav").remove();
+  $("body").prepend('<div style="width:100%; height:100%; position:absolute; z-index:10000; background-color:#000; filter:alpha(opacity=80)" >您的浏览器版本太OUT了!, SO看到的只是这...</div>');
+}
+
 (function($,w){
+
   var JCApp = {
     $menu            :  $("#menu"),
     $bclick          :  $("#cnNav"),
