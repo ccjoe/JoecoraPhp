@@ -115,7 +115,11 @@
 				
 				<!-- vedio BEGIN{ -->
 				
-				<section class="vedio-list" id="vedio"><?php echo do_shortcode("[widget widget_name='WP_Widget_Recent_Comments']"); ?></section>
+				<section class="vedio-list" id="vedio">
+<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Recent_Comments']"); ?>
+<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Top_Threads']"); ?>
+<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Recent_Visitors']"); ?>
+</section>
 				<!-- vedio OVER} -->	
 				
 			</div>			

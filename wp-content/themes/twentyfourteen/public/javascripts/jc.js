@@ -111,7 +111,7 @@
           context:jc.$article,  //上下文，整个弹出面板
           beforeSend:function(){
       var $goalElem = $(this).find(".article-con");
-      $goalElem.find(".jc-art").empty();
+          $goalElem.find(".jc-art").empty();
             $goalElem.find(".jc-art").append(jc.$loading);
             $(this).find('.close').off();
             $(this).find('.size').off();
@@ -128,7 +128,12 @@
           }).done(function ( data ) { 
             var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
-            var thisComments = showDsComments( $("#content").find(".comments-link .ds-thread-count").data("thread-key") );
+            var artid =  href.match(/\d*$/) ;
+            
+            console.log(artid);
+
+            var thisComments = showDsComments(artid);
+            
             //文章容器
             $t.find(".article-con .jc-art").append(needdata, thisComments );
       
@@ -145,7 +150,7 @@
             });
 
             //文章内所有事件
-            artEvent($("#content"));
+            artEvent($("#article").find(".jc-art"));
 
             //ARTICLE
             //$t.draggable({ handle: "p.ui-widget-header" });
@@ -169,6 +174,7 @@
       //'data-author-key': '作者的本地用户ID' //可选参数
     });
     DUOSHUO.EmbedThread($el[0]);
+    //console.log(artid);
     return $el
   }
 
@@ -179,7 +185,7 @@
       }
 
       $("#user").on("click","h3",function(){  
-          $(".lwa").toggle();
+          $("#user").find(".lwa").toggle();
       })
 
       jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
@@ -221,11 +227,12 @@
 
 
       function artEvent(content){
-        content.find(".comments-link a").attr({"href":"#comments"});
+        content.find(".comments-link a").attr({"href":function(){ return "#"+$(this).attr("href").match(/[a-z]*$/) }});
         content.find("a.comment-reply-link").each(function(i){
           $(this).attr("href",$(this).attr("href").substring(1));
         });
-
+        content.find("#ds-thread").prepend("<a name='comments' />");  //加上锚点
+        content.off();
         content.on("click",".entry-meta a",function(){    //文章
           var $t = $(this);
           if($t.parent().hasClass("entry-date")){
@@ -605,7 +612,7 @@
       }
     },
 
-    // @嵌套评论问题待解决
+/*    // @嵌套评论问题待解决
     ajaxComment: function (){
       //Ajax comments
       $("#submit").click(function(event){
@@ -659,7 +666,7 @@
         });
         return false;
       });
-    },
+    },*/
 
 
     //将某张图片作为背景触发
