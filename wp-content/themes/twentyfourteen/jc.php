@@ -5,16 +5,16 @@
  * Email: ihateyou711@163.com
  */  
 ?> 
-<!DOCTYPE html>
-<html>
+<!DOCTYPE HTML>
+<html lang="zh">
 	<head>
-		<meta charset="utf-8" lang="zh">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta content="JOE & CORA's WEBSITE, <?php $description = get_bloginfo( 'description', 'display' );	if ( ! empty ( $description ) ) : ?><?php echo esc_html( $description ); ?><?php endif; ?>" name="description">
-		<meta content="Joe,Cora,website" name="keywords">
-		<meta content="Joe" name="author">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta content="JOE & CORA's WEBSITE, <?php $description = get_bloginfo( 'description', 'display' );	if ( ! empty ( $description ) ) : ?><?php echo esc_html( $description ); ?><?php endif; ?>" name="description" />
+		<meta content="Joe,Cora,website" name="keywords" />
+		<meta content="Joe" name="author" />
 		<title><?php bloginfo( 'name' ); ?></title>
-		<link rel="shortcut icon" href="">
+		<link rel="shortcut icon" href="" />
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
 		<script>var duoshuoQuery = {short_name:"joecora"}</script>
@@ -116,10 +116,9 @@
 				<!-- vedio BEGIN{ -->
 				
 				<section class="vedio-list" id="vedio">
-<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Recent_Comments']"); ?>
-<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Top_Threads']"); ?>
-<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Recent_Visitors']"); ?>
-</section>
+					<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Recent_Comments']"); ?>
+					<?php echo do_shortcode("[widget widget_name='Duoshuo_Widget_Recent_Visitors']"); ?>
+				</section>
 				<!-- vedio OVER} -->	
 				
 			</div>			
