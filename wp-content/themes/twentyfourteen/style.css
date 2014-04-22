@@ -739,6 +739,7 @@ code, kbd, tt, var, samp, pre{ line-height:inherit; font-size:inherit; }
 .content-area,  .content-sidebar { background: #fff; }
 article.post .entry-summary img{max-width: 200px;float: left;padding: 20px;padding-left: 0;}
 .widget .user-menu span{float:left; margin-right:16px;}
+.site-main{ background-color: #fff; }
 /**
  * 10.0 Multisite
  * -----------------------------------------------------------------------------
