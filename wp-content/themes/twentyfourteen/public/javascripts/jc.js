@@ -9,8 +9,8 @@ var _IE = (function(){
 }());
 
 if(_IE && _IE < 9){
-  $("div,section,nav").remove();
-  $("body").prepend('<div style="width:100%; height:100%; position:absolute; z-index:10000; background-color:#000; filter:alpha(opacity=80)" >您的浏览器版本太OUT了!, SO看到的只是这...</div>');
+  $("div,section,nav").not("#progress").remove();
+  $("body").prepend('<div class="bie8"><div class="wrap"><p class="tips">您使用的ie浏览器及版本太OUT了!, SO看到的只是这...</p><p class="info">在Google Chrome上可以有最佳的体验，<a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2014_03_26_17/bind1/14744/ChromeStandaloneSetup33.0.1750.154_14744_BDdl.exe">点击下载</a></p><p class="info">或者 访问 <a href="http://www.joecora.com/?cat=10">其它页面</a></p><p class="ver">友情提示：您当前的浏览器是： ie '+ _IE +'</p></div></div>');
 }
 
 (function($,w){
@@ -32,7 +32,7 @@ if(_IE && _IE < 9){
     $imgGL           :  $("#imgGL"),
     $imgGlList       :  $("#imgGlList"),
     $showMode        :  $("#showMode"),
-    $returnGL        : $("#returnGL"),
+    $returnGL        :  $("#returnGL"),
     $aboutCon        :  $(".about-con"),
     $headerTitle     :  $("#jc-header"),
     $loading         :  $("<span  class='fa fa-spinner fa-spin'></span>"),
@@ -41,7 +41,7 @@ if(_IE && _IE < 9){
     $wrong           :  $('<i class="fa fa-plus"></i>'),
     $failing         :  $("<span class='error'><i class='fa fa-info-circle'></i>提交数据失败,原因为提交内容一致或太过频繁</span>"),
     $overing         :  $("<span class='suceess'><i class='fa fa-check-square'></i>加载数据完毕</span>"),
-    index            : 0,
+    index            :  0,
     bgs : [{  src: '/wp-content/gallery/beach/img_9172-1.jpg', fade: 4000},
     { src: '/wp-content/gallery/park/img_9116-1.jpg', fade: 4000 },
     { src: '/wp-content/gallery/beach/img_9162-1.jpg', fade: 4000 },

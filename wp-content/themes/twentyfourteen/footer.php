@@ -17,7 +17,7 @@
 
 			<div class="site-info">
 				<?php do_action( 'twentyfourteen_credits' ); ?>
-				Copyright ©AJoe All Rights Reserved.
+				Copyright ©AJoe All Rights Reserved.  Original BSD license - 转载请注明链接
 			</div><!-- .site-info -->
 		</footer><!-- #colophon -->
 	</div><!-- #page -->
