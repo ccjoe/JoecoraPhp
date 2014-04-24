@@ -182,7 +182,7 @@ input[type="submit"]{background-color:#428BCA; color: #fff; padding: 2px 8px!imp
 
 
 /* section */
-.con-list{ margin:60px 0 0 0; }
+.con-list{ margin:60px 0 0 0; height: 445px;}
 .post-list  ul li{overflow:hidden;line-height:2em; padding:18px 20px; border-bottom:1px dashed #686868;
 background:url("/wp-content/themes/twentyfourteen/public/images/slidebg.jpg") no-repeat; background-size:0% 100%; transition: all 0.4s; }
 .post-list  ul li:first-child{border-top:1px dashed #686868;}
@@ -229,8 +229,8 @@ background:url("/wp-content/themes/twentyfourteen/public/images/slidebg.jpg") no
 article.comment-body{margin-bottom: 15px; padding: 25px 0; border-bottom:1px dashed #555}
 footer.comment-meta > div{margin-bottom:6px}
 /* IMG LIST */				
-.img-list, .vedio-list{display:none; min-height:300px; padding-left:18px;}
-.post-list{overflow:auto; height:445px}
+.img-list, .vedio-list{display:none; min-height:200px; padding-left:18px;}
+.post-list,.img-list, .vedio-list{overflow:auto; height:100%}
 /*Btn*/
 .show-list{background:transparent none; color:#fff; border:0 none; padding:0;  border-radius:0;  box-shadow:0 0 0 transparent; margin-bottom:0; cursor:pointer}
 .show-list:hover{color:#428BCA;}

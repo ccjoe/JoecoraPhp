@@ -110,7 +110,7 @@ if(_IE && _IE < 9){
         //Ajax Article
         this.$postList.on('click',"ul li a", getAart);
 
-        $("#ds-recent-comments").on("click",".ds-thread-title a",getAart)
+        $("#vedio").on("click",".ds-thread-title a",getAart)
 
         function getAart(){
           var href = $(this)[0].href;
@@ -145,7 +145,7 @@ if(_IE && _IE < 9){
             var $t = $(this);
             var artid =  href.match(/\d*$/) ;
             
-            console.log(artid);
+            //console.log(artid);
 
             var thisComments = showDsComments(artid);
             
