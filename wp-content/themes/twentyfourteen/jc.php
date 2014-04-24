@@ -4,12 +4,13 @@
  * Made by Joe
  * Email: ihateyou711@163.com
  */  
-?> 
+?>
 <!DOCTYPE HTML>
-<html lang="zh">
+<html>
 	<head>
-		<meta charset="utf-8" />
+		<meta charset="<?php bloginfo( 'charset' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta content="JOE & CORA's WEBSITE, <?php $description = get_bloginfo( 'description', 'display' );	if ( ! empty ( $description ) ) : ?><?php echo esc_html( $description ); ?><?php endif; ?>" name="description" />
 		<meta content="Joe,Cora,website" name="keywords" />
 		<meta content="Joe" name="author" />
@@ -21,6 +22,7 @@
 		<script src="http://static.duoshuo.com/embed.js"></script>
 		<script>	
 		function pcsBar(b,o){
+				//console.log(document.)
         $({property: b})
         .animate({property: o}, {
   		    duration: (3000/100)*(o-b),  //每阶段时间
