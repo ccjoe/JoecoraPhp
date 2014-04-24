@@ -143,9 +143,9 @@ if(_IE && _IE < 9){
           }).done(function ( data ) { 
             var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
-            var artid =  href.match(/\d*$/) ;
-            
-            //console.log(artid);
+            //var artid =  href.match(/\d*$/) ;
+            var artid =  href.match(/\d+/) ;
+            console.log(artid);
 
             var thisComments = showDsComments(artid);
             
@@ -225,7 +225,12 @@ if(_IE && _IE < 9){
         }else if( $(this).hasClass("vedNav")){
           //点击视频
           if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
-            $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown().prepend( showDsComments(195) );  
+            $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();
+
+            var $v = $("#vedio");
+            if( !$v.find("#ds-thread").length ){
+              $v.prepend( showDsComments(195) );  
+            }
 
           }else { return false; }
           
