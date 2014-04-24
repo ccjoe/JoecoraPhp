@@ -107,8 +107,8 @@
 								<button type="button" class="btn-lg show-list"  id="returnGL"><i class="fa fa-undo"></i>返回相册列表</button>
 								<div class="btn-group btn-group-sm clearfix" id="showMode" >
 								  <button type="button" class="btn btn-default show-bgs active"  title="点击图片将会显示在背景上"><i class="fa fa-caret-square-o-up"></i>背景</button>
-								  <button type="button" class="btn btn-default show-grid"><i class="fa fa-th-large"></i>矩阵</button>
-								  <button type="button" class="btn btn-default show-book"><i class="fa fa-book"></i>翻页</button>									  
+								  <button type="button" disabled="disabled" class="btn btn-default show-grid"><i class="fa fa-th-large"></i>矩阵</button>
+								  <button type="button" disabled="disabled" class="btn btn-default show-book"><i class="fa fa-book"></i>翻页</button>									  
 							    </div>
 						 </div>
 					</div>

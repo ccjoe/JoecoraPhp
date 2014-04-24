@@ -10,7 +10,7 @@ var _IE = (function(){
 
 if(_IE && _IE < 9){
   $("div,section,nav").not("#progress").remove();
-  $("body").prepend('<div class="bie8"><div class="wrap"><p class="tips">您使用的ie浏览器及版本太OUT了!, SO看到的只是这...</p><p class="info">在Google Chrome上可以有最佳的体验，<a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2014_03_26_17/bind1/14744/ChromeStandaloneSetup33.0.1750.154_14744_BDdl.exe">点击下载</a></p><p class="info">或者 访问 <a href="http://www.joecora.com/?cat=10">其它页面</a></p><p class="ver">友情提示：您当前的浏览器是： ie '+ _IE +'</p></div></div>');
+  $("body").prepend('<div class="bie8"><div class="wrap"><p class="tips">您使用的ie浏览器及版本太OUT了!, SO看到的只是这...</p><p class="info">最佳推荐<a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2014_03_26_17/bind1/14744/ChromeStandaloneSetup33.0.1750.154_14744_BDdl.exe">Google Chrome</a>, 在<a href="http://dlsw.baidu.com/sw-search-sp/soft/6f/11508/Opera_20.0.1387.91_Setup.1397118343.exe" >Opera</a>, <a href="http://dlsw.baidu.com/sw-search-sp/soft/51/11843/Firefox-setup28.0.0.5186.1395192905.exe">Firefox</a>, Safari上也可以有较好体验。</p><p class="info"><a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2014_03_26_17/bind1/14744/ChromeStandaloneSetup33.0.1750.154_14744_BDdl.exe">点击下载</a></p><p class="info">或者 访问 <a href="http://www.joecora.com/?cat=10">其它页面</a></p><p class="ver">友情提示：您当前的浏览器是： ie '+ _IE +'</p></div></div>');
 }
 
 (function($,w){
@@ -110,7 +110,7 @@ if(_IE && _IE < 9){
         //Ajax Article
         this.$postList.on('click',"ul li a", getAart);
 
-        $("#vedio").on("click",".ds-thread-title a",getAart)
+        this.$vedioList.on("click",".ds-thread-title a",getAart)
 
         function getAart(){
           var href = $(this)[0].href;
@@ -225,12 +225,13 @@ if(_IE && _IE < 9){
         }else if( $(this).hasClass("vedNav")){
           //点击视频
           if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
-            $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();  
+            $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown().prepend( showDsComments(195) );  
+
           }else { return false; }
           
         }else if( $(this).hasClass("timeNav")){
           //点击其它
-          $.vegas("pause");
+          //$.vegas("pause");
           //$(".vegas-background").hide();
           //vedioby("http://video-js.zencoder.com/oceans-clip");
           
