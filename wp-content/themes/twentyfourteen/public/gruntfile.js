@@ -70,12 +70,29 @@ module.exports = function(grunt) {
         }
     },
     cssmin: {
-        css: {
+        css1: {
             src:'stylesheets/min/all.css',
             dest:'stylesheets/min/all-min.css'
+        },
+        css2: {
+            src:'../style-nm.css',
+            dest:'../style.css'
+        }
+    },
+    htmlmin: {                                     // Task
+        dist: {                                      // Target
+          options: {                                 // Target options
+            removeComments: true,
+            collapseWhitespace: true,
+            minifyJS: true,
+            minifyCSS: true
+          },
+          files: {                                   // Dictionary of files
+            '../jc.php': '../jc-src.php'    // 'destination': 'source'
+          }
         }
     }
-
+  
   });
 
 
@@ -85,7 +102,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   //grunt.loadNpmTasks('grunt-contrib-less');
-
+  
+  grunt.loadNpmTasks('grunt-contrib-htmlmin');
+  
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-css');
 
@@ -100,10 +119,10 @@ module.exports = function(grunt) {
   grunt.registerTask('dist-css', ['concat','cssmin']);
   // HTML validate.
   //grunt.registerTask('html-validate', ['htmlhint']);
-
+  grunt.registerTask('dist-html', ['htmlmin']);
   // Default task.
   // grunt.registerTask('default', ['dist-css', 'dist-js', 'html-validate']);
-  grunt.registerTask('default', ['dist-css', 'dist-js']);
+  grunt.registerTask('default', ['dist-css', 'dist-js', 'dist-html']);
   // grunt.registerTask('default', ['dist-js']);
 
 };

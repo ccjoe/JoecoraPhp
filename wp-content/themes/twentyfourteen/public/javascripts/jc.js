@@ -42,83 +42,85 @@ if(_IE && _IE < 9){
     $failing         :  $("<span class='error'><i class='fa fa-info-circle'></i>提交数据失败,原因为提交内容一致或太过频繁</span>"),
     $overing         :  $("<span class='suceess'><i class='fa fa-check-square'></i>加载数据完毕</span>"),
     index            :  0,
-    bgs : [{  src: '/wp-content/gallery/beach/img_9172-1.jpg', fade: 4000},
-    { src: '/wp-content/gallery/park/img_9116-1.jpg', fade: 4000 },
-    { src: '/wp-content/gallery/beach/img_9162-1.jpg', fade: 4000 },
-    { src: '/wp-content/gallery/park/img_9150-1.jpg', fade: 4000 },
-    { src: '/wp-content/gallery/beach/img_9163-1.jpg', fade: 4000 },
-    { src: '/wp-content/gallery/park/img_9157-1.jpg', fade: 4000 }],
+    bgs : [{  src: '/wp-content/gallery/beach/img_9172-1.jpg', fade: 2000},
+    { src: '/wp-content/gallery/park/img_9116-1.jpg', fade: 2000 },
+    { src: '/wp-content/gallery/beach/img_9162-1.jpg', fade: 2000 },
+    { src: '/wp-content/gallery/park/img_9150-1.jpg', fade: 2000 },
+    { src: '/wp-content/gallery/beach/img_9163-1.jpg', fade: 2000 },
+    { src: '/wp-content/gallery/park/img_9157-1.jpg', fade: 2000 }],
 
     init : function(){
-      this.$headerTitle.find("h2 a").lettering();  //Lettering
-      JCApp.getAjaxPostData(5);                        //取文章
-      JCApp.PatternSet.initPattern();                  //初始化随机图形
+      if(screen.width > 480){
+        JCApp.PatternSet.initPattern();                  //初始化随机图形
+        this.$headerTitle.find("h2 a").lettering();      //Lettering
+      }   
+      JCApp.getAjaxPostData(5);   
       JCApp.VegasSet();                                        //背景交互
       JCApp.PageUISet();                                   //页面交互
     },  
     
     PageUISet:function(){     //页面上UI 
-        //左侧交互      
-        var jc = this,  showed,status,  n=0;
+      //左侧交互      
+      var jc = this,  showed,status,  n=0;
 
-        $(document).ajaxSend(function(){
-          $("#progress").removeClass("done");
-          pcsBar(0,0);
-        }).ajaxStart(function(){
-          pcsBar(0,70);
-        }).ajaxSuccess(function(){
-          pcsBar(70,100);
+      $(document).ajaxSend(function(){
+        $("#progress").removeClass("done");
+        pcsBar(0,0);
+      }).ajaxStart(function(){
+        pcsBar(0,70);
+      }).ajaxSuccess(function(){
+        pcsBar(70,100);
+      });
+      
+      if(screen.width < 600){
+        $("#musicPlayerWrap").remove();
+      }
+
+      $("#expando").hover(function(){
+        jc.$leftBg.css({
+          "opacity": 0.8,
+          "filter": "alpha(opacity=60)"
         });
-        
-        if(screen.width < 600){
-          $("#musicPlayerWrap").remove();
+      },function(){
+        jc.$leftBg.css({
+          "opacity": 0.5,
+          "filter": "alpha(opacity=50)"
+        });
+      });
+
+      //LEFT EXPANDO      
+      jc.$leftBg.click(function(){
+        n++;
+        n%2 ? jc.$leftCon.hide().parents().find(".ltbg").animate({width:"10px"}, 200,function(){$(this).addClass("shrink")})
+        :jc.$leftBg.removeClass("shrink").animate({width:"100%"},{duration:200,queue:true, specialEasing: {
+          width: 'linear',
+          height: 'easeOutBounce'
+        },complete:function(){jc.$leftCon.show()}});
+
+      });
+
+      //滚动条滚动拉取文章
+      jc.$postList.scroll(function(){
+        if($(this).find("ul.post-wrapper").height() - $(this).scrollTop() < 450){
+          //触发多次则必须200ms或以上才执行一次.
+           jc.getAjaxPostData(5);
+           //_.debounce(function(){  console.log("debounce") }, 200); 
         }
-
-        $("#expando").hover(function(){
-          jc.$leftBg.css({
-            "opacity": 0.8,
-            "filter": "alpha(opacity=60)"
-          });
-        },function(){
-          jc.$leftBg.css({
-            "opacity": 0.5,
-            "filter": "alpha(opacity=50)"
-          });
-        });
-
-        //LEFT EXPANDO      
-        jc.$leftBg.click(function(){
-          n++;
-          n%2 ? jc.$leftCon.hide().parents().find(".ltbg").animate({width:"10px"}, 200,function(){$(this).addClass("shrink")})
-          :jc.$leftBg.removeClass("shrink").animate({width:"100%"},{duration:200,queue:true, specialEasing: {
-            width: 'linear',
-            height: 'easeOutBounce'
-          },complete:function(){jc.$leftCon.show()}});
-
-        });
-
-        //滚动条滚动拉取文章
-        jc.$postList.scroll(function(){
-          if($(this).find("ul.post-wrapper").height() - $(this).scrollTop() < 450){
-            //触发多次则必须200ms或以上才执行一次.
-             jc.getAjaxPostData(5);
-             //_.debounce(function(){  console.log("debounce") }, 200); 
-          }
-        });
+      });
 
 
-        //Ajax Article
-        this.$postList.on('click',"ul li a", getAart);
+      //Ajax Article
+      this.$postList.on('click',"ul li a", getAart);
 
-        this.$vedioList.on("click",".ds-thread-title a",getAart)
+      this.$vedioList.on("click",".ds-thread-title a",getAart)
 
-        function getAart(){
-          var href = $(this)[0].href;
-          //console.log(href);
-          getLinkArticle(href);
-          jc.$aboutCon.hide();
-          return false;
-        }
+      function getAart(){
+        var href = $(this)[0].href;
+        //console.log(href);
+        getLinkArticle(href);
+        jc.$aboutCon.hide();
+        return false;
+      }
 
       function getLinkArticle(href){
         $.ajax({
@@ -181,17 +183,17 @@ if(_IE && _IE < 9){
       }
 
 
-  function showDsComments(artid){
-    var $el = $('<div />');//该div不需要设置class="ds-thread"
-    $el.attr({
-      'data-thread-key': artid,//'文章的本地ID',    //必选参数
-      'data-url': 'http://www.joecora.com'  //必选参数
-      //'data-author-key': '作者的本地用户ID' //可选参数
-    });
-    DUOSHUO.EmbedThread($el[0]);
-    //console.log(artid);
-    return $el
-  }
+      function showDsComments(artid){
+        var $el = $('<div />');//该div不需要设置class="ds-thread"
+        $el.attr({
+          'data-thread-key': artid,//'文章的本地ID',    //必选参数
+          'data-url': 'http://www.joecora.com'  //必选参数
+          //'data-author-key': '作者的本地用户ID' //可选参数
+        });
+        DUOSHUO.EmbedThread($el[0]);
+        //console.log(artid);
+        return $el
+      }
 
       function closeArticle(){
         jc.$article.hide();
@@ -203,17 +205,22 @@ if(_IE && _IE < 9){
           $("#user").find(".lwa").toggle();
       })
 
-      jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
+      jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容  
+        var $t = $(this); 
+        
+        if( !jc.$leftCon.is(":visible") ){
+          jc.$leftBg.trigger("click");
+        }
+        
+        if($t.hasClass("postNav")){
 
-        if($(this).hasClass("postNav")){
-
-          if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
+          if(jc.$postList.is(":visible") === false){  //点击文字
             jc.$postList.slideDown().siblings().slideUp();
           }else { return false; }
           
-        }else if( $(this).hasClass("imgNav") ){
+        }else if( $t.hasClass("imgNav") ){
           //点击图象      
-          if(jc.$leftCon.is(":visible") && jc.$img.is(":visible") === false){
+          if(jc.$img.is(":visible") === false){
             jc.$img.slideDown().siblings().slideUp();
 
             //imgGL里有内容则不再请求数据
@@ -222,9 +229,9 @@ if(_IE && _IE < 9){
             }
           }else { return false; }
           
-        }else if( $(this).hasClass("vedNav")){
+        }else if( $t.hasClass("vedNav")){
           //点击视频
-          if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
+          if(jc.$vedioList.is(":visible") === false){
             $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();
 
             var $v = $("#vedio");
@@ -234,7 +241,7 @@ if(_IE && _IE < 9){
 
           }else { return false; }
           
-        }else if( $(this).hasClass("timeNav")){
+        }else if( $t.hasClass("timeNav")){
           //点击其它
           //$.vegas("pause");
           //$(".vegas-background").hide();
@@ -280,7 +287,7 @@ if(_IE && _IE < 9){
         $t.animate({width:"65%",height:"80%"},200,function(){
           $t.animate({"margin-top":-$t.height()/2, top:"50%",left:"011x0px",right:"120px!important"});
         });
-        $t.addClass("lg-con").find('.enlarge').removeClass("enlarge").addClass("mini");
+        $t.addClass("lg-con").find('.enlarge').removeClass("enlarge").addClass("mini").find('.fa-search-plus').removeClass("fa-search-plus").addClass("fa-search-minus");
         status = true;
       }
 
@@ -289,7 +296,7 @@ if(_IE && _IE < 9){
         $t.animate({width:"400px",height:"400px" },200,function(){
           $t.animate({"margin-top":-$t.height()/2, top:"50%",left:"011x0px", right:"120px!important"});
         });
-        $t.removeClass("lg-con").find('.mini').removeClass("mini").addClass("enlarge");
+        $t.removeClass("lg-con").find('.mini').removeClass("mini").addClass("enlarge").find('.fa-search-minus').removeClass("fa-search-minus").addClass("fa-search-plus");
         status = false;
       } 
 
@@ -395,16 +402,14 @@ if(_IE && _IE < 9){
 
           if(modeClass.hasClass("show-bgs")){
             //背景模式浏览图片
-            
-
             var newBgAdd = this.href;
-            var newbg = { src: newBgAdd, fade: 4000 }
+            var newbg = { src: newBgAdd, fade: 2000 }
             //console.log(JCApp.bgs);
             JCApp.loadImage(newBgAdd, function(){
               JCApp.triggerBgPic(newbg);
             });
 
-          }else if(modeClass.hasClass("show-grid")){
+          }else if(modeClass.hasClass("show-grid")){/*
             //GRID模式浏览图片
             getCurrentGalleryName = $(".showGalleryName:visible").text();   
             $clonehtmlDoc = $(htmlDoc).clone();
@@ -426,7 +431,7 @@ if(_IE && _IE < 9){
               $(".radial-gradient").css("background-color","rgba(0,0,0,0)");
               jc.$leftBg.trigger("click");
             });
-          }else if(modeClass.hasClass("show-book")){
+          */}else if(modeClass.hasClass("show-book")){
 
           }else{
             alert("请选择浏览模式");
@@ -490,7 +495,7 @@ if(_IE && _IE < 9){
 
       $.vegas('slideshow',{
         backgrounds: jc.bgs,
-        delay:8000,
+        delay:6000,
         preload: true
       })('overlay', {
         src: '/wp-content/themes/twentyfourteen/public/images/overlays/mask.png',
@@ -633,9 +638,48 @@ if(_IE && _IE < 9){
         }); 
       }
     },
+    //将某张图片作为背景触发
+    triggerBgPic:function (pic){
+      var bgs = JCApp.bgs;
+      //判断图片是否已存在于背景中
+      if(!_.contains(_.pluck(bgs,"src"),pic.src)){
+        bgs.push(pic);
+      //超过15张背景图则去掉前一张
+      if(bgs.length > 15){
+        bgs.shift();
+      }
+      $.vegas("jump",bgs.length-1);
+      }else{ $.vegas("jump",_.indexOf(bgs,pic-1)); }
+    },
 
-/*    // @嵌套评论问题待解决
-    ajaxComment: function (){
+    //图片链接转换
+    fullOrThumb:function(add){
+      var splitPoint, thumbPic, bigPic;
+      if(add.indexOf("/thumbs/") === -1){
+        splitPoint = add.lastIndexOf("/")+1;
+        thumbPic   = add.substring(0,splitPoint) + "thumbs/thumbs_" + add.substring(splitPoint);
+      }else{
+        splitPoint = add.indexOf("/thumbs/");
+        bigPic     = add.substring(0,splitPoint) + "/" + add.substring(splitPoint + 7);
+      }return thumbPic || bigPic
+    },
+
+    loadImage: function(url, callback) { 
+      $("#progress").removeClass("done");
+      pcsBar(0,60); 
+      var img = new Image(); //创建一个Image对象，实现图片的预下载 
+      img.src = url; 
+      if (img.complete) {    // 如果图片已经存在于浏览器缓存，直接调用回调函数 
+        pcsBar(60,100); callback.call(img);               
+        return;              // 直接返回，不用再处理onload事件 
+      } 
+      img.onload = function () {  
+        pcsBar(60,100);      //图片下载完毕时异步调用callback函数。 
+         callback.call(img); //将回调函数的this替换为Image对象 
+      }; 
+    }
+    /*    // @嵌套评论问题待解决
+    ,ajaxComment: function (){
       //Ajax comments
       $("#submit").click(function(event){
 
@@ -688,47 +732,7 @@ if(_IE && _IE < 9){
         });
         return false;
       });
-    },*/
-
-
-    //将某张图片作为背景触发
-    triggerBgPic:function (pic){
-      var bgs = JCApp.bgs;
-      //判断图片是否已存在于背景中
-      if(!_.contains(_.pluck(bgs,"src"),pic.src)){
-        bgs.push(pic);
-      //超过15张背景图则去掉前一张
-      if(bgs.length > 15){
-        bgs.shift();
-      }
-      $.vegas("jump",bgs.length-1);
-      }else{ $.vegas("jump",_.indexOf(bgs,pic-1)); }
-    },
-
-    //图片链接转换
-    fullOrThumb:function(add){
-      var splitPoint, thumbPic, bigPic;
-      if(add.indexOf("/thumbs/") === -1){
-        splitPoint = add.lastIndexOf("/")+1;
-        thumbPic   = add.substring(0,splitPoint) + "thumbs/thumbs_" + add.substring(splitPoint);
-      }else{
-        splitPoint = add.indexOf("/thumbs/");
-        bigPic     = add.substring(0,splitPoint) + "/" + add.substring(splitPoint + 7);
-      }return thumbPic || bigPic
-    },
-
-    loadImage: function(url, callback) { 
-      var img = new Image(); //创建一个Image对象，实现图片的预下载 
-      img.src = url; 
-      if (img.complete) {    // 如果图片已经存在于浏览器缓存，直接调用回调函数 
-        callback.call(img); 
-        return;              // 直接返回，不用再处理onload事件 
-      } 
-      img.onload = function () {  
-                             //图片下载完毕时异步调用callback函数。 
-         callback.call(img); //将回调函数的this替换为Image对象 
-      }; 
-    }
+    }*/
   }
 
   //启动JCAPP

@@ -15,7 +15,7 @@
 		var a = t.text().split(splitter), inject = '';
 		if (a.length) {
 			$(a).each(function(i, item) {
-				inject += '<span class="'+klass+(i+1)+'">'+item+'</span>'+after;
+				inject += '<span style="animation-delay: '+ (i-1)*0.1 + 's" class="'+klass+(i+1)+'">'+item+'</span>'+after;
 			});	
 			t.empty().append(inject);
 		}
