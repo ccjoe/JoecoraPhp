@@ -60,7 +60,7 @@ if(_IE && _IE < 9){
     PageUISet:function(){     //页面上UI 
         //左侧交互      
         var jc = this,  showed,status,  n=0;
-        var $Player = $("#Player")
+        var $Player = $("#Player");
         $(document).ajaxSend(function(){
           $("#progress").removeClass("done");
           pcsBar(0,0);
@@ -71,7 +71,7 @@ if(_IE && _IE < 9){
         });
         
         //初始化播放器   
-        $("#Player").media({
+        $Player.media({
           url:"/wp-content/themes/twentyfourteen/public/data/music.json",
           autoPlay:true,
           timeout: 8000,
@@ -213,8 +213,8 @@ if(_IE && _IE < 9){
 
           if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
             jc.$postList.slideDown().siblings().slideUp();
-          }else { return false; }
-          
+          }
+          return;
         }else if( $(this).hasClass("imgNav") ){
           //点击图象      
           if(jc.$leftCon.is(":visible") && jc.$img.is(":visible") === false){
@@ -224,7 +224,8 @@ if(_IE && _IE < 9){
             if(!jc.$imgGL.find(".view").length){
               getAjaxGallery();
             }
-          }else { return false; }
+          }
+          return;
           
         }else if( $(this).hasClass("vedNav")){
           //点击视频
@@ -236,7 +237,7 @@ if(_IE && _IE < 9){
               $v.prepend( showDsComments(195) );  
             }
 
-          }else { return false; }
+          }return;
           
         }else if( $(this).hasClass("timeNav")){
           //点击其它
@@ -475,7 +476,9 @@ if(_IE && _IE < 9){
 
       $(".about-music").click(function(){         
         jc.$aboutCon.hide();
+
         if($Player.length){
+            console.log($Player);
             $Player.media("togglePlayer",$Player);
         }
 

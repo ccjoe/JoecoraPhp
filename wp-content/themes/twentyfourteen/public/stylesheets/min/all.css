@@ -46,7 +46,7 @@
 .fa-circle{color: #202020;}      .fa-inverse{color: #505050;}
 .chg .fa-circle{color: #494949;} .fa-lg .fa-inverse{color: #000;}
 .prog-wrap{width: 100%; height: 5px; background-color: #aaa; cursor:pointer;}
-.progress {position: relative!important; width:100%!important; height:5px!important; }
+.progress {position: relative!important; width:100%; height:5px!important; }
 .progress span {box-shadow:#FC4989 0 0 10px 5px!important; right:0px!important; }
 .lrc-html-wrap{position: relative;}
 /*!
