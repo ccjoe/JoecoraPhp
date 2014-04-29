@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         src: [
           'Gruntfile.js',
           'javascripts/jc.js',
-          'musicPlayer.js'
+          'javascripts/coraui.media.js'
         ]
       }
     },
@@ -34,16 +34,12 @@ module.exports = function(grunt) {
         dest: 'javascripts/min/lib.js'
       },
       buildplugins:{
-        src:['javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min'],
+        src:['javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min','javascripts/coraui.media.js'],
         dest:'javascripts/min/jquery.plugins.js'
       },
       buildjc:{
         src:'javascripts/jc.js',
         dest:'javascripts/min/jc.min.js'
-      },
-      buildmp:{
-        src:'javascripts/musicPlayer.js',
-        dest:'javascripts/min/musicPlayer.min.js'
       }
     },
 

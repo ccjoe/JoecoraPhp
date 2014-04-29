@@ -1,0 +1,51 @@
+{
+    "songData": [
+        {
+            "abName": "《I Am Chilam》",
+            "abCover": "/wp-content/themes/twentyfourteen/public/albumImg/min/zjh.jpg",
+            "abSong": [
+                {
+                    "title": "祝君好",
+                    "artist": "张智霖",
+                    "src": "/wp-content/themes/twentyfourteen/public/music/祝君好.OGG",
+                    "lrc": "/wp-content/themes/twentyfourteen/public/lyrics/祝君好.lrc",
+                    "cover": "/wp-content/themes/twentyfourteen/public/albumImg/min/zjh.jpg"
+                }
+            ]
+        },
+        {
+            "abName": "夜的钢琴曲",
+            "abCover": "/wp-content/themes/twentyfourteen/public/albumImg/max/shijin.jpg",
+            "abSong": [
+                {
+                    "title": "夜的钢琴曲二十八",
+                    "artist": "石进",
+                    "src": "/wp-content/themes/twentyfourteen/public/music/ydgqq.OGG",
+                    "lrc": "/wp-content/themes/twentyfourteen/public/lyrics/thh.lrc",
+                    "cover": "/wp-content/themes/twentyfourteen/public/albumImg/min/hcsmlive.jpg"
+                },
+                {
+                    "title": "一封家书",
+                    "artist": "石进",
+                    "src": "/wp-content/themes/twentyfourteen/public/music/一封家书.OGG",
+                    "lrc": "/wp-content/themes/twentyfourteen/public/lyrics/thh.lrc",
+                    "cover": "/wp-content/themes/twentyfourteen/public/albumImg/min/hcsmlive.jpg"
+                }      
+            ]
+        },
+        {
+            "abName": "Glass Cloud",
+            "abCover": "/wp-content/themes/twentyfourteen/public/albumImg/max/Maria.jpg",
+            "abSong": [
+                {
+                    "title": "Like The Wind",
+                    "artist": "Like The Wind (日剧《爱情白皮书》配乐)",
+                    "src": "/wp-content/themes/twentyfourteen/public/music/Like The Wind.OGG",
+                    "lrc": "/wp-content/themes/twentyfourteen/public/lyrics/thh.lrc",
+                    "cover": "/wp-content/themes/twentyfourteen/public/albumImg/min/Maria.jpg"
+                }
+            ]
+        }
+    ],
+    "songNum": 13
+}
