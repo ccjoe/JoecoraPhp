@@ -176,7 +176,8 @@
 
 	<!--播放器层 { -->
 	<!--[if !IE]><--> 
- <div class="player-area" id="Player">
+   <div class="player-area show" id="Player">
+      <!-- <div class="toggle-btn" style="width:10px; background-color:green; height:100%; float:left"></div> -->
       <div class="player-main clearfix">
           <div class="img-area">
               <div class="lrc-area">
@@ -195,7 +196,7 @@
                   </span>             
                   <span class="volume">
                       <i class="prog btn hide">
-                        <span class="prog-val">100</span>
+                        <span class="prog-val">88</span>
                         <span class="prog-bar"><span class="prog-in"></span></span>
                       </i>
                       <i ctitle="静音" class="btn fa fa-volume-off hide"></i>
@@ -203,8 +204,8 @@
                   </span> 
               </p>
               <p class="btn-title">
-                  <span class="song-title">JOECORA</span>
-                  <span class="song-author">Joe and COra</span>
+                  <span class="song-title">West Coast</span>
+                  <span class="song-author">Lana Delrey</span>
                   <span class="song-desc">活出生命LIVE演唱会</span>
               </p>
 
