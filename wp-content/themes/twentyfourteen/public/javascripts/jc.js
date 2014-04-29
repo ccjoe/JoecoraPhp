@@ -60,7 +60,7 @@ if(_IE && _IE < 9){
     PageUISet:function(){     //页面上UI 
         //左侧交互      
         var jc = this,  showed,status,  n=0;
-
+        var $Player = $("#Player")
         $(document).ajaxSend(function(){
           $("#progress").removeClass("done");
           pcsBar(0,0);
@@ -70,10 +70,14 @@ if(_IE && _IE < 9){
           pcsBar(70,100);
         });
         
-        if(screen.width < 600){
-          $("#musicPlayerWrap").remove();
-        }
-
+        //初始化播放器   
+        $("#Player").media({
+          url:"/wp-content/themes/twentyfourteen/public/data/music.json",
+          autoPlay:true,
+          timeout: 8000,
+          initCircle: "list"
+        });  
+        
         $("#expando").hover(function(){
           jc.$leftBg.css({
             "opacity": 0.8,
@@ -181,17 +185,17 @@ if(_IE && _IE < 9){
       }
 
 
-  function showDsComments(artid){
-    var $el = $('<div />');//该div不需要设置class="ds-thread"
-    $el.attr({
-      'data-thread-key': artid,//'文章的本地ID',    //必选参数
-      'data-url': 'http://www.joecora.com'  //必选参数
-      //'data-author-key': '作者的本地用户ID' //可选参数
-    });
-    DUOSHUO.EmbedThread($el[0]);
-    //console.log(artid);
-    return $el
-  }
+      function showDsComments(artid){
+        var $el = $('<div />');//该div不需要设置class="ds-thread"
+        $el.attr({
+          'data-thread-key': artid,//'文章的本地ID',    //必选参数
+          'data-url': 'http://www.joecora.com'  //必选参数
+          //'data-author-key': '作者的本地用户ID' //可选参数
+        });
+        DUOSHUO.EmbedThread($el[0]);
+        //console.log(artid);
+        return $el
+      }
 
       function closeArticle(){
         jc.$article.hide();
@@ -440,8 +444,8 @@ if(_IE && _IE < 9){
       //ABOUT
       $(".about-more").click(function(){             
         jc.$aboutCon.slideToggle();
-        if($("#musicPlayerWrap").length){
-            musicPlayerSwitch("close");
+        if($Player.length){
+            $Player.media("togglePlayer",$Player);
         }
         
         if( !jc.$article.is(":hidden") ){
@@ -471,17 +475,17 @@ if(_IE && _IE < 9){
 
       $(".about-music").click(function(){         
         jc.$aboutCon.hide();
-        if($("#musicPlayerWrap").length){
-           musicPlayerSwitch();
+        if($Player.length){
+            $Player.media("togglePlayer",$Player);
         }
 
       }) 
 
       //打开关闭
-      $("#musicPlayerSwitch").on("click",function(){
+/*      $("#musicPlayerSwitch").on("click",function(){
         jc.$aboutCon.hide();
         musicPlayerSwitch();
-      });
+      });*/
     },  
 
     //Vegas

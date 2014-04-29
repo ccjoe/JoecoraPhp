@@ -194,74 +194,70 @@
 
 	<!--播放器层 { -->
 	<!--[if !IE]><--> 
-	<div id="musicPlayerWrap" class="m-player-wrap">
-		  <div id="musicPlayerSwitch" class="m-player-switch off" title="隐藏播放器">
-	    <a href="javascript:void(0);" id="playerSwitchBtn" class="switch-on"></a>
-	  </div>
-	  <div id="musicPlayer" class="m-player">
-	    <div id="musicInfo" class="m-info">
-	      <img src="<?php echo get_template_directory_uri(); ?>/public/images/album.png" alt="" id="albumFrontCover" class="album-front-cover">
-	      <div class="front-cover-mask" title=""></div>
-	      <div id="infoWrap" class="info-wrap">
-	        <dl>
-	          <dt id="musicName" title="FeelPlayer">FeelPlayer</dt>
-	          <dd id="musicSinger" title="播放最爱的音乐">播放最爱的音乐</dd>
-	          <dd id="albumName" title=""></dd>
-	        </dl>
-	
-	        <div id="musicFunction" class="m-function clearfix">
-	          <a href="javascript:void(0);" id="albumLists" class="album-lists"  title="关闭专辑列表"></a>
-	          <a href="javascript:void(0);" id="lyrics" class="lyrics lyrics-hover"  title="打开歌词"></a>
-	          <!-- <a href="javascript:void(0);" id="favorites" class="favorites" title="打开收藏夹"></a> -->
-	        </div>
-	      </div>
-	    </div>
-	    <div id="broadcastControl" class="broadcast-control clearfix">
-	      <div class="broadcast-control-l"></div>
-	      <div class="broadcast-control-m">
-	        <a href="javascript:void(0);" id="play" class="m-play" title="播放"></a>
-	        <a href="javascript:void(0);" id="pause" class="m-pause hidden" title="暂停"></a>
-	        <a href="javascript:void(0);" id="next" class="m-next" title="下一曲"></a>
-	        <a href="javascript:void(0);" id="prev" class="m-prev" title="上一曲"></a>
-	
-	        <div class="play-progress-rate">
-	          <span id="playTime" class="play-time">0:00</span>
-	          <div id="progressRateBg" class="progress-rate-bg">
-	            <div id="progressRateColor" class="progress-rate-color" style="width:0;"></div>
-	          </div>
-	          <span id="surplusTime" class="surplus-time">-0:00</span>
-	        </div>
-	
-	        <a href="javascript:void(0);" id="nowVolume" class="volume volume-active now-volume"></a>
-	        <a href="javascript:void(0);" id="nowMute" class="mute mute-active now-volume hidden"></a>
-	        <a href="javascript:void(0);" id="nowPlayManner" class="now-manner list-cycle list-cycle-active" title="列表循环"></a>
-	
-	        <div id="volumeControl" class="volume-wrap hidden">
-	          <a href="javascript:void(0);" id="volume" class="volume" title="点击设为静音"></a>
-	          <a href="javascript:void(0);" id="mute" class="mute hidden" title="点击开启声音"></a>
-	          <div id="volumeSizeBg" class="volume-size-bg" title="音量调节">
-	            <div id="volumeSizeColor" class="volume-size-color" data-volume="" data-height="" style="height:0;"></div>
-	          </div>
-	        </div>
-	
-	        <div id="playMannerControl" class="play-manner-wrap hidden">
-	          <a href="javascript:void(0);" id="orderPlay" class="order-play" title="顺序播放"></a>
-	          <a href="javascript:void(0);" id="shufflePlay" class="shuffle-play" title="随机播放"></a>
-	          <a href="javascript:void(0);" id="singleCycle" class="single-cycle" title="单曲循环"></a>
-	          <a href="javascript:void(0);" id="listCycle" class="list-cycle" title="列表循环"></a>
-	        </div>
-	
-	      </div>
-	      <div class="broadcast-control-r"></div>
-	    </div>
-	  </div>
 
-	
-	  <div id="lrcWrap" class="lrc-wrap hidden">
-	    <div id="loadLrc" class="load-lrc hidden">歌曲载入中...</div>
-	    <div id="lrcBox" class="lrc-box"></div>
-	  </div>
-	</div>
+  <div class="player-area" id="Player">
+      <div class="player-main clearfix">
+          <div class="img-area">
+              <div class="lrc-area">
+                <div class="lrc-html-wrap">正在载入中... ... </div>    
+              </div>
+              <img width='150' height='150' title='' alt='' src='data:image/jpg;base64,/9j/4QAYRXhpZgAASUkqAAgAAAAAAAAAAAAAAP/sABFEdWNreQABAAQAAAA8AAD/4QMraHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLwA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/PiA8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJBZG9iZSBYTVAgQ29yZSA1LjMtYzAxMSA2Ni4xNDU2NjEsIDIwMTIvMDIvMDYtMTQ6NTY6MjcgICAgICAgICI+IDxyZGY6UkRGIHhtbG5zOnJkZj0iaHR0cDovL3d3dy53My5vcmcvMTk5OS8wMi8yMi1yZGYtc3ludGF4LW5zIyI+IDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bXA6Q3JlYXRvclRvb2w9IkFkb2JlIFBob3Rvc2hvcCBDUzYgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkZDMTM1OUFBQ0U3QzExRTNBMUUzRTMzNjk1MzgwQjhFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkZDMTM1OUFCQ0U3QzExRTNBMUUzRTMzNjk1MzgwQjhFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RkMxMzU5QThDRTdDMTFFM0ExRTNFMzM2OTUzODBCOEUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RkMxMzU5QTlDRTdDMTFFM0ExRTNFMzM2OTUzODBCOEUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz7/7gAOQWRvYmUAZMAAAAAB/9sAhAAGBAQEBQQGBQUGCQYFBgkLCAYG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'>
+          </div>
+          <div class="btn-area">
+              <p class="btn-top">
+                  <span ctitle="收藏" class="btn fa fa-star"></span>
+                  <span ctitle="喜欢" class="btn fa fa-heart "></span>
+                  <span class="circle">
+                      <i circletype="random" ctitle="随机播放" class="btn fa fa-random hide"></i>
+                      <i circletype="single" ctitle="单曲播放" class="btn fa fa-refresh hide"></i>
+                      <i circletype="list" ctitle="顺序播放" class="btn fa fa-list-ul"></i>
+                  </span>             
+                  <span class="volume">
+                      <i class="prog btn hide">
+                        <span class="prog-val">100</span>
+                        <span class="prog-bar"><span class="prog-in"></span></span>
+                      </i>
+                      <i ctitle="静音" class="btn fa fa-volume-off hide"></i>
+                      <i ctitle="音量"  class="btn fa fa-volume-up "></i>
+                  </span> 
+              </p>
+              <p class="btn-title">
+                  <span class="song-title">JOECORA</span>
+                  <span class="song-author">Joe and COra</span>
+                  <span class="song-desc">活出生命LIVE演唱会</span>
+              </p>
+
+
+              <p class="btn-main">
+                  <span  ctitle="播放"  class="btn chg play fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-play fa-stack-1x fa-inverse"></i> <!-- fa-play -->
+                  </span>
+                  <span  ctitle="下一曲"   class="btn prev fa-stack">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-backward fa-stack-1x fa-inverse"></i>
+                  </span>                 
+                  <span  ctitle="上一曲"  class="btn next fa-stack">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-forward fa-stack-1x fa-inverse"></i> 
+                  </span>
+                  <span class="r">
+                      <span  ctitle="歌曲列表"  class="btn slist fa-stack fa-sm">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-align-justify fa-stack-1x fa-inverse"></i>
+                      </span>                 
+                      <span  ctitle="打开歌词"  class="btn lrc fa-stack">
+                        <i class="fa fa-circle fa-stack-2x"></i>
+                        <i class="fa fa-list-alt fa-stack-1x fa-inverse"></i> 
+                      </span>
+                  </span>
+              </p>
+          </div>
+      </div>
+      <div class="prog-wrap"><div class="progress"><span></span></div></div>
+      <audio id="Media"></audio>
+  </div>
+ 
 	<!--<![endif]-->
 	<!--播放器层 } -->
 
@@ -269,11 +265,6 @@
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
   <script>pcsBar(60,80)</script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jc.min.js"></script>
-
-	<!--[if !IE]><-->
-	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/musicPlayer.min.js"></script>
-	<!-- [endif] -->
-
 	<script type="text/javascript" src="/wp-content/plugins/login-with-ajax/widget/login-with-ajax.js?ver=3.8.3"></script>
 
 	<script>pcsBar(80,100)</script>
