@@ -16,6 +16,7 @@
 		<meta content="Joe" name="author" />
 		<title><?php bloginfo( 'name' ); ?></title>
 		<link rel="shortcut icon" href="" />
+    <script>if(screen.width <= 480){ window.location.href = "http://www.joecora.com/?author=1";} </script>
 		<link rel="stylesheet"  href="<?php echo get_template_directory_uri(); ?>/public/stylesheets/min/all-min.css" />
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
 		<script>var duoshuoQuery = {short_name:"joecora"}</script>

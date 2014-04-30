@@ -743,6 +743,7 @@ article.post .entry-summary img{max-width: 200px;float: left;padding: 20px;paddi
 .ie7 .content-area{width:70%}
 .ie7 .content-sidebar{width:25%; margin-left:0; display:block}
 .ds-powered-by,.ds-post-report{display:none!important}
+.lwa td.lwa-info{display: none;}
 /**
  * 10.0 Multisite
  * -----------------------------------------------------------------------------
@@ -783,7 +784,7 @@ article.post .entry-summary img{max-width: 200px;float: left;padding: 20px;paddi
 .list-view .site-content .entry-meta { background-color: transparent; clear: none; margin: 0; text-transform: none; }
 .archive-header,  .page-header { border-bottom: 1px solid rgba(0, 0, 0, 0.1); margin: 24px auto 0; padding-bottom: 24px; }
 .error404 .page-header { border-bottom: 0; margin: 0 auto 24px; padding: 0 10px; }
-.site-content, .site-main .widecolumn{ padding:0 }
+.site-content, .site-main .widecolumn{ padding:0 10px}
 .content-sidebar{padding:30px 10px 10px 10px;}
 }
 
@@ -837,7 +838,7 @@ a.post-thumbnail:hover img { opacity: 0.85; }
 .slider-direction-nav a { height: 48px; }
 .slider-direction-nav a:before { line-height: 48px; }
 .site-info { padding: 15px 30px; }
-.menu-toggle{ margin-right:30px }
+/* .menu-toggle{ margin-right:30px } */
 }
  @media screen and (min-width: 783px) {
 .header-main { padding-right: 0; }
