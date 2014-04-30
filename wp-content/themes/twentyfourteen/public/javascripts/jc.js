@@ -41,6 +41,8 @@ if(_IE && _IE < 9){
     $wrong           :  $('<i class="fa fa-plus"></i>'),
     $failing         :  $("<span class='error'><i class='fa fa-info-circle'></i>提交数据失败,原因为提交内容一致或太过频繁</span>"),
     $overing         :  $("<span class='suceess'><i class='fa fa-check-square'></i>加载数据完毕</span>"),
+    $aboutMore       :  $(".about-more"),
+    $aboutMusic      :  $(".about-music"),
     index            :  0,
     bgs : [{  src: '/wp-content/gallery/beach/img_9172-1.jpg', fade: 2000},
     { src: '/wp-content/gallery/park/img_9116-1.jpg', fade: 2000 },
@@ -50,18 +52,34 @@ if(_IE && _IE < 9){
     { src: '/wp-content/gallery/park/img_9157-1.jpg', fade: 2000 }],
 
     init : function(){
-      if(screen.width > 480){
-        JCApp.PatternSet.initPattern();                  //初始化随机图形
-        this.$headerTitle.find("h2 a").lettering();      //Lettering
-      }   
+      JCApp.routerSet;                                  //页面路由
+      JCApp.PatternSet.initPattern();                   //初始化随机图形
+      this.$headerTitle.find("h2 a").lettering();       //Lettering   
       JCApp.getAjaxPostData(5);   
-      JCApp.VegasSet();                                        //背景交互
-      JCApp.PageUISet();                                   //页面交互
+      JCApp.VegasSet();                                 //背景交互
+      JCApp.PageUISet();                                //页面交互 
     },  
     
     PageUISet:function(){     //页面上UI 
       //左侧交互      
       var jc = this,  showed,status,  n=0;
+          menu = jc.$menu;
+
+      var routes = {
+        '/article' : [function(){ menu.find(".postNav").trigger("click") }],
+        '/article/:id' : [function(id){ getLinkArticle("http://www.joecora.com/?p="+id) }] ,
+        '/gallery' : [function(){ menu.find(".imgNav").trigger("click") }],
+        '/comments': [function(){ menu.find(".vedNav").trigger("click") }],
+        '/user'    : [function(){ menu.find("#user h3").trigger("click") }],
+        '/about'   : [function(){ jc.$aboutMore.trigger("click") }],
+        '/music'   : [function(){ jc.$aboutMusic.trigger("click") }],
+      }
+      var router = new Router(routes);
+      router.init();
+
+
+
+
       var $Player = $("#Player");
       $(document).ajaxSend(function(){
         $("#progress").removeClass("done");
@@ -84,7 +102,8 @@ if(_IE && _IE < 9){
         });
       });
 
-        //初始化播放器   
+      
+      //初始化播放器   
       $Player.media({
         url:"/wp-content/themes/twentyfourteen/public/data/music.json",
         autoPlay:true,
@@ -152,6 +171,7 @@ if(_IE && _IE < 9){
           //return false;
           }
           }).done(function ( data ) { 
+
             var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
             var $t = $(this);
             //var artid =  href.match(/\d*$/) ;
@@ -159,7 +179,7 @@ if(_IE && _IE < 9){
             //console.log(artid);
 
             var thisComments = showDsComments(artid);
-            
+                router.setRoute("/article/"+artid);
             //文章容器
             $t.find(".article-con .jc-art").append(needdata, thisComments );
       
@@ -210,14 +230,17 @@ if(_IE && _IE < 9){
         jc.PatternSet.disperse();
       }
 
-      $("#user").on("click","h3",function(){  
-          $("#user").find(".lwa").toggle();
+      $("#user").on("click","h3",function(){ 
+          var $lwa = $("#user").find(".lwa"); 
+          $lwa.toggle();
+          if($lwa.is(":visible"))
+              router.setRoute("/user");
       })
 
       jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
 
         if($(this).hasClass("postNav")){
-
+          router.setRoute("/article");
           if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
             jc.$postList.slideDown().siblings().slideUp();
           }else{
@@ -225,6 +248,7 @@ if(_IE && _IE < 9){
           }
         }else if( $(this).hasClass("imgNav") ){
           //点击图象      
+          router.setRoute("/gallery");
           if(jc.$leftCon.is(":visible") && jc.$img.is(":visible") === false){
             jc.$img.slideDown().siblings().slideUp();
 
@@ -238,6 +262,7 @@ if(_IE && _IE < 9){
           
         }else if( $(this).hasClass("vedNav")){
           //点击视频
+          router.setRoute("/comments");
           if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
             $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();
 
@@ -260,10 +285,6 @@ if(_IE && _IE < 9){
         closeArticle();
         return false;
       });  
-        
-        
-
-
 
       function artEvent(content){
         content.find(".comments-link a").attr({"href":function(){ return "#"+$(this).attr("href").match(/[a-z]*$/) }});
@@ -453,7 +474,7 @@ if(_IE && _IE < 9){
       }
 
       //ABOUT
-      $(".about-more").click(function(){             
+      jc.$aboutMore.click(function(){             
         jc.$aboutCon.slideToggle();
         if($Player.hasClass("show")){
             $Player.media("togglePlayer",$Player);
@@ -481,19 +502,24 @@ if(_IE && _IE < 9){
           }else{
             return false
           }
-        })
+        });
+        router.setRoute("/about");
       });
 
-      $(".about-music").click(function(){         
+      jc.$aboutMusic.click(function(){         
         jc.$aboutCon.hide();
+        $Player.media("togglePlayer",$Player);
 
-        if($Player.length){
-            //console.log($Player);
-            $Player.media("togglePlayer",$Player);
-        }
-
-      }) 
+        if( $Player.hasClass("show") )
+          router.setRoute("/music");
+      }); 
     },  
+
+     //页面路由
+    routerSet : function(){
+
+      console.log(this);
+    },
 
     //Vegas
     VegasSet : function (){
@@ -574,7 +600,7 @@ if(_IE && _IE < 9){
       });
     },
 
-    PatternSet:{
+    PatternSet : {
       $mbPattern  : $('#mb_pattern'),
       initPattern:function () {
         ////console.log("init");
