@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         dest: 'javascripts/min/lib.js'
       },
       buildplugins:{
-        src:['javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min','javascripts/coraui.media.js'],
+        src:['javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min','javascripts/coraui.media.js', 'javascripts/flame.js'],
         dest:'javascripts/min/jquery.plugins.js'
       },
       buildjc:{

@@ -238,10 +238,11 @@
       </div>
       <div class="prog-wrap"><div class="progress"><span></span></div></div>
       <audio id="Media"></audio>
+      <canvas id="joecanvas"  style="position:absolute; left:0; bottom:0; z-index:-1"></canvas>
   </div>
 	<!--<![endif]-->
 	<!--播放器层 } -->
-
+  <!-- <canvas id="joecanvas"></canvas> -->
 	<script>pcsBar(50,60)</script>
 	<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/jquery.plugins.js"></script>
   <script>pcsBar(60,80)</script>
