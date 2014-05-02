@@ -21,13 +21,10 @@
 		<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/public/javascripts/min/lib.js"></script>
 		<script>var duoshuoQuery = {short_name:"joecora"}</script>
 		<script src="http://static.duoshuo.com/embed.js"></script>
-		<script>function pcsBar(b,o){$({property: b}).animate({property: o}, {duration: (3000/100)*(o-b),step: function() { var percentage = Math.round(this.property); $('#progress').css('width',  percentage+"%"); if(percentage == 100) { $("#progress").addClass("done");}}});} pcsBar(0,20); </script>
+		<script>function pcsBar(b,o){$({property: b}).animate({property: o}, {duration: (3000/100)*(o-b),step: function() { var percentage = Math.round(this.property); $('#progress').css('height',  percentage+"%"); if(percentage == 100) { $("#progress").addClass("done");}}});} pcsBar(0,20); </script>
 	</head>
 	
 <body class="jc">
-  <!-- 进度层 BEGIN{ -->
-	<div id="progress"><span></span></div>
-	<!-- 进度层 OVER} -->
 
 	<!-- 覆盖层 BEGIN{ -->
 	<div id="mb_pattern" class="mb_pattern"></div>
@@ -60,6 +57,9 @@
 	
 	<!-- 左侧层{ -->	
 	<div id="expando">
+		 <!-- 进度层 BEGIN{ -->
+		<div id="progress"><span></span></div>
+		<!-- 进度层 OVER} -->
 		<div class="ltbg" id="ltbg" data-toggle="tooltip" data-placement="right" title="" data-original-title="请点击空白区域收缩面板"></div>
 		<div class="lt">
 		

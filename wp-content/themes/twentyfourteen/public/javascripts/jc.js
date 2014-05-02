@@ -13,36 +13,37 @@ if(_IE && _IE < 9){
   $("body").prepend('<div class="bie8"><div class="wrap"><p class="tips">您使用的ie浏览器及版本太OUT了!, SO看到的只是这...</p><p class="info">最佳推荐<a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2014_03_26_17/bind1/14744/ChromeStandaloneSetup33.0.1750.154_14744_BDdl.exe">Google Chrome</a>, 在<a href="http://dlsw.baidu.com/sw-search-sp/soft/6f/11508/Opera_20.0.1387.91_Setup.1397118343.exe" >Opera</a>, <a href="http://dlsw.baidu.com/sw-search-sp/soft/51/11843/Firefox-setup28.0.0.5186.1395192905.exe">Firefox</a>, Safari上也可以有较好体验。</p><p class="info"><a href="http://dlsw.baidu.com/sw-search-sp/gaosu/2014_03_26_17/bind1/14744/ChromeStandaloneSetup33.0.1750.154_14744_BDdl.exe">点击下载</a></p><p class="info">或者 访问 <a href="http://www.joecora.com/?cat=10">其它页面</a></p><p class="ver">友情提示：您当前的浏览器是： ie '+ _IE +'</p></div></div>');
 }
 
+$(document).ajaxSend(function(){
+  $("#progress").removeClass("done");
+  pcsBar(0,0);
+}).ajaxStart(function(){
+  pcsBar(0,70);
+}).ajaxSuccess(function(){
+  pcsBar(70,100);
+});
+
 (function($,w){
 
   var JCApp = {
+    $headerTitle     :  $("#jc-header"),
     $menu            :  $("#menu"),
-    $bclick          :  $("#cnNav"),
-    $bl              :  $("#cnNav").find(".cn-nav-prev"),
-    $br              :  $("#cnNav").find(".cn-nav-next"),
-    $leftConAll      :  $("#ltbg, #conList"),
+    $bclk            :  $("#cnNav"),
+    $ltConAll        :  $("#ltbg, #conList"),
     $leftBg          :  $("#ltbg"),
-    $leftCon         :  $("#conList"),
-    $postList        :  $("#conList").find("#post"),
+    $ltCon           :  $("#conList"),
     $article         :  $("#article"),
-    $img             :  $("#conList").find("#img"),
-    $vedioList       :  $("#conList").find("#vedio"),
-    $postListCon     :  $("#conList").find(".post-wrapper"),
-    $imgWrap         :  $("#imgWarp"),
+    $imgWrap         :  $("#imgWrap"),
     $imgGL           :  $("#imgGL"),
     $imgGlList       :  $("#imgGlList"),
     $showMode        :  $("#showMode"),
     $returnGL        :  $("#returnGL"),
     $aboutCon        :  $(".about-con"),
-    $headerTitle     :  $("#jc-header"),
-    $loading         :  $("<span  class='fa fa-spinner fa-spin'></span>"),
-    $ok              :  $('<span><i class="fa fa-ok"></i>发表成功，待审核后可见</span>'),
-    $tips            :  $('<span><i class="fa fa-hand-o-right"></i>麻烦将*号项填写正确</span>'),
-    $wrong           :  $('<i class="fa fa-plus"></i>'),
-    $failing         :  $("<span class='error'><i class='fa fa-info-circle'></i>提交数据失败,原因为提交内容一致或太过频繁</span>"),
-    $overing         :  $("<span class='suceess'><i class='fa fa-check-square'></i>加载数据完毕</span>"),
     $aboutMore       :  $(".about-more"),
     $aboutMusic      :  $(".about-music"),
+    $player          :  $("#Player"),
+    $loading         :  $("<span  class='fa fa-spinner fa-spin'></span>"),
+    $failing         :  $("<span class='error'><i class='fa fa-info-circle'></i>获取文章信息失败</span>"),
+    $overing         :  $("<span class='suceess'><i class='fa fa-check-square'></i>加载数据完毕</span>"),
     index            :  0,
     bgs : [{  src: '/wp-content/gallery/beach/img_9172-1.jpg', fade: 2000},
     { src: '/wp-content/gallery/park/img_9116-1.jpg', fade: 2000 },
@@ -52,7 +53,6 @@ if(_IE && _IE < 9){
     { src: '/wp-content/gallery/park/img_9157-1.jpg', fade: 2000 }],
 
     init : function(){
-      JCApp.routerSet;                                  //页面路由
       JCApp.PatternSet.initPattern();                   //初始化随机图形
       this.$headerTitle.find("h2 a").lettering();       //Lettering   
       JCApp.getAjaxPostData(5);   
@@ -62,33 +62,31 @@ if(_IE && _IE < 9){
     
     PageUISet:function(){     //页面上UI 
       //左侧交互      
-      var jc = this,  showed,status,  n=0;
-          menu = jc.$menu;
+      var jc = this,  showed, status,  n=0, 
+          $menu   = jc.$menu,  
+          $player = jc.$player,
+          $ltCon  = jc.$ltCon,
+          $post   = $ltCon.find("#post"),
+          $img    = $ltCon.find("#img"),
+          $words  = $ltCon.find("#vedio"),
+          $postArea=$ltCon.find(".post-wrapper"),
+          $article = jc.$article;
 
+      //路由模块初始化
       var routes = {
-        '/article' : [function(){ menu.find(".postNav").trigger("click") }],
+        '/article' : showSecPost,
         '/article/:id' : [function(id){ getLinkArticle("http://www.joecora.com/?p="+id) }] ,
-        '/gallery' : [function(){ menu.find(".imgNav").trigger("click") }],
-        '/comments': [function(){ menu.find(".vedNav").trigger("click") }],
-        '/user'    : [function(){ menu.find("#user h3").trigger("click") }],
-        '/about'   : [function(){ jc.$aboutMore.trigger("click") }],
-        '/music'   : [function(){ jc.$aboutMusic.trigger("click") }],
+        '/gallery' : showSecGl,
+        '/gallery/:id' : [function(name){  
+          if(!$img.is(":visible"))
+            showSecGl();
+          showGlList( jc.$imgWrap.find('div[data-gl="'+name+'"]').find("a")[0], name ) }],
+        '/words'   : showSecWords,
+        '/user'    : [function(){ $("#user").find(".lwa").toggle(); }],
+        '/music'   : [function(){ jc.$aboutMusic.trigger("click") }]
       }
       var router = new Router(routes);
       router.init();
-
-
-
-
-      var $Player = $("#Player");
-      $(document).ajaxSend(function(){
-        $("#progress").removeClass("done");
-        pcsBar(0,0);
-      }).ajaxStart(function(){
-        pcsBar(0,70);
-      }).ajaxSuccess(function(){
-        pcsBar(70,100);
-      });
               
       $("#expando").hover(function(){
         jc.$leftBg.css({
@@ -104,113 +102,192 @@ if(_IE && _IE < 9){
 
       
       //初始化播放器   
-      $Player.media({
+      $player.media({
         url:"/wp-content/themes/twentyfourteen/public/data/music.json",
         autoPlay:true,
         timeout: 8000,
-        initCircle: "list"
+        initCircle: "random",
+        autoHide: false
       });  
-
-      setTimeout(function(){
-         $Player.media("togglePlayer",$Player);
-      },8000)
-
 
       //LEFT EXPANDO      
       jc.$leftBg.click(function(){
         n++;
-        n%2 ? jc.$leftCon.hide().parents().find(".ltbg").animate({width:"10px"}, 200,function(){$(this).addClass("shrink")})
+        n%2 ? $ltCon.hide().parents().find(".ltbg").animate({width:"10px"}, 200,function(){$(this).addClass("shrink")})
         :jc.$leftBg.removeClass("shrink").animate({width:"100%"},{duration:200,queue:true, specialEasing: {
           width: 'linear',
           height: 'easeOutBounce'
-        },complete:function(){jc.$leftCon.show()}});
+        },complete:function(){$ltCon.show()}});
 
       });
 
+      //触发多次则必须500ms或以上才执行一次.
+      var throttled = _.throttle(scrollGetPost, 500);           
       //滚动条滚动拉取文章
-      jc.$postList.scroll(function(){
-        if($(this).find("ul.post-wrapper").height() - $(this).scrollTop() < 450){
-          //触发多次则必须200ms或以上才执行一次.
-           jc.getAjaxPostData(5);
-           //_.debounce(function(){  //console.log("debounce") }, 200); 
+      $post.scroll(throttled);
+
+      function scrollGetPost(){
+        if($post.find("ul.post-wrapper").height() - $post.scrollTop() < 450){
+           jc.getAjaxPostData(5)
         }
+      }
+      //Ajax Article
+      $post.on('click',"ul li a", getAart);
+
+      $words.on("click",".ds-thread-title a",getAart)
+     
+      $("#user").on("click","h3",function(){ 
+          var $lwa = $("#user").find(".lwa"); 
+          $lwa.toggle();
+          if($lwa.is(":visible"))
+              router.setRoute("/user");
+      })
+
+      $menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容
+        if($(this).hasClass("postNav")){   
+          router.setRoute("/article");
+          return false;
+        }else if( $(this).hasClass("imgNav") ){
+            router.setRoute("/gallery");
+        }else if( $(this).hasClass("vedNav")){
+            router.setRoute("/words");
+        }else if( $(this).hasClass("timeNav")){
+          //点击其它
+          //$.vegas("pause");
+          //$(".vegas-background").hide();
+          //vedioby("http://video-js.zencoder.com/oceans-clip");    
+        }else{  }
+
+        if(jc.$article.is(":visible"))
+          closeArticle();
+        return false;
+      });  
+
+      //ABOUT
+      jc.$aboutMore.click(function(){ 
+        if(!jc.$aboutCon.is(":visible")){                  
+          // router.setRoute("/about");
+          jc.$aboutCon.slideDown();
+        }else{
+          jc.$aboutCon.slideUp();
+        }   
+        if($player.hasClass("show")){
+            $player.media("togglePlayer",$player);
+        }
+        
+        if( !jc.$article.is(":hidden") ){
+          closeArticle();
+        }
+        if($(this).hasClass("active")){
+          $(this).removeClass("active");
+          $(this).find("i").removeClass("fa-arrow-circle-o-down").addClass("fa-arrow-circle-o-up");  
+        }else{
+          $(this).addClass("active");
+          $(this).find("i").removeClass("fa-arrow-circle-o-up").addClass("fa-arrow-circle-o-down");      
+        }           
+        jc.$aboutCon.find("li:first-child").addClass("active").find(" .about-item-desc").show().animate({width:"200px",margin:"10px"},200);
+        jc.$aboutCon.find("li:first-child").siblings().find(" .about-item-desc").removeClass("active").animate({width:"0",margin:"0"},200);
+        jc.$aboutCon.off();
+        jc.$aboutCon.on("click","li a",function(){
+          var $t = $(this);
+          if(!$t.parent().hasClass("active")){
+            $t.parent().siblings().find(" .about-item-desc").animate({width:"0",margin:"0"},200);
+            $t.parent().addClass("active").siblings().removeClass("active");
+            $t.next().show().animate({width:"200px",margin:"10px"},200);
+          }else{
+            return false
+          }
+        });
       });
 
-
-      //Ajax Article
-      this.$postList.on('click',"ul li a", getAart);
-
-      this.$vedioList.on("click",".ds-thread-title a",getAart)
+      jc.$aboutMusic.click(function(){         
+        jc.$aboutCon.hide();
+        if( $player.hasClass("hide") )
+          router.setRoute("/music");
+        $player.media("togglePlayer",$player);
+      }); 
 
       function getAart(){
-        var href = $(this)[0].href;
-        ////console.log(href);
-        getLinkArticle(href);
-        jc.$aboutCon.hide();
+        var $t = $(this);
+        var href = $t[0].href;
+        var artid =  href.match(/\d+/) ;
+        router.setRoute("/article/"+artid);  
+        //getLinkArticle(href);
+        jc.$aboutCon.hide();  
+        
         return false;
       }
 
       function getLinkArticle(href){
-        $.ajax({
-          url: href,
-          context:jc.$article,  //上下文，整个弹出面板
-          beforeSend:function(){
-      var $goalElem = $(this).find(".article-con");
-          $goalElem.find(".jc-art").empty();
-            $goalElem.find(".jc-art").append(jc.$loading);
-            $(this).find('.close').off();
-            $(this).find('.size').off();
-            var $t = $(this);
-            
-            jc.PatternSet.openItem();
-            jc.PatternSet.$mbPattern.children().promise().done(function() {
-              $t.show();
-            }).done(function(){        
-              jc.PatternSet.$mbPattern.hide();
-            });
-          //return false;
-          }
-          }).done(function ( data ) { 
+       // if($postArea.find("a[href*="+  +"]"))
+        var artid =  href.match(/\d+/) ;
+        var thisComments = showDsComments(artid); 
+        var cacheArt = $postArea.find('a[href="'+ href +'"]').data("art-comment");
 
-            var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
-            var $t = $(this);
-            //var artid =  href.match(/\d*$/) ;
-            var artid =  href.match(/\d+/) ;
-            //console.log(artid);
-
-            var thisComments = showDsComments(artid);
-                router.setRoute("/article/"+artid);
-            //文章容器
-            $t.find(".article-con .jc-art").append(needdata, thisComments );
-      
-            $t.find('.close').click( closeArticle );
-
-            $t.find('.size').click(function(){
-
-              if($(this).hasClass("enlarge")){
-                exlargeArt($t);
-              }
-              else if($(this).hasClass("mini")){
-                miniArt($t);
-              }
-            });
-
-            //文章内所有事件
-            artEvent($("#article").find(".jc-art"));
-
-            //ARTICLE
-            //$t.draggable({ handle: "p.ui-widget-header" });
-            //自定义ajax原生评论
-            //jc.ajaxComment();     
-            
-            jc.$article.find(".fa-spinner").remove();           
-            return false;
-
-          }).fail(function(){ 
-              alert("调用发生错误！"); 
-            });       
+        // 判断是否有缓存文章
+        if( cacheArt ){
+          clearArticle();
+          jc.$article.find(".article-con .jc-art").empty().append(cacheArt, thisComments );
+          fixArticle();
+        }else{
+          $.ajax({
+            url: href,
+            context:$article,  //上下文，整个弹出面板
+            beforeSend:function(){
+              clearArticle();
+            }
+            }).done(function ( data ) {  
+              var needdata = $($.parseHTML(data)).find("#content").find("article.post, nav.post-navigation");
+              fixArticle(); 
+              //文章容器
+              this.find(".article-con .jc-art").append(needdata, thisComments );
+              //将此文章红缓存下在相应链接下
+              var cacheThisCons = $postArea.find('a[href="'+ href +'"]').data("art-comment",needdata);
+              return false;
+            }).fail(function(){ 
+                alert("调用发生错误！"); 
+              });   
+          }    
       }
 
+      //获取文章前清场
+      function clearArticle(){
+      var $goalElem = $article.find(".article-con");
+          $goalElem.find(".jc-art").empty();
+          $goalElem.find(".jc-art").append(jc.$loading);
+          $article.find('.close').off();
+          $article.find('.size').off();
+          jc.PatternSet.openItem();
+          jc.PatternSet.$mbPattern.children().promise().done(function() {
+            $article.show();
+            ////console.log("showshowshow");
+          }).done(function(){        
+            jc.PatternSet.$mbPattern.hide();
+          });
+         //return false;
+      }
+
+      //获取文章后修理绑定
+      function fixArticle(){
+          $article.find('.close').click( closeArticle );
+          $article.find('.size').click(function(){
+            if($(this).hasClass("enlarge")){
+              exlargeArt($article);
+            }else if($(this).hasClass("mini")){
+              miniArt($article);
+            }
+          });
+
+          //文章内所有事件
+          artEvent($article.find(".jc-art"));
+
+          //ARTICLE
+          //$t.draggable({ handle: "p.ui-widget-header" });
+          //自定义ajax原生评论
+          //jc.ajaxComment();     
+          
+          $article.find(".fa-spinner").remove();   
+      }
 
       function showDsComments(artid){
         var $el = $('<div />');//该div不需要设置class="ds-thread"
@@ -220,71 +297,40 @@ if(_IE && _IE < 9){
           //'data-author-key': '作者的本地用户ID' //可选参数
         });
         DUOSHUO.EmbedThread($el[0]);
-        ////console.log(artid);
+        //////console.log(artid);
         return $el
       }
 
       function closeArticle(){
-        jc.$article.hide();
+        $article.hide();
         jc.PatternSet.$mbPattern.show();
         jc.PatternSet.disperse();
+        router.setRoute("/");
       }
 
-      $("#user").on("click","h3",function(){ 
-          var $lwa = $("#user").find(".lwa"); 
-          $lwa.toggle();
-          if($lwa.is(":visible"))
-              router.setRoute("/user");
-      })
-
-      jc.$menu.on("click",".nav span.mn",function(e){        //MENU//左侧可见且当前项不可见时显示当前项内容   
-
-        if($(this).hasClass("postNav")){
-          router.setRoute("/article");
-          if(jc.$leftCon.is(":visible") && jc.$postList.is(":visible") === false){  //点击文字
-            jc.$postList.slideDown().siblings().slideUp();
-          }else{
-            return false;
+      function showSection($showElem,otherFn){
+          /*router.setRoute(routerStr);*/
+          //console.log("section HP");
+          if($ltCon.is(":visible") && !$showElem.is(":visible")){  
+            $showElem.slideDown().siblings().slideUp();
+            if(otherFn)
+                otherFn();
           }
-        }else if( $(this).hasClass("imgNav") ){
-          //点击图象      
-          router.setRoute("/gallery");
-          if(jc.$leftCon.is(":visible") && jc.$img.is(":visible") === false){
-            jc.$img.slideDown().siblings().slideUp();
+      }
 
-            //imgGL里有内容则不再请求数据
-            if(!jc.$imgGL.find(".view").length){
-              getAjaxGallery();
-            }
-          }else{
-            return false;
-          }
-          
-        }else if( $(this).hasClass("vedNav")){
-          //点击视频
-          router.setRoute("/comments");
-          if(jc.$leftCon.is(":visible") && jc.$vedioList.is(":visible") === false){
-            $("#conList").find("section").slideUp().end().find(".vedio-list").slideDown();
-
+      function showSecPost(){
+          showSection($post);
+      }
+      function showSecWords(){
+          //点击留言
+          showSection($words,function(){
             var $v = $("#vedio");
             if( !$v.find("#ds-thread").length ){
               $v.prepend( showDsComments(195) );  
             }
+          });
+      }
 
-          }else{
-            return false;
-          }
-          
-        }else if( $(this).hasClass("timeNav")){
-          //点击其它
-          //$.vegas("pause");
-          //$(".vegas-background").hide();
-          //vedioby("http://video-js.zencoder.com/oceans-clip");
-          
-        }
-        closeArticle();
-        return false;
-      });  
 
       function artEvent(content){
         content.find(".comments-link a").attr({"href":function(){ return "#"+$(this).attr("href").match(/[a-z]*$/) }});
@@ -331,54 +377,65 @@ if(_IE && _IE < 9){
         status = false;
       } 
 
+      function showSecGl(){
+          //点击显示相册  如果可见则为返回相册
+          if($img.is(":visible")){
+            returnGL()
+          }else{
+            showSection($img,function(){ 
+              //imgGL里有内容则不再请求数据
+              if(!jc.$imgGL.find(".view").length){
+                getAjaxGallery();
+              }
+            });
+          }
+      }
       //加载相册集
-      function getAjaxGallery(){      
+      function getAjaxGallery(doneCb){      
         $.ajax({
           url:"?page_id=213",
           context: jc.$imgGL,   //上下文
           dataType:"html",
           beforeSend:function(){    
             jc.$imgGL.append(jc.$loading);
-          }
+            }
           }).done(function ( data ) {
             var cthis =this;    
 
-          //进入相册，显示相册
-          $htmlDoc = $( $.parseHTML( data ));
-          var GalleryConGet = showGallery($htmlDoc);      
-          this.append(GalleryConGet);
+            //进入相册，显示相册
+            $htmlDoc = $( $.parseHTML( data ));
+            var GalleryConGet = showGallery($htmlDoc);      
+            this.append(GalleryConGet);
 
-          this.find(".fa-spinner").remove();
+            this.find(".fa-spinner").remove();
 
-          //点击相册目录显示列表
-          this.on("click",".view a",function(){
-            cthis.hide();
-            cthis.next().show();
+            //点击相册目录显示列表
+            this.on("click",".view a",function(){
 
-          //识别请求的当前对象
-          var reqGl = $(this).parent().data("gl"),
-          showedGl = jc.$imgGlList.find(".ngg-galleryoverview");
-          showedGl.hide();
-          if(showedGl.hasClass(reqGl) ){
-            jc.$imgGlList.find("."+reqGl).show();
-          }else{
-            showGlList(this);
-          }
-          return false;
-          });
+              //console.log("Pic Hp");
+              //识别请求的当前对象
+              var reqGl = $(this).parent().data("gl");
+              router.setRoute("/gallery/"+reqGl); 
+              return false;
+            });
 
-          //点击列表返回相册
-          jc.$returnGL.click(function(){
-            cthis.show();
-            cthis.next().hide();
-          });
+            //点击列表返回相册
+            jc.$returnGL.click(function(){
+              router.setRoute("/gallery");
+            });
 
-          //显示当前选中相册浏览模式
-          jc.$showMode.on("click","button",function(){
-            $(this).addClass("active").siblings().removeClass("active");
-          });
+            //显示当前选中相册浏览模式
+            jc.$showMode.on("click","button",function(){
+              $(this).addClass("active").siblings().removeClass("active");
+            });
           }).fail(function(){ alert("调用发生错误！"); });
         }
+
+      //返回相册
+      function returnGL(){
+        jc.$imgGL.show();
+        jc.$imgGL.next().hide();
+      }
 
       //解析相册数据
       function showGallery(data){
@@ -401,30 +458,40 @@ if(_IE && _IE < 9){
           galleryData.push(item);
         })();
         }               
-        var GalleryTemplate = "<% _.each(galleryData, function(item) { %> <div class='view view-tenth' data-gl='label-<%= item.galleryTitle %>'><a href='<%= item.galleryLinks %>'><img src='<%= item.galleryThumbSrc %>' /><div class='mask'><h2><%= item.galleryTitle %></h2><p><%= item.galleryDescription %></p></div></a></div> <% }); %>";
+        var GalleryTemplate = "<% _.each(galleryData, function(item) { %> <div class='view view-tenth' data-gl='<%= item.galleryTitle %>'><a href='<%= item.galleryLinks %>'><img src='<%= item.galleryThumbSrc %>' /><div class='mask'><h2><%= item.galleryTitle %></h2><p><%= item.galleryDescription %></p></div></a></div> <% }); %>";
         var GalleryCon = _.template(GalleryTemplate, galleryData);
         return GalleryCon;
       }
 
       //解析某一相册数据 curobj为
-      function showGlList(thisObj){
-        $.ajax({
-          url:thisObj.href,
-          dataType:"html",
-          context:jc.$imgGlList,
-          beforeSend:function(){
-            this.append(jc.$loading);
-          }
-        }).done(function(data){
-          var needdata = $($.parseHTML(data)).find(".ngg-galleryoverview");
-          this.append(needdata.addClass($(thisObj).parent().data("gl")));
-          this.find(".fa-spinner").remove();
+      function showGlList(thisObj,reqGl){
+          jc.$imgGL.hide();
+          jc.$imgGL.next().show();
+          var showedGl = jc.$imgGlList.find(".ngg-galleryoverview");
+          
+          showedGl.hide();
+          if(showedGl.hasClass(reqGl) ){
+            jc.$imgGlList.find("."+reqGl).show(); 
+          }else{
+            $.ajax({
+              url:thisObj.href,
+              dataType:"html",
+              context:jc.$imgGlList,
+              beforeSend:function(){
+                this.append(jc.$loading);
+              }
+            }).done(function(data){
+              var needdata = $($.parseHTML(data)).find(".ngg-galleryoverview");
+              this.append(needdata.addClass($(thisObj).parent().data("gl")));
+              this.find(".fa-spinner").remove();
 
-          //为每个图片绑定事件触发显示方式
-          galleryShowStyle();
-        });
+              //为每个图片绑定事件触发显示方式
+              galleryShowStyle();
+            });
+          }
       }
 
+      //相册里层图片显示规则
       function galleryShowStyle(){
         //点击列表显示图片
         $(".ngg-galleryoverview").off();
@@ -435,7 +502,7 @@ if(_IE && _IE < 9){
             //背景模式浏览图片
             var newBgAdd = this.href;
             var newbg = { src: newBgAdd, fade: 2000 }
-            ////console.log(JCApp.bgs);
+            //////console.log(JCApp.bgs);
             JCApp.loadImage(newBgAdd, function(){
               JCApp.triggerBgPic(newbg);
             });
@@ -473,58 +540,90 @@ if(_IE && _IE < 9){
         return false;
       }
 
-      //ABOUT
-      jc.$aboutMore.click(function(){             
-        jc.$aboutCon.slideToggle();
-        if($Player.hasClass("show")){
-            $Player.media("togglePlayer",$Player);
+    },    
+    //AJAX取文章信息
+    getAjaxPostData: function(num){
+      var self = this,
+          $postArea = self.$ltCon.find(".post-wrapper");
+      $.ajax({
+        url:"?feed=rss2",
+        dataType:"xml",
+        beforeSend:function(){
+          $postArea.append(self.$loading);
         }
-        
-        if( !jc.$article.is(":hidden") ){
-          closeArticle();
-        }
-        if($(this).hasClass("active")){
-          $(this).removeClass("active");
-          $(this).find("i").removeClass("fa-arrow-circle-o-down").addClass("fa-arrow-circle-o-up");  
+      }).done(function(xml){
+        var xmldt = $(xml).find("channel item"),
+            len = xmldt.length;
+
+        //如果没有数据了
+        if(num*self.index > len){
+          $postArea.find(self.$loading,self.$overing).remove(); //.end().append(self.$overing)
         }else{
-          $(this).addClass("active");
-          $(this).find("i").removeClass("fa-arrow-circle-o-up").addClass("fa-arrow-circle-o-down");      
-        }           
-        jc.$aboutCon.find("li:first-child").addClass("active").find(" .about-item-desc").show().animate({width:"200px",margin:"10px"},200);
-        jc.$aboutCon.find("li:first-child").siblings().find(" .about-item-desc").removeClass("active").animate({width:"0",margin:"0"},200);
-        jc.$aboutCon.off();
-        jc.$aboutCon.on("click","li a",function(){
-          var $t = $(this);
-          if(!$t.parent().hasClass("active")){
-            $t.parent().siblings().find(" .about-item-desc").animate({width:"0",margin:"0"},200);
-            $t.parent().addClass("active").siblings().removeClass("active");
-            $t.next().show().animate({width:"200px",margin:"10px"},200);
-          }else{
-            return false
-          }
-        });
-        router.setRoute("/about");
+          //alert("test");
+          //取第 index+1个num条数据
+          var xmlperdt = (num*(self.index+1)) > len ? _.last(_.first(xmldt,num*(self.index+1)),len-num) : _.last(_.first(xmldt,num*(self.index+1)),num);
+
+          var $htmlFrag = [];
+          $(xmlperdt).each(function(i){
+            var liitem = $('<li><a href="'+$(this).find("link").text()+'">'+ $(this).find("title").text() +'</a><span class="post-date">'+ $(this).find("description").text() +'</span></li>');
+            //////console.log(liitem.html());
+            $htmlFrag.push(liitem);
+          });
+          //////console.log($htmlFrag);
+          $postArea.find(self.$loading,self.$overing).remove().end().append($htmlFrag);
+        }
+
+        self.index++;
+
+      }).fail(function(){
+         $postArea.find(loading,overing).remove().end().append(self.$failing);
       });
-
-      jc.$aboutMusic.click(function(){         
-        jc.$aboutCon.hide();
-        $Player.media("togglePlayer",$Player);
-
-        if( $Player.hasClass("show") )
-          router.setRoute("/music");
-      }); 
     },  
-
-     //页面路由
-    routerSet : function(){
-
-      console.log(this);
+    //将某张图片作为背景触发
+    triggerBgPic:function (pic){
+      var bgs = JCApp.bgs;
+      //判断图片是否已存在于背景中
+      if(!_.contains(_.pluck(bgs,"src"),pic.src)){
+        bgs.push(pic);
+      //超过15张背景图则去掉前一张
+      if(bgs.length > 15){
+        bgs.shift();
+      }
+      $.vegas("jump",bgs.length-1);
+      }else{ $.vegas("jump",_.indexOf(bgs,pic-1)); }
     },
 
+    //图片链接转换
+    fullOrThumb:function(add){
+      var splitPoint, thumbPic, bigPic;
+      if(add.indexOf("/thumbs/") === -1){
+        splitPoint = add.lastIndexOf("/")+1;
+        thumbPic   = add.substring(0,splitPoint) + "thumbs/thumbs_" + add.substring(splitPoint);
+      }else{
+        splitPoint = add.indexOf("/thumbs/");
+        bigPic     = add.substring(0,splitPoint) + "/" + add.substring(splitPoint + 7);
+      }return thumbPic || bigPic
+    },
+
+    loadImage: function(url, callback) { 
+      $("#progress").removeClass("done");
+      pcsBar(0,60); 
+      var img = new Image(); //创建一个Image对象，实现图片的预下载 
+      img.src = url; 
+      if (img.complete) {    // 如果图片已经存在于浏览器缓存，直接调用回调函数 
+        pcsBar(60,100); callback.call(img);               
+        return;              // 直接返回，不用再处理onload事件 
+      } 
+      img.onload = function () {  
+        pcsBar(60,100);      //图片下载完毕时异步调用callback函数。 
+         callback.call(img); //将回调函数的this替换为Image对象 
+      }; 
+    },
     //Vegas
     VegasSet : function (){
-      var jc = this;
-
+      var jc = this,
+          $bl     = jc.$bclk.find(".cn-nav-prev"),
+          $br     = jc.$bclk.find(".cn-nav-next");
       $.vegas('slideshow',{
         backgrounds: jc.bgs,
         delay:6000,
@@ -536,74 +635,33 @@ if(_IE && _IE < 9){
 
       //当背景变化时
       $("body").on("vegaswalk",function(e,bg,step){
-        ////console.log("vegaswalk");
+        //////console.log("vegaswalk");
         var prevImg = jc.bgs[step ? step-1 : jc.bgs.length-1].src;
         var nextImg = (step == jc.bgs.length-1) ? jc.bgs[0].src : jc.bgs[step+1].src;
 
-        jc.$bl.find("div").css("background-image","url("+JCApp.fullOrThumb(prevImg) +")");
-        jc.$br.find("div").css("background-image","url("+JCApp.fullOrThumb(nextImg) +")");
+         $bl.find("div").css("background-image","url("+JCApp.fullOrThumb(prevImg) +")");
+         $br.find("div").css("background-image","url("+JCApp.fullOrThumb(nextImg) +")");
       });
 
       //点击左右切换
-      this.$bclick.on("click",".cn-nav-item", function(event){
+      this.$bclk.on("click",".cn-nav-item", function(event){
         $(".vegas-background").stop();
         if(event.currentTarget.className.indexOf("cn-nav-prev") !== -1){
-          ////console.log("previous");
+          //////console.log("previous");
           $.vegas("previous");
         }
         if(event.currentTarget.className.indexOf("cn-nav-next") !== -1){
-          ////console.log("next");
+          //////console.log("next");
           $.vegas("next");
         }
         return false;
       });
     },
 
-    //AJAX取文章信息
-    getAjaxPostData: function(num){
-      var self = this;
-      $.ajax({
-        url:"?feed=rss2",
-        dataType:"xml",
-        beforeSend:function(){
-          self.$postListCon.append(self.$loading);
-        }
-      }).done(function(xml){
-        var xmldt = $(xml).find("channel item");
-        var len = xmldt.length;
-        /*//排除前五条已显示的数据
-        if(len>5){}else{
-        return false
-        }*/
-        //如果没有数据了
-        if(num * self.index > len){
-          self.$postListCon.find(self.$loading,self.$overing).remove(); //.end().append(self.$overing)
-        }else{
-          //alert("test");
-          //取第 index+1个num条数据
-          var xmlperdt = (num*(self.index+1)) > len ? _.last(_.first(xmldt,num*(self.index+1)),len-num) : _.last(_.first(xmldt,num*(self.index+1)),num);
-
-          var $htmlFrag = [];
-          $(xmlperdt).each(function(i){
-            var liitem = $('<li><a href="'+$(this).find("link").text()+'">'+ $(this).find("title").text() +'</a><span class="post-date">'+ $(this).find("description").text() +'</span></li>');
-            ////console.log(liitem.html());
-            $htmlFrag.push(liitem);
-          });
-          ////console.log($htmlFrag);
-          self.$postListCon.find(self.$loading,self.$overing).remove().end().append($htmlFrag);
-        }
-
-        self.index++;
-
-      }).fail(function(){
-        self.$postListCon.find(loading,overing).remove().end().append(self.$failing);
-      });
-    },
-
     PatternSet : {
       $mbPattern  : $('#mb_pattern'),
       initPattern:function () {
-        ////console.log("init");
+        //////console.log("init");
         for(var i = 0; i < 16 ; ++i) {
           this.showItem("50px","50px");
           $el     = $('<div>').css(param);
@@ -669,102 +727,7 @@ if(_IE && _IE < 9){
           $el.animate(param,1000, "swing");
         }); 
       }
-    },
-    //将某张图片作为背景触发
-    triggerBgPic:function (pic){
-      var bgs = JCApp.bgs;
-      //判断图片是否已存在于背景中
-      if(!_.contains(_.pluck(bgs,"src"),pic.src)){
-        bgs.push(pic);
-      //超过15张背景图则去掉前一张
-      if(bgs.length > 15){
-        bgs.shift();
-      }
-      $.vegas("jump",bgs.length-1);
-      }else{ $.vegas("jump",_.indexOf(bgs,pic-1)); }
-    },
-
-    //图片链接转换
-    fullOrThumb:function(add){
-      var splitPoint, thumbPic, bigPic;
-      if(add.indexOf("/thumbs/") === -1){
-        splitPoint = add.lastIndexOf("/")+1;
-        thumbPic   = add.substring(0,splitPoint) + "thumbs/thumbs_" + add.substring(splitPoint);
-      }else{
-        splitPoint = add.indexOf("/thumbs/");
-        bigPic     = add.substring(0,splitPoint) + "/" + add.substring(splitPoint + 7);
-      }return thumbPic || bigPic
-    },
-
-    loadImage: function(url, callback) { 
-      $("#progress").removeClass("done");
-      pcsBar(0,60); 
-      var img = new Image(); //创建一个Image对象，实现图片的预下载 
-      img.src = url; 
-      if (img.complete) {    // 如果图片已经存在于浏览器缓存，直接调用回调函数 
-        pcsBar(60,100); callback.call(img);               
-        return;              // 直接返回，不用再处理onload事件 
-      } 
-      img.onload = function () {  
-        pcsBar(60,100);      //图片下载完毕时异步调用callback函数。 
-         callback.call(img); //将回调函数的this替换为Image对象 
-      }; 
     }
-    /*    // @嵌套评论问题待解决
-    ,ajaxComment: function (){
-      //Ajax comments
-      $("#submit").click(function(event){
-
-        var $cf = $("#commentform");
-        var params = {
-          author: $cf.find("#author").val(),
-          email: $cf.find("#email").val(),
-          url:$cf.find("#url").val(),
-          comment:$cf.find("#comment").val(),
-          submit:$cf.find("#submit").val(),
-          comment_post_ID:$cf.find("#comment_post_ID").val(),
-          comment_parent:$cf.find("#comment_parent").val()
-        };
-
-      //检验
-      for(var i in  params){
-        if(params[i] === ""){ 
-          if(i === "url"){
-          //params.url = w.location.href;
-          }else{
-            if($("#submit").next()[0].id !== "comment_post_ID"){
-              $("#submit").next() .remove();
-            }
-            $("#submit").after(JCApp.$tips);
-            return false;
-          }               
-        }   
-      }
-      ////console.log(params.toJSON());
-      $.ajax({
-        url:window.location.href,
-        type:'POST', //get_comment
-        data:$cf.serialize()+'&action=ajax_comment',
-        beforeSend:function(){
-          if($("#submit").next()[0].id !== "comment_post_ID"){
-            $("#submit").next().remove();
-          }
-          $("#submit").after(JCApp.$loading);
-        }
-        }).done(function (data){
-          if(data.success){
-            $("#submit").next().remove();
-            $("#submit").after(JCApp.$ok);
-          }
-        }).fail(function(){
-          if($("#submit").next()[0].id !== "comment_post_ID"){
-            $("#submit").next() .remove();
-          }
-          $("#submit").after(JCApp.$failing);
-        });
-        return false;
-      });
-    }*/
   }
 
   //启动JCAPP

@@ -498,12 +498,14 @@ section.articl p.comment-notes{color:#666}
 .comment-form p{padding:8px 0; margin:0}
 
 #submit{background-color:#428BCA; width:80px; padding:2px 8px; border:0 none; border-radius:2px; color:#fff; margin-right:8px}
-#progress, .progress{position:fixed;height: 2px;background:#f05; transition:opacity 500ms linear; z-index:1000000; top:0;}
+#progress{top:0; left: 360px;}
+#progress, .progress{position:fixed; width:2px; background:#f05; transition:opacity 500ms linear; z-index:1000000;}
 #progress.done, .progress.done {opacity:0}
-#progress span, .progress span {position:absolute;height:2px; box-shadow:#FC4989 0 0 10px 5px; border-radius:100%; opacity:1;
-width:150px;right:-10px; animation:pulse 2s ease-out 0s infinite;}
-#ds-sync-checkbox{height:13px}
+#progress span, .progress span {position:absolute; height:2px; box-shadow:#FC4989 0 0 10px 5px; border-radius:100%; opacity:1; animation:pulse 2s ease-out 0s infinite;}
+#progress span{width:2px; bottom: 0}
 
+
+#ds-sync-checkbox{height:13px}
 .ds-powered-by,.ds-post-report{display:none!important}
 
 .bie8 {width:100%; height:100%; position:absolute; z-index:10000; background-color:#000; filter:alpha(opacity=80)}
