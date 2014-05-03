@@ -221,6 +221,8 @@ $(document).ajaxSend(function(){
       function getLinkArticle(href){
        // if($postArea.find("a[href*="+  +"]"))
         var artid =  href.match(/\d+/) ;
+        if(!artid)
+            return;  
         var thisComments = showDsComments(artid); 
         var cacheArt = $postArea.find('a[href="'+ href +'"]').data("art-comment");
 
@@ -265,10 +267,7 @@ $(document).ajaxSend(function(){
             jc.PatternSet.$mbPattern.hide();
           });
          //return false;
-      }
 
-      //获取文章后修理绑定
-      function fixArticle(){
           $article.find('.close').click( closeArticle );
           $article.find('.size').click(function(){
             if($(this).hasClass("enlarge")){
@@ -277,6 +276,10 @@ $(document).ajaxSend(function(){
               miniArt($article);
             }
           });
+      }
+
+      //获取文章后修理绑定
+      function fixArticle(){
 
           //文章内所有事件
           artEvent($article.find(".jc-art"));
