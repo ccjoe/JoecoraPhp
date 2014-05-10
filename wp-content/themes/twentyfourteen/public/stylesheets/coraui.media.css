@@ -1,4 +1,4 @@
-.player-area{height: 152px; width: 372px; background-color: rgba(0,0,0,0.6); background-color:#222\9; position: absolute; bottom: 30px; right: 0;}
+.player-area{height: 152px; width: 372px; background-color: rgba(0,0,0,0.6); background-color:#222\9; position: absolute; bottom: 35px; right: 0;}
 .player-main{height:150px;    font-family: "Lucida Grande","Helvetica Neue",Helvetica,Arial,Microsoft Yahei }
 .player-area .hide{display: none!important}
 .player-area .show{display: block;}

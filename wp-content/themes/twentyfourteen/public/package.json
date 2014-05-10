@@ -11,7 +11,6 @@
     , "grunt-recess": "~0.4.0"
     , "grunt-contrib-less": "~0.8.1"
 	, "grunt-contrib-concat":"~0.1.1"
-	, "grunt-contrib-htmlmin":"~0.2.0"
 	, "grunt-css":  ">0.0.0"
   }
 }

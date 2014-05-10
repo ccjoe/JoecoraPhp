@@ -276,13 +276,7 @@
           albumSongNum = songData[randomAlbum].abSong.length, 
           randomAlbumSong = Math.floor( Math.random() * albumSongNum );  //随机专辑中随机歌曲
           ////console.log(randomAlbum, randomAlbumSong);
-          var index = this.getLabel();
-          if(randomAlbum === index.ai && randomAlbumSong === index.si){
-            this.playIndex(index.ai, index.si + 1);
-          }else{
-            this.playIndex(randomAlbum, randomAlbumSong);
-          }
-
+      this.playIndex(randomAlbum, randomAlbumSong);
     },
 
     /** 单曲循环 */

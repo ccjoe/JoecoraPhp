@@ -1,0 +1,302 @@
+/**_______________________________________
+ *
+ * @author Joe <icareu.joe@gmail.com>
+ * @email   >  icareu.joe@gmail.com   
+ * @date    >  2014-04-16 13:51:13   
+ * @content >  swc                 
+ * _______________________________________
+ */
+ /** 这是一个面向所有切换的插件的基件,包含tab,slide,slidebox */
+(function($){
+  /**
+   * @author Joe <icareu.joe@gmail.com>
+   * @constructor 
+   * @param {Object} opts - 当前参数对象
+   * @param {$} ithis 当前swc对象的jQuery对象  
+   */
+
+  Swc = function(opts,ithis){
+   /** 
+     * @access public 
+     * @public
+     * @this Swc
+     * @mixes default,options
+     */
+    this.opts = opts;
+    //在此元素下查找防止集化操作时选择失误的情况。如二个swc实例下选择的元素会增多
+    /** 当前控件的root jquery对象
+     * @access public 
+     */
+    this.$dom = $(ithis); 
+    //改变原this到当前swc对象
+    initSwicth.call(this,opts); 
+    //给控制元素初始化位置
+    setPos();
+    /** @access private */
+    //切换控制柄按钮的方向
+    function setPos(){
+      opts.swcPosition.indexOf('b') !== -1 ? 
+      $(ithis).addClass('ui-swc-b ui-swc-'+opts.swcPosition) :
+      $(ithis).addClass('ui-swc-'+opts.swcPosition);
+    }
+
+  };
+
+  /**
+   * @constructor
+   * @param {Object} opts - 当前参数对象
+   * @desc swc 插件 初始化函数
+   */
+  function initSwicth(opts){
+    //this没有执行环境->window
+    var _t = this,    
+        $swcList = this.getSwcList();   //保存取得的句柄，以免多次调用;
+
+    //是否设置了激活项？
+    if( !$swcList.find(".ui-swc-active").length )
+      this.getSwcItems().first().addClass("ui-swc-active");
+
+    this.showSwcItem();   //显示相应项  
+
+    $swcList.on(opts.eventType, "li", function(){
+      _t.showSwcItem( $(this) );
+    })
+
+  }
+
+  /**
+    * @this swc对象
+    * 原型上方法this指向原型对象即Switcth上. */
+  Swc.prototype = {
+   
+    /**  @returns {$} 返回控制柄父元素$对象. */
+    getSwcList : function(){
+      //alert("执行了");
+      return this.$dom.find(this.opts.swcList);     
+    },
+    /** @returns {$} 返回控制柄单项集合$数组对象. */
+    getSwcItems : function(){
+      return this.$dom.find(this.opts.swcListItems);
+    },
+    /** @returns {$} 返回面板父元素$对象. */
+    getSwcPane  :function(){
+      return this.$dom.find(this.opts.contentList); 
+    },
+    /** @returns {$} 返回面板单项$数组对象. */
+    getSwcCont  :function(){
+      return this.$dom.find(this.opts.contentListItems); 
+    },
+    /** 显示当前面板. */
+    showSwcItem : function($item){ 
+
+      //console.log(this.opts);
+      var _t = this,
+          _opts = _t.opts;
+          args  = arguments;
+      //有指定显示某项
+      $item = $item || null;
+      if ( $item ){
+        $item.addClass( "ui-swc-active" ).siblings().removeClass("ui-swc-active");  
+      } 
+      //没有指定则自己判断  
+      _t.getSwcItems().each(function(i){
+        var $t = $(this);  
+
+        $t.attr({"index":i});
+
+        if( $t.hasClass("ui-swc-active") ){
+
+          //直接执行则会丢失_t全局和$item当前项的对象
+          
+          if(_opts.beforeSwc)
+             _opts.beforeSwc.apply(_t,args);
+
+          switch (_opts.showType){
+            case "show" :
+              _t.getSwcCont().eq(i).show(_opts.showSpeed, _opts.showSwc)
+                        .siblings().hide(0,_opts.hideSwc);
+              break;
+            case "fade" :
+              _t.getSwcCont().eq(i).fadeIn(_opts.showSpeed, _opts.showSwc)
+                        .siblings().fadeOut(0,_opts.hideSwc);
+              break;
+            case "slide":
+              _t.getSwcCont().eq(i).slideDown(_opts.showSpeed, _opts.showSwc)
+                        .siblings().slideUp(0,_opts.hideSwc);
+              break;
+          }
+
+          //存在$bd滑动则
+          if( _opts.$bd !== void 0 )
+              _t.slideBd(i);
+        }   
+       
+      });
+
+      //始终返回当前播放项
+      return $item;
+    },
+    /** @returns {$} 取得当前激活项. */
+    getCutItem : function(){
+      return this.getSwcList().find(".ui-swc-active");
+    },
+
+    /**
+     * @param {string} itemName -为标签名
+     * @param {string} itemDom -为内容HTML
+     * @returns {null}
+     */
+    createItem : function(itemName, itemDom){
+      //新建DOM
+      $item = $('<li>'+itemName+'</li>');
+      $cont = $('<div class="ui-swc-cont" />');
+      $cont.append( $( $(itemDom) ) );
+      //加入DOM
+      this.getSwcList().append($item);
+      this.getSwcPane().append($cont);
+      //显示相应项
+      this.showSwcItem($item);
+
+      //仅在右下时需要更新list-bd的样式的 right值
+      this.$dom.find(".list-bd").css({"right": this.getSwcList().outerWidth() });
+    },
+
+    /** 创建滑动. */
+    createBd : function(){
+
+      var $first = this.getSwcItems().first(),
+          nItem = parseInt($first.css("margin-left") , 10);  
+
+      this.opts.$bd = $("<div class='tab-arrow'><b></b></div>").css({"left": nItem, "bottom":0,"width":$first.outerWidth()});
+
+      this.getSwcList().after('<div class="list-bd" />');
+      var $lbd = this.$dom.find(".list-bd");
+
+      $lbd.css({"position":"absolute","z-index":100}).append(this.opts.$bd); 
+      //如果在下面
+      if(this.opts.swcPosition.indexOf("b") !== -1)
+        $lbd.css({"bottom": 0});
+      //如果在右边
+      if(this.opts.swcPosition.indexOf("r") !== -1)
+        $lbd.css({"right": this.getSwcList().outerWidth() });
+
+      return this; //返回this以便链式操作
+    },
+     /** 滑动规则. */
+    slideBd : function(i){
+
+      var $first = this.getSwcItems().first(),
+          nItemL = parseInt($first.css("margin-left") , 10)
+          nItemR = parseInt($first.css("margin-right") , 10) ;    
+      this.opts.$bd.clearQueue();     //防止没有执行完的动画缓存
+      this.opts.$bd.animate({"left": nItemL +(nItemR + $first.outerWidth()) * i } , 300);
+    }
+
+  };
+
+  //转换为插件风格去执行
+  $.fn.extend({
+  /**
+    * @param {Object} options -传参调用方法,参数包含属性和回调
+    * @example <caption>options 部分参数使用示例</caption>
+    *    $("selector").swc({
+    *      eventType:"mouseover",
+    *      showType:"slide",
+    *      beforeSwc:function(item){
+             // @this 为Swc对象,item为激动项
+    *        console.log(this, item);
+    *      },
+    *      showSwc : function(){
+             //this为显示的面板项
+    *        console.log(this);
+    *      },
+    *      hideSwc : function(){
+             //this为所有隐藏的面板项
+    *        console.log(this);
+    *      }
+    *    });
+    * @example 调用{@link Methods|公有方法} $(Select).swc("publicMethod","arg1","arg2") 
+    * @example 默认调用方法 $(Select).swc()
+    * @mixin
+    */
+    swc : function(options){
+      //遍历匹配的元素集合
+      var args = [].slice.call(arguments, 1);
+
+      //this指向jQuery对象
+      return this.each(function(){
+
+        //this指向jQuery对象的遍历单项
+        var ui = $._data(this, "swc");
+        //console.log("否实例化过:" + ui);
+        //判断是否实例化过
+        if (!ui) {
+          var opts = $.extend(true, {}, $.fn.swc.defaults, typeof options === "object" ? options : {});
+
+          //ui 即为实例化的 Tab
+          //this 为swc jQuery对象
+          ui = new Swc(opts, this);
+
+          //实例化后在上面添加标识;
+          $._data(this, "swc", ui);
+
+          //console.log( $._data(this, "swc") );
+        }
+
+        //如果参数为字符串，或函数则 ui即Tab实例上的方法执行在Tab上,参数为options对象
+        if(typeof options === "string" && typeof ui[options] == 'function'){
+          //console.log("调用到公有方法");
+          ui[options].apply(ui, args);  //执行插件的方法
+
+        }
+
+      });
+    }
+
+  })
+
+  /**
+   * @memberof swc
+   * @member
+   * @namespace
+   * @property {string} swcList -切换列表 @default
+   * @property {string} contentList -切换内容
+   * @property {string} swcListItems -切换列表子项
+   * @property {string} contentListItems -切换内容子项
+   * @property {string} swcActive -激活某项
+   * @property {string} swcDisable -禁用某项
+   * @property {string} swcPosition -class 为 tl/tr/bl/br 左上/左下/右上/右下
+   * @property {string} eventType -切换方式
+   * @property {string} showType -显示方式
+   * @property {string} showSpeed -切换速度 ( "slow", "normal", 或 "fast" 或 数字 
+   * @property {function} beforeSwc -切换前事件
+   * @property {function} showSwc -显示后回调
+   * @property {function} hideSwc -隐藏后回调          
+   * @desc swc 插件的默认参数 里面的this指向swc构造函数
+   * @mixin
+   * @default
+   */
+  $.fn.swc.defaults = {
+      swcList     : ".ui-swc-list",                      //切换列表
+      contentList : ".ui-swc-pane",                   //切换内容
+      swcListItems: ".ui-swc-list > li",                 //切换列表子项
+      contentListItems:".ui-swc-pane >.ui-swc-cont",     //切换内容子项
+      swcActive   : ".ui-swc-active",                    //激活某项
+      swcDisable  : ".ui-swc-disable",                   //禁用某项
+      swcPosition : "tl",                                //class 为 tl/tr/bl/br 左上/左下/右上/右下
+      eventType      : "click",                          //切换方式
+      showType       : "show",                           //显示方式
+      showSpeed      : "fast",                           //切换速度 ( "slow", "normal", 或 "fast" 或 数字 1000
+      /** 切换前回调
+        * @this Swc
+        * @param {$} item返回为切换后的标签
+        */
+      beforeSwc      :$.noop(),                             //切换前事件 
+      /** 面板显示后 回调,this返回为当前显示的面板对象$ */
+      showSwc        :$.noop(),                             //显示后回调
+      /** 面板隐藏前 回调,this返回为当前要隐藏的面板对象$集合 */
+      hideSwc        :$.noop()                              //隐藏后回调
+
+  } //默认配置对象
+
+})(jQuery)
