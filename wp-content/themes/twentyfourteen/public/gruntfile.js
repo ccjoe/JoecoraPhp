@@ -22,7 +22,7 @@ module.exports = function(grunt) {
         src: [
           'Gruntfile.js',
           'javascripts/jc.js',
-          'musicPlayer.js'
+          'javascripts/coraui.media.js'
         ]
       }
     },
@@ -30,20 +30,16 @@ module.exports = function(grunt) {
     //js的合并与压缩
     uglify: {
       lib: {
-        src: ['javascripts/jquery-1.9.1.js',/*'javascripts/jquery-ui.js', */'javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
+        src: ['javascripts/jquery-1.9.1.js','javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
         dest: 'javascripts/min/lib.js'
       },
       buildplugins:{
-        src:['javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min'],
+        src:['javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min','javascripts/coraui.media.js'],
         dest:'javascripts/min/jquery.plugins.js'
       },
       buildjc:{
         src:'javascripts/jc.js',
         dest:'javascripts/min/jc.min.js'
-      },
-      buildmp:{
-        src:'javascripts/musicPlayer.js',
-        dest:'javascripts/min/musicPlayer.min.js'
       }
     },
 

@@ -43,11 +43,11 @@ if(_IE && _IE < 9){
     $overing         :  $("<span class='suceess'><i class='fa fa-check-square'></i>加载数据完毕</span>"),
     index            :  0,
     bgs : [{  src: '/wp-content/gallery/beach/img_9172-1.jpg', fade: 4000},
-    { src: '/wp-content/gallery/park/img_9116-1.jpg', fade: 4000 },
-    { src: '/wp-content/gallery/beach/img_9162-1.jpg', fade: 4000 },
+    {  src: '/wp-content/gallery/guilin-1/DSC_0028.jpg', fade: 4000},
+    { src: '/wp-content/gallery/favor/KaiZiehl.jpg', fade: 4000 },
     { src: '/wp-content/gallery/park/img_9150-1.jpg', fade: 4000 },
     { src: '/wp-content/gallery/beach/img_9163-1.jpg', fade: 4000 },
-    { src: '/wp-content/gallery/park/img_9157-1.jpg', fade: 4000 }],
+    { src: '/wp-content/gallery/favor/jqdll.jpg', fade: 4000 }],
 
     init : function(){
       this.$headerTitle.find("h2 a").lettering();  //Lettering
