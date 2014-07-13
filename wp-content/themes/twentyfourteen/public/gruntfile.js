@@ -33,8 +33,8 @@ module.exports = function(grunt) {
         src: ['javascripts/jquery-1.9.1.js','javascripts/underscore-min.js','javascripts/prefixfree.min.js'],
         dest: 'javascripts/min/lib.js'
       },
-      buildplugins:{
-        src:['javascripts/director.js','javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min','javascripts/coraui.media.js', 'javascripts/flame.js'],
+      buildplugins:{ //, 'javascripts/flame.js'
+        src:['javascripts/director.js','javascripts/jquery.vegas.js','javascripts/jquery.lettering.js','javascripts/jquery.transform-0.9.1.min','javascripts/coraui.media.js'],
         dest:'javascripts/min/jquery.plugins.js'
       },
       buildjc:{

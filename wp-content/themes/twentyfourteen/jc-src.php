@@ -160,9 +160,10 @@
 				</div>
 			</div></li>
 			<li><a><i class="fa fa-link"></i>友情链接</a>
-			<div class="about-item-desc">
-				<?php wp_list_bookmarks('orderby=id&category_orderby=id'); ?>
-			</div>
+				<div class="about-item-desc">
+					<?php wp_list_bookmarks( 'title_li=&categorize=0&before=&after=' ); ?>  
+					
+				</div>
 			</li>
 		</ul>
 		<div class="about-btn">
@@ -239,7 +240,7 @@
       </div>
       <div class="prog-wrap"><div class="progress"><span></span></div></div>
       <audio id="Media"></audio>
-      <canvas id="joecanvas"  style="position:absolute; left:0; bottom:0; z-index:-1"></canvas>
+      <!--<canvas id="joecanvas"  style="position:absolute; left:0; bottom:0; z-index:-1"></canvas>-->
   </div>
 	<!--<![endif]-->
 	<!--播放器层 } -->
